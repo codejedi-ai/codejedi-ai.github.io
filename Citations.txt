@@ -6,3 +6,9 @@ data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIREhUSExIVFRUVGB4XF
 
 ChatBot:
 https://miro.medium.com/max/700/1*fIaAHAdO6yKP_PFPK0296w.png
+
+AWS developer assiciate
+https://d1.awsstatic.com/training-and-certification/Certification%20Badges/AWS-Certified_Developer_Associate_badge_512x512.616df8fd6c6a4298d013b7787e0bbbf93f9e2760.png
+
+AWs PractitionerAW:
+https://images.credly.com/images/68468004-5a85-4f3b-bc58-590773979486/AWS-CloudPractitioner-2020.png
