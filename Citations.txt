@@ -17,3 +17,6 @@ AI See human
 https://mwi.usma.edu/wp-content/uploads/2021/06/AI-mil-1200-1200x640.jpg
 Spacex Rocket
 https://spectrum.ieee.org/media-library/concept-image-of-relativity-terran-r.jpg?id=27044732&width=1200&coordinates=0%2C4%2C0%2C4&height=600
+
+Wild Ryde:
+https://async-messaging.workshop.aws/images/wild-rydes.png

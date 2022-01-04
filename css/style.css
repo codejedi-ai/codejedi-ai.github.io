@@ -61,6 +61,7 @@ a, a:hover, a:active {
 	background: #3085a3;
 	text-align: center;
 	cursor: pointer;
+    
 }
 
 .grid figure img {
@@ -364,7 +365,12 @@ p {
     position: relative;
 	*/
     background-image: url("../img/AISeeHuman.jpeg");
-	height:650px;
+	height:640px;
+    width:1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: center;
 }
 
 .hero_section {
@@ -472,6 +478,12 @@ a.read_more:hover {
 #skills {
     padding: 60px 0px;
     background-image: url("../img/spacexRocket.jpeg");
+	height:600px;
+    width:1200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: center;
 }
 #skills h2{
   color: #fff;
