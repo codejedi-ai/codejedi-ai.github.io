@@ -54,7 +54,7 @@ a, a:hover, a:active {
 	float: left;
 	overflow: hidden;
 	margin: 10px 1%;
-	min-width: 320px;
+	min-width:320px;
 	max-width: 480px;
 	max-height: 360px;
 	width: 48%;
@@ -117,7 +117,6 @@ a, a:hover, a:active {
 .grid figure p {
 	margin: 0;
 }
-
 .grid figure p {
 	letter-spacing: 1px;
 	font-size: 68.5%;
