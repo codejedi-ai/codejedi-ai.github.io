@@ -246,6 +246,11 @@ p {
     background: #ffffff;
     padding: 20px 0px;
 	
+    margin-left: auto;
+    margin-right: auto;
+    position: center;
+
+
     border-top: bisque;
 	box-shadow: 1px 1px 4px rgba(60, 60, 60, 0.44);
     border-bottom: 1px solid #D2D2D2;
@@ -253,6 +258,7 @@ p {
 
 .header_box {
     position: relative;
+    
 }
 
 .logo {
@@ -368,7 +374,6 @@ p {
 	*/
     background-image: url("../img/AISeeHuman.jpeg");
 	height:640px;
-    width:1200px;
     margin-left: auto;
     margin-right: auto;
     position: center;
@@ -480,7 +485,6 @@ a.read_more:hover {
     padding: 60px 0px;
     background-image: url("../img/spacexRocket.jpeg");
 	height:600px;
-    width:1200px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -1250,6 +1254,10 @@ border: 1px solid #CE1139;
 
 .footer_wrapper {
     background: #232323;
+
+    margin-left: auto;
+    margin-right: auto;
+    position: center;
 }
 
 .footer_bottom {
