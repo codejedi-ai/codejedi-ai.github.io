@@ -372,11 +372,13 @@ p {
     /*background: #bd0ea5;
     position: relative;
 	*/
-    background-image: url("../img/AISeeHuman.jpeg");
+    background: url("../img/AISeeHuman.jpeg") no-repeat center;   
+    background-size: cover;
 	height:640px;
     margin-left: auto;
     margin-right: auto;
     position: center;
+    
 }
 
 .hero_section {
@@ -483,7 +485,8 @@ a.read_more:hover {
 
 #skills {
     padding: 60px 0px;
-    background-image: url("../img/spacexRocket.jpeg");
+    background: url("../img/spacexRocket.jpeg") no-repeat center;   
+    background-size: cover;
 	height:600px;
     display: block;
     margin-left: auto;
