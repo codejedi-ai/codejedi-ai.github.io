@@ -58,9 +58,10 @@ a:active {
 /* Common style */
 
 .grid figure {
-    position: static;
+    position: relative;
     float: left;
     overflow: hidden;
+    grid-template-columns: auto;
     margin: 1%;
     min-width: 400px;
     max-width: 680px;
@@ -71,7 +72,8 @@ a:active {
     text-transform: capitalize;
     cursor: pointer;
     grid-row-gap: 10px;
-    grid-column-gap: 10px;    
+    grid-column-gap: 10px;
+    place-items: center;    
 }
 
 .grid figure img {
@@ -81,6 +83,8 @@ a:active {
     max-width: 100%;
     padding: 10px;
     opacity: 0.8;
+    width: 400px;
+    height: 273px;
 }
 
 .grid figure figcaption {
@@ -138,6 +142,7 @@ a:active {
 .grid figure h2,
 .grid figure p {
     margin-left: -10%;
+    margin-right: -10%;
 }
 
 .grid figure p {
@@ -180,7 +185,7 @@ figure.effect-oscar figcaption::before {
 }
 
 figure.effect-oscar h2 {
-    margin: 0 0 10px 0;
+    margin: 0 0 0px 0;
     transition: transform 0.35s;
     transform: translate3d(0, 100%, 0);
     color: #A3A3A3;
@@ -194,7 +199,7 @@ figure.effect-oscar p {
 }
 
 figure.effect-oscar:hover h2 {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 20%, 0);
     color: #fff;
 }
 
@@ -206,7 +211,7 @@ figure.effect-oscar:hover p {
     color: #fff;
     +++++++
 }
-
+/*
 figure.effect-oscar:hover figcaption {
     background-color: rgba(58, 52, 42, 0);
 }
@@ -214,7 +219,7 @@ figure.effect-oscar:hover figcaption {
 figure.effect-oscar:hover img {
     opacity: 0.4;
 }
-
+*/
 
 /* Styles
 ---------------------------------*/
@@ -1462,10 +1467,10 @@ img {
 
 #portfolio_wrapper {
     position: static;
-    padding: 10;
-    width: 98%;
-    margin: auto auto;
+    width: 100%;
+    margin-left: 2%;
     display: block;
+    place-items: center;
 }
 
 #portfolio_wrapper .one-four {
@@ -1474,41 +1479,38 @@ img {
     width: 50%;
     padding: 0;
     position: relative;
+    
 }
 
 .portfolio-item {
     padding: 0;
     position: relative;
     overflow: hidden;
+    place-items: center;
 }
 
 .portfolio-item .portfolio_img {
     overflow: hidden;
     display: block;
     position: relative;
-    width: 400px;
-    height: 273px; 
+    
 }
 
 .portfolio-item .portfolio_img img {
-    width: 100%;
-    height: auto;
+    width: 400px;
+    height: 273px;
 }
 
 .portfolio-item:hover .item_overlay {
     opacity: 1;
     transition: all 0.4s ease 0s;
-    -moz-transition: all 0.4s ease 0s;
-    -webkit-transition: all 0.4s ease 0s;
-    -ms-transition: all 0.4s ease 0s;
-    -o-transition: all 0.4s ease 0s;
-}
+   
 
 .item_overlay {
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    top: 0px ;
     left: 0;
     opacity: 0;
     transition: all 0.3s ease 0s;
