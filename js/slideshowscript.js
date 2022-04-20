@@ -1,5 +1,9 @@
-var slideIndex = 1;
-showSlides(slideIndex);
+var n = 1;
+var start = new Date().getTime();
+showSlides(n);
+
+
+
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
@@ -9,7 +13,7 @@ function currentSlide(n) {
     showSlides(slideIndex = n);
 }
 
-function showSlides() {
+function showSlides(slideIndex) {
     var i;
     var slides = document.getElementsByClassName("mySlides");
     var dots = document.getElementsByClassName("dot");
