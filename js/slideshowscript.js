@@ -3,12 +3,10 @@ showSlides(slideIndex);
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
-    clearTimeout()
 }
 
 function currentSlide(n) {
     showSlides(slideIndex = n);
-    clearTimeout()
 }
 
 function showSlides() {
@@ -18,7 +16,6 @@ function showSlides() {
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";
     }
-    slideIndex++;
     if (slideIndex > slides.length) { slideIndex = 1 }
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
