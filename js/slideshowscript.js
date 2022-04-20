@@ -3,10 +3,12 @@ showSlides(slideIndex);
 
 function plusSlides(n) {
     showSlides(slideIndex += n);
+    setTimeout(showSlides, 4000); // Change image every 2 seconds
 }
 
 function currentSlide(n) {
     showSlides(slideIndex = n);
+    setTimeout(showSlides, 4000); // Change image every 2 seconds
 }
 
 function showSlides() {
