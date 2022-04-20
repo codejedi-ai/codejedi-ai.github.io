@@ -4,11 +4,13 @@ showSlides(slideIndex);
 function plusSlides(n) {
     showSlides(slideIndex += n);
     clearTimeout()
+    setTimeout(showSlides, 4000);
 }
 
 function currentSlide(n) {
     showSlides(slideIndex = n);
     clearTimeout()
+    setTimeout(showSlides, 4000);
 }
 
 function showSlides() {
