@@ -1663,7 +1663,7 @@ img {
 .portfolio-item:hover .item_overlay {
     opacity: 1;
     transition: all 0.4s ease 0s;
-   
+}
 
 .item_overlay {
     width: 100%;
