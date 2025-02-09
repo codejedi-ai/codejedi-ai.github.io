@@ -212,7 +212,6 @@ figure.effect-oscar:hover p {
     -webkit-transform: scale(1);
     transform: scale(1);
     color: #fff;
-    +++++++
 }
 /*
 figure.effect-oscar:hover figcaption {
@@ -340,8 +339,7 @@ p {
 }
 
 .navStyle ul li:first-child {
-    /*margin:0px;*/
-    ;
+    margin:0px;
 }
 
 .navStyle ul li:last-child {
@@ -774,7 +772,7 @@ a.read_more:hover {
 }
 
 .skills-list-col1 i {
-    display: ;
+    display: block;
     color: #888;
     font-size: 19px;
     font-style: normal;
@@ -842,7 +840,7 @@ a.contact_btn:hover {
 }
 
 #portfolio_wrapper {
-    display: block
+    display: block;
     background-color: blueviolet;
     width: 100%;
     margin: 2%;
@@ -2166,7 +2164,6 @@ div.mc-image {
     .page_section.team {
         padding: 40px 0;
     }
-    ,
     #clients {
         padding: 40px 0;
     }
