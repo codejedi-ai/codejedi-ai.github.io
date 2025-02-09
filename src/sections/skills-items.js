@@ -41,20 +41,6 @@ function generateSkillsSection() {
   `;
 }
 
-function generateSkillItems() {
-  const total = skillsData.length;
-  const rows = [];
-  
-  // Split into rows of 4
-  for (let i = 0; i < total; i += 4) {
-    const rowItems = skillsData.slice(i, i + 4);
-    const rowHtml = generateRow(rowItems);
-    rows.push(rowHtml);
-  }
-
-  return rows.join('');
-}
-
 function generateRow(rowItems) {
   const itemCount = rowItems.length;
   const colWidth = itemCount === 1 ? 12 : 
