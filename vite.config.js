@@ -1,7 +1,19 @@
-export default {
-  base: '/awesomefalcon1.github.io/',
-  build: {
-    outDir: 'dist',
-    sourcemap: true
-  }
-}
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+    base: './',
+    build: {
+        outDir: 'dist',
+        assetsDir: 'assets',
+        rollupOptions: {
+            input: {
+                main: '/index.html'
+            }
+        }
+    },
+    resolve: {
+        alias: {
+            '@': '/src'
+        }
+    }
+})
