@@ -44,7 +44,7 @@ jobs:
       
     - name: Upload artifact
       if: matrix.node-version == '18.x'
-      uses: actions/upload-pages-artifact@v2
+      uses: actions/upload-pages-artifact@v4
       with:
         path: './dist'
 
