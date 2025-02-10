@@ -2260,3 +2260,85 @@ img.img.img-circle.lt-box {
     height: auto;
 }
 
+.portfolio-item {
+    width: 400px;
+    height: 600px;
+    margin: 15px;
+    position: relative;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.portfolio-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-image {
+    height: 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-image .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-image .overlay:hover {
+    opacity: 1;
+}
+
+.portfolio-image .overlay i {
+    color: white;
+    font-size: 48px;
+}
+
+.portfolio-content {
+    height: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.portfolio-content h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.portfolio-content p {
+    margin: 0;
+    font-size: 1em;
+    color: #666;
+    line-height: 1.6;
+    overflow-y: auto;
+}
+
+#portfolio_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 20px;
+}

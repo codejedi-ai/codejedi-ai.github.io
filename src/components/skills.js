@@ -49,13 +49,13 @@ export function generateSkillsSection() {
         </div>
         <div class="skills_wrapper">
             <div class="row justify-content-center">
-                ${generateSkillItems()}
+                ${generateSkillItems(skillsData)}
             </div>
         </div>
     `;
 }
 
-function generateSkillItems() {
+function generateSkillItems(skillsData) {
     const total = skillsData.length;
     const rows = [];
     

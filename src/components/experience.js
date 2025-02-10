@@ -62,12 +62,12 @@ export const quotes = [
     }
 ];
 
-function generateRandomQuote() {
+function generateRandomQuote(quotes) {
     return quotes[0]; // Using first quote for consistency
 }
 
 export function generateTimelineHeader() {
-    const quote = generateRandomQuote();
+    const quote = generateRandomQuote(quotes);
     const header = document.querySelector('#experience .heading');
     if (header) {
         header.innerHTML = `
