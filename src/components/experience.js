@@ -1,4 +1,3 @@
-import {notion_client, WORK_EXPERIANE} from '../notionIterators/notionVariables.js';
 export const experienceItems = [
     {
         title: 'Software Developer Intern - DevOps (Hybrid)',

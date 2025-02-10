@@ -1,5 +1,4 @@
 // Replace require with import
-import { Client } from "@notionhq/client";
 import {Filter, PortfolioProject } from '../classes/PortfolioProject.js';
 
 const portfolioProjects = [
