@@ -2342,3 +2342,16 @@ img.img.img-circle.lt-box {
     gap: 30px;
     padding: 20px;
 }
+
+.qr-code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 100%;
+}
+
+.qr-code img {
+    max-width: 200px;
+    height: auto;
+}

@@ -218,7 +218,13 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     <!-- Portfolio -->
     <section id="Portfolio" class="content"></section>
     <script type="module" src="/src/components/portfolio.js"></script>
-        
+<!-- Add this in the head section -->
+<script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+<!-- Replace the existing QR code div with: -->
+<div id="qrcode"></div>
+
+
     <!--Footer-->
     <footer class="footer_wrapper" id="contact">
         <div class="container">
@@ -228,6 +234,13 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
                     <h6>
                         <h3><a href="https://www.linkedin.com/in/codejediatuw/">Let's Linked in</a></h3>
                         <h3><a href="https://github.com/codejedi-ai">GitHub</a></h3>
+        <!-- Add QR code here with white text-->
+         <h2 class="section-title">QR Code</h2>
+         <div class="qr-code" style="display: flex; justify-content: center; align-items: center; margin: 20px auto;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://codejedi-ai.github.io/" 
+                 alt="QR Code for CodeJedi Portfolio"
+                 style="max-width: 200px; height: auto;" />
+        </div>
                     </h6>
                 </div>
             </section>
