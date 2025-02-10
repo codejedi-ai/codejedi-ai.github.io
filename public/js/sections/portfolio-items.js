@@ -5,6 +5,36 @@ const portfolioItems = [
         image: 'img/bunny.bmp',
         link: 'vids/K-means_V1.mp4',
         description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
+    },{
+        category: 'CV',
+        title: 'K-Means Algorithm for Unsupervised Learning',
+        image: 'img/bunny.bmp',
+        link: 'vids/K-means_V1.mp4',
+        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
+    },{
+        category: 'CV',
+        title: 'K-Means Algorithm for Unsupervised Learning',
+        image: 'img/bunny.bmp',
+        link: 'vids/K-means_V1.mp4',
+        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
+    },{
+        category: 'CV',
+        title: 'K-Means Algorithm for Unsupervised Learning',
+        image: 'img/bunny.bmp',
+        link: 'vids/K-means_V1.mp4',
+        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
+    },{
+        category: 'CV',
+        title: 'K-Means Algorithm for Unsupervised Learning',
+        image: 'img/bunny.bmp',
+        link: 'vids/K-means_V1.mp4',
+        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
+    },{
+        category: 'CV',
+        title: 'K-Means Algorithm for Unsupervised Learning',
+        image: 'img/bunny.bmp',
+        link: 'vids/K-means_V1.mp4',
+        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
     },
     // ... more items
 ];
@@ -60,7 +90,7 @@ function generateFilters() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', generateFilters);
+
 function generatePortfolioItems() {
     const wrapper = document.getElementById('portfolio_wrapper');
     
@@ -86,8 +116,6 @@ function generatePortfolioItems() {
     });
 }
 
-// Call after DOM loads
-document.addEventListener('DOMContentLoaded', generatePortfolioItems);
 
 function generateRandomQuote(quotes) {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -101,6 +129,45 @@ function displayQuote() {
         quoteElement.textContent = `"${quote.text}" — ${quote.author}`;
     }
 }
-
+document.addEventListener('DOMContentLoaded', generateFilters);
+// Call after DOM loads
+document.addEventListener('DOMContentLoaded', generatePortfolioItems);
 document.addEventListener('DOMContentLoaded', displayQuote);
-
+// Within the portfolio section, the following HTML structure is expected:
+// <!-- Container -->
+// <div class="container portfolio_title">
+//     <!-- Title -->
+//     <div class="section-title">
+//         <h2>Projects</h2>
+//         <h6></h6> <!-- Quote will be inserted here --></div>
+// </div>
+// <!-- Container -->
+// 
+// <div class="portfolio-top"></div>
+// 
+// <!-- Portfolio Filters -->
+// <div class="portfolio">
+//     <div id="filters" class="sixteen columns">
+//         <ul class="clearfix">
+// 
+// 
+//         </ul>
+//     </div>
+//     <!--/Portfolio Filters -->
+//     <!-- Portfolio Wrapper -->
+//     <div class="isotope fadeInLeft animated wow grid" id="portfolio_wrapper">
+//         <!-- Portfolio Item -->
+// 
+//     </div>
+//     <!--/Portfolio Wrapper -->
+// </div>
+// <!--/Portfolio Filters -->
+// 
+// <div class="portfolio_btm"></div>
+// 
+// <div id="project_container">
+//     <div class="clear"></div>
+//     <div id="project_data"></div>
+// </div>
+//     <!-- Add script reference -->
+// 
