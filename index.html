@@ -208,15 +208,21 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
 
     <!--Skills-->
     <section id="skills"></section>
-    
+
     <!--Service-->
 
     <!--Experience  -->
     <section class="experience" id="experience" style="background: #f2f2f2; padding: 30px 0;"></section>
-    
+
     <!-- Portfolio -->
     <section id="Portfolio" class="content"></section>
-        
+    <!-- Add this in the head section -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
+    <!-- Replace the existing QR code div with: -->
+    <div id="qrcode"></div>
+
+
     <!--Footer-->
     <footer class="footer_wrapper" id="contact">
         <div class="container">
@@ -226,6 +232,13 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
                     <h6>
                         <h3><a href="https://www.linkedin.com/in/codejediatuw/">Let's Linked in</a></h3>
                         <h3><a href="https://github.com/codejedi-ai">GitHub</a></h3>
+                        <!-- Add QR code here with white text-->
+                        <h2 class="section-title">QR Code</h2>
+                        <div class="qr-code"
+                            style="display: flex; justify-content: center; align-items: center; margin: 20px auto;">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://codejedi-ai.github.io/"
+                                alt="QR Code for CodeJedi Portfolio" style="max-width: 200px; height: auto;" />
+                        </div>
                     </h6>
                 </div>
             </section>
@@ -244,7 +257,7 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     <script type="text/javascript" src="js/sections/skills-items.js"></script> 
     <script type="text/javascript" src="js/sections/experience-items.js"></script> 
 -->
-   <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-scrolltofixed.js"></script>
     <script type="text/javascript" src="js/jquery.nav.js"></script>
