@@ -105,3 +105,10 @@ export function setSkillsBackground() {
         `;
     }
 }
+
+function initializeAll() {
+    generateSkillsSection();
+    setSkillsBackground();
+}
+
+document.addEventListener('DOMContentLoaded', initializeAll);

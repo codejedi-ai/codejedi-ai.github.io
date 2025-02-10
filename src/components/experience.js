@@ -1,58 +1,44 @@
+import {notion_client, WORK_EXPERIANE} from '../notionIterators/notionVariables.js';
 export const experienceItems = [
     {
-        year: '2024',
-        positions: [
-            {
-                title: 'Software Developer Intern - DevOps (Hybrid)',
-                company: 'Open Text Corporation',
-                location: 'Ottawa, ON, Canada',
-                companyUrl: 'https://www.opentext.com/',
-                period: 'Sep.3 ~ Dec.20, 2024 (4 months)',
-            },
-            {
-                title: 'Cloud Engineer Intern (Remote)',
-                company: 'Sun Life Financial',
-                location: 'Toronto, ON, Canada',
-                companyUrl: 'https://www.sunlife.ca/en/',
-                period: 'May.6~ Aug.30, 2024 (4 months)',
-            }
-        ]
+        title: 'Software Developer Intern - DevOps (Hybrid)',
+        company: 'Open Text Corporation',
+        location: 'Ottawa, ON, Canada',
+        companyUrl: 'https://www.opentext.com/',
+        period: 'Sep.3 ~ Dec.20, 2024 (4 months)',
+        year: '2024'
     },
     {
-        year: '2023',
-        positions: [
-            {
-                title: 'Site Reliability Engineer Intern (Remote)',
-                company: 'OANDA (Canada) Corporation',
-                location: 'Toronto, ON, Canada',
-                companyUrl: 'https://oanda.com/ca-en/',
-                period: 'Jan.9 ~ Apr.21, 2023 (4 Months)',
-            }
-        ]
+        title: 'Cloud Engineer Intern (Remote)',
+        company: 'Sun Life Financial',
+        location: 'Toronto, ON, Canada',
+        companyUrl: 'https://www.sunlife.ca/en/',
+        period: 'May.6~ Aug.30, 2024 (4 months)',
+        year: '2024'
     },
     {
-        year: '2022',
-        positions: [
-            {
-                title: 'Site Reliability Engineer Intern (Hybrid)',
-                company: 'Carta Maple Technologies Inc.',
-                location: 'Waterloo, ON, Canada',
-                companyUrl: 'https://carta.com/',
-                period: 'May.2 ~ Aug.26, 2022 (4 Months)',
-            }
-        ]
+        title: 'Site Reliability Engineer Intern (Remote)',
+        company: 'OANDA (Canada) Corporation',
+        location: 'Toronto, ON, Canada',
+        companyUrl: 'https://oanda.com/ca-en/',
+        period: 'Jan.9 ~ Apr.21, 2023 (4 Months)',
+        year: '2023'
     },
     {
-        year: '2021',
-        positions: [
-            {
-                title: 'Software Development Co-op Student (Remote)',
-                company: 'VirtaMove Corp.',
-                location: 'Ottawa, ON, Canada',
-                companyUrl: 'https://www.virtamove.com/about-us',
-                period: 'May.6 ~ Aug.27, 2021 (4 Months)',
-            }
-        ]
+        title: 'Site Reliability Engineer Intern (Hybrid)',
+        company: 'Carta Maple Technologies Inc.',
+        location: 'Waterloo, ON, Canada',
+        companyUrl: 'https://carta.com/',
+        period: 'May.2 ~ Aug.26, 2022 (4 Months)',
+        year: '2022'
+    },
+    {
+        title: 'Software Development Co-op Student (Remote)',
+        company: 'VirtaMove Corp.',
+        location: 'Ottawa, ON, Canada',
+        companyUrl: 'https://www.virtamove.com/about-us',
+        period: 'May.6 ~ Aug.27, 2021 (4 Months)',
+        year: '2021'
     }
 ];
 export const quotes = [
@@ -66,20 +52,12 @@ function generateRandomQuote(quotes) {
     return quotes[0]; // Using first quote for consistency
 }
 
-export function generateTimelineHeader() {
-    const quote = generateRandomQuote(quotes);
-    const header = document.querySelector('#experience .heading');
-    if (header) {
-        header.innerHTML = `
-            <h2>Work Experience</h2>
-            <p>"${quote.text}" — ${quote.author}</p>
-        `;
-    }
-}
+
 
 function generateTimelineItem(item, side) {
-    return `
-        <div class="${side === 'right' ? 'col-sm-offset-6' : ''} col-sm-6 timeline-item">
+    const timeLineItem = document.createElement('div');
+    timeLineItem.className = `${side === 'right' ? 'col-sm-offset-6' : ''} col-sm-6 timeline-item`;
+    timeLineItem.innerHTML = `
             <div class="row">
                 <div class="${side === 'right' ? 'col-sm-offset-1' : ''} col-sm-11">
                     <div class="timeline-panel ${side === 'right' ? 'debits' : 'credits'}">
@@ -95,48 +73,68 @@ function generateTimelineItem(item, side) {
                     </div>
                 </div>
             </div>
-        </div>
     `;
+    return timeLineItem;
 }
 
-export function generateTimeline() {
-    const timeline = document.getElementById('timeline');
-    if (!timeline) {
-        console.error('Timeline element not found');
-        return;
-    }
+function new_year_section(year) {
+    const yearSection = document.createElement('div');
+    yearSection.className = 'row timeline-movement';
     
+    yearSection.innerHTML = `
+        <div class="timeline-badge">
+            <span class="timeline-balloon-date-day"></span>
+            <span class="timeline-balloon-date-month">${year}</span>
+        </div>
+    `;
+    
+    
+    return yearSection;
+}
+export function generateTimeline() {
+    const timeline = document.createElement('div');
+    timeline.id = 'timeline';
+
     // Add timeline year image at top
     const yearImageSection = document.createElement('div'); 
     yearImageSection.className = 'row timeline-movement timeline-movement-top';
     yearImageSection.innerHTML = `
         <div class="timeline-badge timeline-filter-movement">
-            <img src="/img/year.png" style="margin: 0 0 80px; position: relative">
+            <img src="/img/year.png" style="margin: 0 0 80px; position: relative" alt="timeline">
         </div>
     `;
     timeline.appendChild(yearImageSection);
 
     let side = 'left';
-    experienceItems.forEach(yearGroup => {
-        const yearSection = document.createElement('div');
-        yearSection.className = 'row timeline-movement';
-        
-        yearSection.innerHTML = `
-            <div class="timeline-badge">
-                <span class="timeline-balloon-date-day"></span>
-                <span class="timeline-balloon-date-month">${yearGroup.year}</span>
-            </div>
-        `;
-        
-        yearGroup.positions.forEach(position => {
-            yearSection.innerHTML += generateTimelineItem(position, side);
-            side = side === 'left' ? 'right' : 'left';
-        });
-        
-        timeline.appendChild(yearSection);
-    });
-}
+    
+    // Sort experiences by date in descending order
+    const sortedExperiences = experienceItems
 
+    // Create first year section
+    let currentYearSection = new_year_section(sortedExperiences[0].year);
+    side = 'left'; // Reset side for new year
+    // Process each experience
+    //sortedExperiences.forEach((experience, index) => {
+    for( let index = 0; index < sortedExperiences.length; index++){
+        const experience = sortedExperiences[index];
+        // If year changes, append current section and create new one
+        if (index > 0 && experience.year !== sortedExperiences[index - 1].year) {
+            timeline.appendChild(currentYearSection);
+            currentYearSection = new_year_section(experience.year);
+           
+        }
+
+        // Add experience to current year section
+        const timelineItem = generateTimelineItem(experience, side);
+        currentYearSection.appendChild(timelineItem);
+        side = side === 'left' ? 'right' : 'left';
+    }//);
+
+    // Append the last year section
+    timeline.appendChild(currentYearSection);
+
+    return timeline;
+}
 export function initExperience() {
     let section = document.getElementById('experience');
     
@@ -148,21 +146,21 @@ export function initExperience() {
         section.style.cssText = 'background: #f2f2f2; padding: 30px 0;';
         document.body.appendChild(section);
     }
+    const quote = generateRandomQuote(quotes);
 
     // Create container structure
     section.innerHTML = `
         <div class="container">
             <div class="heading text-center" style="margin: 0 0 20px">
                 <h2>Work Experience</h2>
-                <p>placeholder</p>
-            </div>
-            <div id="timeline">
-                <!-- Timeline items will be generated here -->
+                <p>"${quote.text}" — ${quote.author}</p>
             </div>
         </div>
     `;
 
-    // Generate content
-    generateTimelineHeader();
-    generateTimeline();
+    // add the vvalue of generateTimeline(); to the constainer
+    const timeline = generateTimeline();
+    section.appendChild(timeline);
 }
+
+document.addEventListener('DOMContentLoaded', initExperience);

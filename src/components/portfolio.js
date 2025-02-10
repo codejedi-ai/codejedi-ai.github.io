@@ -1,7 +1,8 @@
-import { Filter } from '../classes/Filter.js';
-import { PortfolioProject } from '../classes/PortfolioProject.js';
+// Replace require with import
+import { Client } from "@notionhq/client";
+import {Filter, PortfolioProject } from '../classes/PortfolioProject.js';
 
-export const portfolioProjects = [
+const portfolioProjects = [
     new PortfolioProject(
         'CV',
         '/vids/K-means_V1.mp4',
@@ -140,7 +141,7 @@ const filters = [
 
 // Generate filter HTML
 const filterHTML = filters.map(filter => filter.toHTML()).join('\n');
-console.log(filterHTML);
+// console.log(filterHTML);
 
 document.querySelector('#Portfolio').innerHTML = `
         <!-- Container -->
