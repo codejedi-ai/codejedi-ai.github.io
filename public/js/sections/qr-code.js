@@ -1,5 +1,26 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Find the QR code element
+    // This script ensures the QR code is properly loaded
+    // The QR code is generated using the QR Server API
+    
+    // Check if QR code exists and is loaded correctly
+    const qrCodeImg = document.querySelector('.qr-code img');
+    
+    if (qrCodeImg) {
+        qrCodeImg.onerror = function() {
+            // If the QR code fails to load, replace with a fallback message
+            const qrCodeContainer = document.querySelector('.qr-code');
+            if (qrCodeContainer) {
+                qrCodeContainer.innerHTML = `
+                    <div style="width: 150px; height: 150px; display: flex; align-items: center; justify-content: center; background: #f5f5f5; border-radius: 10px;">
+                        <p style="text-align: center; padding: 10px;">Visit: codejedi-ai.github.io</p>
+                    </div>
+                    <p>Visit my portfolio</p>
+                `;
+            }
+        };
+    }
+    
+    // Find the QR code element in projects page
     const qrCodeElement = document.getElementById('qr-code');
     
     if (qrCodeElement && !qrCodeElement.closest('.footer_wrapper')) {
