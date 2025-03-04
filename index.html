@@ -18,7 +18,8 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
     <link href="css/animate.css" rel="stylesheet" type="text/css" />
     <link href="css/slideshowstyle.css" rel="stylesheet" type="text/css" />
-
+    <link href="css/portfolio-enhancements.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <!--[if lt IE 9]>
       <script src="js/respond-1.1.0.min.js"></script>
@@ -216,13 +217,8 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     <script type="module" src="/src/components/experience.js"></script>
 
     <!-- Portfolio -->
-    <section id="Portfolio" class="content"></section>
-    <script type="module" src="/src/components/portfolio.js"></script>
-    <!-- Add this in the head section -->
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-
-    <!-- Replace the existing QR code div with: -->
-    <div id="qrcode"></div>
+    <section id="Portfolio" class="content wow fadeInDown animated" data-wow-delay="0.3s"></section>
+    <script type="module" src="/src/components/enhanced-portfolio.js"></script>
 
 
     <!--Footer-->
@@ -231,17 +227,27 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
             <section class="page_section contact" id="contact">
                 <div class="contact_section">
                     <h2>Get In Touch</h2>
-                    <h6>
-                        <h3><a href="https://www.linkedin.com/in/codejediatuw/">Let's Linked in</a></h3>
-                        <h3><a href="https://github.com/codejedi-ai">GitHub</a></h3>
-                        <!-- Add QR code here with white text-->
-                        <h2 class="section-title">QR Code</h2>
-                        <div class="qr-code"
-                            style="display: flex; justify-content: center; align-items: center; margin: 20px auto;">
-                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://codejedi-ai.github.io/"
-                                alt="QR Code for CodeJedi Portfolio" style="max-width: 200px; height: auto;" />
-                        </div>
-                    </h6>
+                    
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/codejediatuw/" class="contact-link" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://github.com/codejedi-ai" class="contact-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="mailto:contact@codejedi.ai" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                    </div>
+                    
+                    <div class="qr-code-container">
+                        <h2>Scan My Portfolio</h2>
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://codejedi-ai.github.io/"
+                            alt="QR Code for CodeJedi Portfolio" />
+                    </div>
                 </div>
             </section>
         </div>

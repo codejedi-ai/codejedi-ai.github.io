@@ -1,0 +1,145 @@
+/* Enhanced Portfolio Styling */
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.contact-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    transition: transform 0.3s ease, color 0.3s ease;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-link:hover {
+    transform: translateY(-5px);
+    color: #0077B5;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.contact-link i {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-link span {
+    font-weight: 600;
+}
+
+/* Portfolio section enhancements */
+.portfolio-filter {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.portfolio-filter ul {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 0;
+}
+
+.portfolio-filter li {
+    list-style: none;
+}
+
+.portfolio-filter a {
+    display: block;
+    padding: 8px 15px;
+    background: #f8f8f8;
+    color: #333;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.portfolio-filter a:hover,
+.portfolio-filter a.active {
+    background: #0077B5;
+    color: white;
+}
+
+.portfolio-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.portfolio_img img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.portfolio-item:hover .portfolio_img img {
+    transform: scale(1.05);
+}
+
+figcaption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 15px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover figcaption {
+    transform: translateY(0);
+}
+
+figcaption h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.qr-code-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+}
+
+.qr-code-container h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.qr-code-container img {
+    border: 1px solid #eee;
+    padding: 10px;
+    background: white;
+}
