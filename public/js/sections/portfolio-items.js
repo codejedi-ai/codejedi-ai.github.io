@@ -40,6 +40,27 @@ async function fetchPortfolioData() {
                 image: 'img/ImageStitching.png',
                 link: 'vids/PanoramicStich_1.mp4',
                 description: 'Implemented homographies with Scikit libraries for panoramic image stitching, seamlessly blending visual elements.'
+            },
+            {
+                category: 'RL',
+                title: 'Deep Q-Learning for Game AI',
+                image: 'img/portfolio/rl1.jpg',
+                link: '#',
+                description: 'Implemented Deep Q-Networks for training AI agents to play complex games with superhuman performance.'
+            },
+            {
+                category: 'AWS',
+                title: 'Serverless Architecture',
+                image: 'img/portfolio/aws1.jpg',
+                link: '#',
+                description: 'Designed and deployed a scalable serverless application using AWS Lambda, API Gateway, and DynamoDB.'
+            },
+            {
+                category: 'NLP',
+                title: 'Sentiment Analysis Engine',
+                image: 'img/portfolio/nlp1.jpg',
+                link: '#',
+                description: 'Built a sentiment analysis system for social media monitoring using transformer-based models.'
             }
         ];
         
@@ -49,7 +70,8 @@ async function fetchPortfolioData() {
             {id: 'rl', label: 'Reinforcement Learning', filter: '.RL'},
             {id: 'cv', label: 'Computer Vision', filter: '.CV'}, 
             {id: 'swe', label: 'Software Developments', filter: '.SWE'},
-            {id: 'aws', label: 'AWS', filter: '.AWS'}
+            {id: 'aws', label: 'AWS', filter: '.AWS'},
+            {id: 'nlp', label: 'NLP', filter: '.NLP'}
         ];
         
         generateFilters();
@@ -80,6 +102,10 @@ async function fetchPortfolioQuotes() {
             {
                 text: "Knowledge = Experience x Sensitivity",
                 author: "Yuval Noah Harari"
+            },
+            {
+                text: "The best way to predict the future is to create it",
+                author: "Abraham Lincoln"
             }
         ];
         displayQuote();
@@ -203,41 +229,3 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchPortfolioData();
     fetchPortfolioQuotes();
 });
-// Within the portfolio section, the following HTML structure is expected:
-// <!-- Container -->
-// <div class="container portfolio_title">
-//     <!-- Title -->
-//     <div class="section-title">
-//         <h2>Projects</h2>
-//         <h6></h6> <!-- Quote will be inserted here --></div>
-// </div>
-// <!-- Container -->
-// 
-// <div class="portfolio-top"></div>
-// 
-// <!-- Portfolio Filters -->
-// <div class="portfolio">
-//     <div id="filters" class="sixteen columns">
-//         <ul class="clearfix">
-// 
-// 
-//         </ul>
-//     </div>
-//     <!--/Portfolio Filters -->
-//     <!-- Portfolio Wrapper -->
-//     <div class="isotope fadeInLeft animated wow grid" id="portfolio_wrapper">
-//         <!-- Portfolio Item -->
-// 
-//     </div>
-//     <!--/Portfolio Wrapper -->
-// </div>
-// <!--/Portfolio Filters -->
-// 
-// <div class="portfolio_btm"></div>
-// 
-// <div id="project_container">
-//     <div class="clear"></div>
-//     <div id="project_data"></div>
-// </div>
-//     <!-- Add script reference -->
-// 
