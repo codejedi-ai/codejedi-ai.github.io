@@ -80,6 +80,7 @@ function generateTimeline() {
     // Create a container div to constrain width
     const timelineContainer = document.createElement('div');
     timelineContainer.className = 'timeline-container';
+    timelineContainer.style.margin = '0 auto';
     
     // Add timeline year image at top
     const yearImageSection = document.createElement('div'); 

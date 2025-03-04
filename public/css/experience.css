@@ -4,9 +4,14 @@
 }
 
 #timeline {
-    max-width: 90%;
+    max-width: 80%;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+.timeline-container {
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .timeline-movement {
