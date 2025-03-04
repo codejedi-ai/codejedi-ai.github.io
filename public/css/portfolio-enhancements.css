@@ -155,6 +155,28 @@ figcaption h2 {
     font-size: 1.2rem;
 }
 
+/* Portfolio animations */
+@keyframes portfolioFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#portfolio_wrapper.filtering .portfolio-item {
+    animation: portfolioFadeIn 0.5s ease forwards;
+}
+
+#portfolio_wrapper .portfolio-item {
+    animation: portfolioFadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--item-index, 0) * 0.1s);
+}
+
+/* QR Code Container */
 .qr-code-container {
     display: flex;
     flex-direction: column;

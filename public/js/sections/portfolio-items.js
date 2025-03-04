@@ -41,13 +41,21 @@ async function fetchPortfolioQuotes() {
 function generateFilters() {
     const filterList = document.querySelector('#filters ul.clearfix');
     
+    if (!filterList) {
+        console.error('Filter list not found');
+        return;
+    }
+    
+    // Clear existing content
+    filterList.innerHTML = '';
+    
     portfolioFilters.forEach(filter => {
         const li = document.createElement('li');
         li.innerHTML = `
             <a class="${filter.id === 'all' ? 'active' : ''}" 
                href="#" 
                data-filter="${filter.filter}">
-                <h5>${filter.label}</h5>
+                ${filter.label}
             </a>
         `;
         filterList.appendChild(li);
@@ -65,8 +73,19 @@ function generateFilters() {
             button.classList.add('active');
             
             const filterValue = button.getAttribute('data-filter');
-            const container = document.querySelector('#portfolio_wrapper');
-            container.isotope({ filter: filterValue });
+            
+            // Add animation class to portfolio wrapper
+            const portfolioWrapper = document.querySelector('#portfolio_wrapper');
+            portfolioWrapper.classList.add('filtering');
+            
+            setTimeout(() => {
+                portfolioWrapper.isotope({ filter: filterValue });
+                
+                // Remove animation class after filtering
+                setTimeout(() => {
+                    portfolioWrapper.classList.remove('filtering');
+                }, 400);
+            }, 200);
         });
     });
 }
@@ -75,26 +94,47 @@ function generateFilters() {
 function generatePortfolioItems() {
     const wrapper = document.getElementById('portfolio_wrapper');
     
+    if (!wrapper) {
+        console.error('Portfolio wrapper not found');
+        return;
+    }
+    
+    // Clear existing content
+    wrapper.innerHTML = '';
+    
     portfolioItems.forEach(item => {
         const figure = document.createElement('figure');
-        figure.className = `portfolio-item one-four ${item.category} isotope-item effect-oscar`;
+        figure.className = `portfolio-item ${item.category} isotope-item`;
         
         figure.innerHTML = `
+            <span class="category-badge">${item.category}</span>
             <a href="${item.link}" class="fancybox">
                 <div class="portfolio_img">
-                    <img src="${item.image}" alt="Portfolio" />
+                    <img src="${item.image}" alt="${item.title}" />
                 </div>
                 <figcaption>
-                    <div>
-                        <h2><span>${item.title}</span></h2>
-                        <p>${item.description}</p>
-                    </div>
+                    <h2>${item.title}</h2>
+                    <p>${item.description}</p>
+                    <div class="view-project">View Project</div>
                 </figcaption>
             </a>
         `;
         
         wrapper.appendChild(figure);
     });
+    
+    // Initialize isotope after all items are added
+    setTimeout(() => {
+        if (typeof $.fn.isotope !== 'undefined') {
+            $('#portfolio_wrapper').isotope({
+                itemSelector: '.portfolio-item',
+                layoutMode: 'fitRows',
+                fitRows: {
+                    gutter: 25
+                }
+            });
+        }
+    }, 100);
 }
 
 

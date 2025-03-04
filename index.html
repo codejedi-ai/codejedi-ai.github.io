@@ -244,8 +244,43 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     </section>
 
     <!-- Portfolio -->
-    <section id="Portfolio" class="content wow fadeInDown animated" data-wow-delay="0.3s"></section>
-    <script type="module" src="/src/components/enhanced-portfolio.js"></script>
+    <section id="Portfolio" class="content">
+        <!-- Container -->
+        <div class="container portfolio_title">
+            <!-- Title -->
+            <div class="section-title">
+                <h2>Projects</h2>
+                <h6>Necessity is the mother of invention</h6>
+            </div>
+        </div>
+        <!-- Container -->
+
+        <div class="portfolio-top"></div>
+
+        <!-- Portfolio Filters -->
+        <div class="portfolio">
+            <div id="filters" class="sixteen columns">
+                <ul class="clearfix">
+                    <!-- Filters will be loaded from JSON -->
+                </ul>
+            </div>
+            <!--/Portfolio Filters -->
+
+            <!-- Portfolio Wrapper -->
+            <div class="isotope fadeInLeft animated wow grid" id="portfolio_wrapper">
+                <!-- Portfolio items will be loaded from JSON -->
+            </div>
+            <!--/Portfolio Wrapper -->
+        </div>
+        <!--/Portfolio Filters -->
+
+        <div class="portfolio_btm"></div>
+
+        <div id="project_container">
+            <div class="clear"></div>
+            <div id="project_data"></div>
+        </div>
+    </section>
 
 
     <!--Footer-->
@@ -287,9 +322,6 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
         </div>
     </footer>
     <!-- Scripts -->
-    <script type="text/javascript" src="js/sections/portfolio-items.js"></script> 
-    <script type="text/javascript" src="js/sections/qr-code.js"></script>
-    <script type="text/javascript" src="js/sections/certifications.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/jquery-scrolltofixed.js"></script>
@@ -298,6 +330,9 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     <script type="text/javascript" src="js/jquery.isotope.js"></script>
     <script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
     <script type="text/javascript" src="js/wow.js"></script>
+    <script type="text/javascript" src="js/sections/portfolio-items.js"></script> 
+    <script type="text/javascript" src="js/sections/qr-code.js"></script>
+    <script type="text/javascript" src="js/sections/certifications.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
     <script type="text/javascript" src="js/slideshowscript.js"></script>
 </body>
