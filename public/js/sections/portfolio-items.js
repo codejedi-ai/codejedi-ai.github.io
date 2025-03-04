@@ -5,7 +5,7 @@ let portfolio_quotes = [];
 // Fetch portfolio data from JSON file
 async function fetchPortfolioData() {
     try {
-        const response = await fetch('/data/portfolio.json');
+        const response = await fetch('data/portfolio.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -18,13 +18,49 @@ async function fetchPortfolioData() {
         generatePortfolioItems();
     } catch (error) {
         console.error('Error loading portfolio data:', error);
+        // Fallback to hardcoded data if JSON fails to load
+        portfolioItems = [
+            {
+                category: 'CV',
+                title: 'K-Means Algorithm for Unsupervised Learning',
+                image: 'img/bunny.bmp',
+                link: 'vids/K-means_V1.mp4',
+                description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
+            },
+            {
+                category: 'CV',
+                title: 'CNN for Hurricane Damage Classification',
+                image: 'img/damage_no_damage.png',
+                link: 'vids/Hurricane.mp4',
+                description: 'Utilized Convolutional Neural Networks for classifying hurricane damage, aiding disaster response planning.'
+            },
+            {
+                category: 'CV',
+                title: 'Panoramic Image Stitching',
+                image: 'img/ImageStitching.png',
+                link: 'vids/PanoramicStich_1.mp4',
+                description: 'Implemented homographies with Scikit libraries for panoramic image stitching, seamlessly blending visual elements.'
+            }
+        ];
+        
+        portfolioFilters = [
+            {id: 'all', label: 'All', filter: '*'},
+            {id: 'nengo', label: 'Neuroscience', filter: '.Nengo'},
+            {id: 'rl', label: 'Reinforcement Learning', filter: '.RL'},
+            {id: 'cv', label: 'Computer Vision', filter: '.CV'}, 
+            {id: 'swe', label: 'Software Developments', filter: '.SWE'},
+            {id: 'aws', label: 'AWS', filter: '.AWS'}
+        ];
+        
+        generateFilters();
+        generatePortfolioItems();
     }
 }
 
 // Fetch quotes data from JSON file
 async function fetchPortfolioQuotes() {
     try {
-        const response = await fetch('/data/quotes.json');
+        const response = await fetch('data/quotes.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -35,6 +71,18 @@ async function fetchPortfolioQuotes() {
         displayQuote();
     } catch (error) {
         console.error('Error loading quotes data:', error);
+        // Fallback to hardcoded quotes
+        portfolio_quotes = [
+            {
+                text: "Necessity is the mother of invention",
+                author: "Plato"
+            },
+            {
+                text: "Knowledge = Experience x Sensitivity",
+                author: "Yuval Noah Harari"
+            }
+        ];
+        displayQuote();
     }
 }
 
