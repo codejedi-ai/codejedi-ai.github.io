@@ -69,6 +69,17 @@ function generateTimelineItem(item, side) {
 
 function generateTimeline() {
     const timeline = document.getElementById('timeline');
+    if (!timeline) {
+        console.error('Timeline element not found');
+        return;
+    }
+    
+    // Clear existing content
+    timeline.innerHTML = '';
+    
+    // Create a container div to constrain width
+    const timelineContainer = document.createElement('div');
+    timelineContainer.className = 'timeline-container';
     
     // Add timeline year image at top
     const yearImageSection = document.createElement('div'); 
@@ -78,7 +89,8 @@ function generateTimeline() {
             <img src="img/year.png" style="margin: 0 0 80px; position: relative">
         </div>
     `;
-    timeline.appendChild(yearImageSection);
+    timelineContainer.appendChild(yearImageSection);
+    
     let side = 'left';
     // Generate timeline items
     experienceItems.forEach(yearGroup => {
@@ -92,13 +104,15 @@ function generateTimeline() {
             </div>
         `;
         yearGroup.positions.forEach(position => {
-            
             yearSection.innerHTML += generateTimelineItem(position, side);
             side = side === 'left' ? 'right' : 'left';
         });
         
-        timeline.appendChild(yearSection);
+        timelineContainer.appendChild(yearSection);
     });
+    
+    // Add the container to the timeline
+    timeline.appendChild(timelineContainer);
 }
 
 function generateRandomQuote(quotesArray) {
