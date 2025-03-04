@@ -17,17 +17,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const infoSection = document.createElement('div');
             infoSection.className = 'business-card-info';
             infoSection.innerHTML = `
-                <div class="business-card-name">Your Name</div>
-                <div class="business-card-title">Software Developer</div>
-                <div class="business-card-contact">email@example.com</div>
-                <div class="business-card-contact">+1 (123) 456-7890</div>
-                <div class="business-card-contact">github.com/yourusername</div>
+                <div class="business-card-logo">JL</div>
+                <div class="business-card-name">John Lee</div>
+                <div class="business-card-title">Software Developer & Cloud Engineer</div>
+                <div class="business-card-contact"><i class="fa fa-envelope"></i> john.lee@example.com</div>
+                <div class="business-card-contact"><i class="fa fa-phone"></i> +1 (123) 456-7890</div>
+                <div class="business-card-contact"><i class="fa fa-github"></i> github.com/johnlee</div>
+                <div class="business-card-contact"><i class="fa fa-linkedin"></i> linkedin.com/in/johnlee</div>
             `;
             
             // Create QR section
             const qrSection = document.createElement('div');
             qrSection.className = 'business-card-qr';
-            qrSection.innerHTML = `<img src="${imgSrc}" alt="QR Code">`;
+            qrSection.innerHTML = `
+                <img src="${imgSrc}" alt="QR Code">
+                <div class="business-card-qr-text">Scan to visit my portfolio</div>
+            `;
             
             // Assemble business card
             businessCard.appendChild(infoSection);
