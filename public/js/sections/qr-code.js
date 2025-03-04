@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Find the QR code element
     const qrCodeElement = document.getElementById('qr-code');
     
-    if (qrCodeElement) {
+    if (qrCodeElement && !qrCodeElement.closest('.footer_wrapper')) {
+        // Only create business card if not in footer
         // Get the current QR code image
         const qrImage = qrCodeElement.querySelector('img');
         
@@ -17,13 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const infoSection = document.createElement('div');
             infoSection.className = 'business-card-info';
             infoSection.innerHTML = `
-                <div class="business-card-logo">JL</div>
-                <div class="business-card-name">John Lee</div>
-                <div class="business-card-title">Software Developer & Cloud Engineer</div>
-                <div class="business-card-contact"><i class="fa fa-envelope"></i> john.lee@example.com</div>
-                <div class="business-card-contact"><i class="fa fa-phone"></i> +1 (123) 456-7890</div>
-                <div class="business-card-contact"><i class="fa fa-github"></i> github.com/johnlee</div>
-                <div class="business-card-contact"><i class="fa fa-linkedin"></i> linkedin.com/in/johnlee</div>
+                <div class="business-card-logo">CJ</div>
+                <div class="business-card-name">CodeJedi</div>
+                <div class="business-card-title">Software Developer & AI Specialist</div>
+                <div class="business-card-contact"><i class="fa fa-envelope"></i> contact@codejedi.ai</div>
+                <div class="business-card-contact"><i class="fa fa-map-marker"></i> Waterloo, ON, Canada</div>
+                <div class="business-card-contact"><i class="fa fa-github"></i> github.com/codejedi-ai</div>
+                <div class="business-card-contact"><i class="fa fa-linkedin"></i> linkedin.com/in/codejediatuw</div>
             `;
             
             // Create QR section

@@ -22,6 +22,7 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
     <link href="css/experience.css" rel="stylesheet" type="text/css" />
     <link href="css/business-card-qr.css" rel="stylesheet" type="text/css" />
     <link href="css/certifications.css" rel="stylesheet" type="text/css" />
+    <link href="css/footer.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <!--[if lt IE 9]>
@@ -287,39 +288,63 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
 
     <!--Footer-->
     <footer class="footer_wrapper" id="contact">
-        <div class="container">
-            <section class="page_section contact">
-                <div class="contact_section">
-                    <h2>Get In Touch</h2>
-                    
-                    <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/codejediatuw/" class="contact-link" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="https://github.com/codejedi-ai" class="contact-link" target="_blank">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="mailto:contact@codejedi.ai" class="contact-link">
-                            <i class="fas fa-envelope"></i>
-                            <span>Email</span>
-                        </a>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-info">
+                            <h3>CodeJedi</h3>
+                            <p>
+                                University of Waterloo<br>
+                                Waterloo, ON, Canada<br><br>
+                                <strong>Email:</strong> contact@codejedi.ai<br>
+                            </p>
+                            <div class="social-links mt-3">
+                                <a href="https://www.linkedin.com/in/codejediatuw/" target="_blank" class="footer-social-icon">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://github.com/codejedi-ai" target="_blank" class="footer-social-icon">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="mailto:contact@codejedi.ai" class="footer-social-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div id="qr-code" class="qr-code-container">
-                        <h2>Scan My Portfolio</h2>
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://codejedi-ai.github.io/"
-                            alt="QR Code for CodeJedi Portfolio" />
+
+                    <div class="col-md-4">
+                        <div class="footer-links">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#hero_section">Home</a></li>
+                                <li><a href="#aboutUs">About Me</a></li>
+                                <li><a href="#skills">Skills</a></li>
+                                <li><a href="#experience">Experience</a></li>
+                                <li><a href="#Portfolio">Projects</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div id="qr-code" class="qr-code-container">
+                            <h4>Scan My Portfolio</h4>
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://codejedi-ai.github.io/"
+                                alt="QR Code for CodeJedi Portfolio" />
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
-        <div class="container">
-            <div class="footer_bottom">
-                <span>Copyright © 2015, Template by
-                    <a href="http://webthemez.com">WebThemez.com</a>.
-                </span>
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>CodeJedi</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    Template by <a href="http://webthemez.com">WebThemez.com</a>
+                </div>
             </div>
         </div>
     </footer>
