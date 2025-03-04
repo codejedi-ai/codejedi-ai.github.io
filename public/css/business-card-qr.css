@@ -1,0 +1,52 @@
+.business-card {
+    width: 350px;
+    height: 200px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    overflow: hidden;
+    margin: 20px auto;
+    font-family: 'Arial', sans-serif;
+}
+
+.business-card-info {
+    flex: 2;
+    padding: 20px;
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.business-card-qr {
+    flex: 1;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.business-card-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.business-card-title {
+    font-size: 12px;
+    margin-bottom: 15px;
+    color: #ecf0f1;
+}
+
+.business-card-contact {
+    font-size: 11px;
+    margin-bottom: 3px;
+}
+
+.business-card-qr img {
+    max-width: 100%;
+    max-height: 100%;
+}

@@ -1,75 +1,49 @@
 
-const experienceItems = [
-    {
-        year: '2024',
-        positions: [
-            {
-                title: 'Software Developer Intern - DevOps (Hybrid)',
-                company: 'Open Text Corporation',
-                location: 'Ottawa, ON, Canada',
-                companyUrl: 'https://www.opentext.com/',
-                period: 'Sep.3 ~ Dec.20, 2024 (4 months)',
-            },
-            {
-                title: 'Cloud Engineer Intern (Remote)',
-                company: 'Sun Life Financial',
-                location: 'Toronto, ON, Canada',
-                companyUrl: 'https://www.sunlife.ca/en/',
-                period: 'May.6~ Aug.30, 2024 (4 months)',
-            }
-        ]
-    },
-    {
-        year: '2023',
-        positions: [
-            {
-                title: 'Site Reliability Engineer Intern (Remote)',
-                company: 'OANDA (Canada) Corporation',
-                location: 'Toronto, ON, Canada',
-                companyUrl: 'https://oanda.com/ca-en/',
-                period: 'Jan.9 ~ Apr.21, 2023 (4 Months)',
-            }
-        ]
-    },
-    {
-        year: '2022',
-        positions: [
-            {
-                title: 'Site Reliability Engineer Intern (Hybrid)',
-                company: 'Carta Maple Technologies Inc.',
-                location: 'Waterloo, ON, Canada',
-                companyUrl: 'https://carta.com/',
-                period: 'May.2 ~ Aug.26, 2022 (4 Months)',
-            }
-        ]
-    },
-    {
-        year: '2021',
-        positions: [
-            {
-                title: 'Software Development Co-op Student (Remote)',
-                company: 'VirtaMove Corp.',
-                location: 'Ottawa, ON, Canada',
-                companyUrl: 'https://www.virtamove.com/about-us',
-                period: 'May.6 ~ Aug.27, 2021 (4 Months)',
-            }
-        ]
-    }
-];
+let experienceItems = [];
+let quotes = [];
 
-function generateTimelineHeader() {
-    const quote = generateRandomQuote(quotes);
-    const quoteElement = document.querySelector('#experience > div > div.heading.text-center > p');
-    if (quoteElement) {
-        quoteElement.textContent = `"${quote.text}" — ${quote.author}`;
+// Fetch experience data from JSON file
+async function fetchExperienceData() {
+    try {
+        const response = await fetch('/data/experience.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        experienceItems = await response.json();
+        
+        // After data is loaded, generate the timeline
+        generateTimeline();
+    } catch (error) {
+        console.error('Error loading experience data:', error);
     }
 }
 
-// Update DOMContentLoaded listener
-document.addEventListener('DOMContentLoaded', () => {
-    generateTimelineHeader();
-    // ...other timeline generation code
-});
+// Fetch quotes data from JSON file
+async function fetchQuotesData() {
+    try {
+        const response = await fetch('/data/quotes.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        quotes = data.experience;
+        
+        // After quotes are loaded, generate the header
+        generateTimelineHeader();
+    } catch (error) {
+        console.error('Error loading quotes data:', error);
+    }
+}
+
+function generateTimelineHeader() {
+    if (quotes.length > 0) {
+        const quote = generateRandomQuote(quotes);
+        const quoteElement = document.querySelector('#experience > div > div.heading.text-center > p');
+        if (quoteElement) {
+            quoteElement.textContent = `"${quote.text}" — ${quote.author}`;
+        }
+    }
+}
 function generateTimelineItem(item, side) {
     const template = `
         <div class="${side === 'right' ? 'col-sm-offset-6' : ''} col-sm-6 timeline-item">
@@ -127,19 +101,16 @@ function generateTimeline() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', generateTimeline);
-
-function generateRandomQuote() {
-    const randomIndex = Math.floor(Math.random() * quotes.length);
-    return quotes[randomIndex];
-}
-
-function displayQuote() {
-    const quote = generateRandomQuote();
-    const quoteElement = document.querySelector('.portfolio h6');
-    if (quoteElement) {
-        quoteElement.textContent = `"${quote.text}" - ${quote.author}`;
+function generateRandomQuote(quotesArray) {
+    if (!quotesArray || quotesArray.length === 0) {
+        return { text: "Loading...", author: "" };
     }
+    const randomIndex = Math.floor(Math.random() * quotesArray.length);
+    return quotesArray[randomIndex];
 }
 
-document.addEventListener('DOMContentLoaded', displayQuote);
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    fetchQuotesData();
+    fetchExperienceData();
+});

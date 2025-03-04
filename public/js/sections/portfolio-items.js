@@ -1,61 +1,42 @@
-const portfolioItems = [
-    {
-        category: 'CV',
-        title: 'K-Means Algorithm for Unsupervised Learning',
-        image: 'img/bunny.bmp',
-        link: 'vids/K-means_V1.mp4',
-        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
-    },{
-        category: 'CV',
-        title: 'K-Means Algorithm for Unsupervised Learning',
-        image: 'img/bunny.bmp',
-        link: 'vids/K-means_V1.mp4',
-        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
-    },{
-        category: 'CV',
-        title: 'K-Means Algorithm for Unsupervised Learning',
-        image: 'img/bunny.bmp',
-        link: 'vids/K-means_V1.mp4',
-        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
-    },{
-        category: 'CV',
-        title: 'K-Means Algorithm for Unsupervised Learning',
-        image: 'img/bunny.bmp',
-        link: 'vids/K-means_V1.mp4',
-        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
-    },{
-        category: 'CV',
-        title: 'K-Means Algorithm for Unsupervised Learning',
-        image: 'img/bunny.bmp',
-        link: 'vids/K-means_V1.mp4',
-        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
-    },{
-        category: 'CV',
-        title: 'K-Means Algorithm for Unsupervised Learning',
-        image: 'img/bunny.bmp',
-        link: 'vids/K-means_V1.mp4',
-        description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
-    },
-    // ... more items
-];
-const portfolioFilters = [
-    {id: 'all', label: 'All', filter: '*'},
-    {id: 'nengo', label: 'Neuroscience', filter: '.Nengo'},
-    {id: 'rl', label: 'Reinforcement Learning', filter: '.RL'},
-    {id: 'cv', label: 'Computer Vision', filter: '.CV'}, 
-    {id: 'swe', label: 'Software Developments', filter: '.SWE'},
-    {id: 'aws', label: 'AWS', filter: '.AWS'}
-];
-const portfolio_quotes = [
-    {
-        text: "Necessity is the mother of invention",
-        author: "Plato"
-    },
-    {
-        text: "Knowledge = Experience x Sensitivity",
-        author: "Yuval Noah Harari"
+let portfolioItems = [];
+let portfolioFilters = [];
+let portfolio_quotes = [];
+
+// Fetch portfolio data from JSON file
+async function fetchPortfolioData() {
+    try {
+        const response = await fetch('/data/portfolio.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        portfolioItems = data.items;
+        portfolioFilters = data.filters;
+        
+        // After data is loaded, generate the portfolio items and filters
+        generateFilters();
+        generatePortfolioItems();
+    } catch (error) {
+        console.error('Error loading portfolio data:', error);
     }
-];
+}
+
+// Fetch quotes data from JSON file
+async function fetchPortfolioQuotes() {
+    try {
+        const response = await fetch('/data/quotes.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        portfolio_quotes = data.portfolio;
+        
+        // After quotes are loaded, display a quote
+        displayQuote();
+    } catch (error) {
+        console.error('Error loading quotes data:', error);
+    }
+}
 
 function generateFilters() {
     const filterList = document.querySelector('#filters ul.clearfix');
@@ -129,10 +110,11 @@ function displayQuote() {
         quoteElement.textContent = `"${quote.text}" — ${quote.author}`;
     }
 }
-document.addEventListener('DOMContentLoaded', generateFilters);
-// Call after DOM loads
-document.addEventListener('DOMContentLoaded', generatePortfolioItems);
-document.addEventListener('DOMContentLoaded', displayQuote);
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    fetchPortfolioData();
+    fetchPortfolioQuotes();
+});
 // Within the portfolio section, the following HTML structure is expected:
 // <!-- Container -->
 // <div class="container portfolio_title">
