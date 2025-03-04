@@ -202,9 +202,8 @@ function generatePortfolioItems() {
         if (typeof $.fn.isotope !== 'undefined') {
             $('#portfolio_wrapper').isotope({
                 itemSelector: '.portfolio-item',
-                layoutMode: 'masonry',
-                masonry: {
-                    columnWidth: '.portfolio-item',
+                layoutMode: 'fitRows',
+                fitRows: {
                     gutter: 30
                 },
                 percentPosition: true

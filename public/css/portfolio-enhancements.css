@@ -167,6 +167,7 @@
     margin: 0 auto;
     padding: 0 15px;
     box-sizing: border-box;
+    justify-content: center;
 }
 
 @media (max-width: 992px) {
@@ -193,6 +194,7 @@
     flex-direction: column;
     margin-bottom: 10px;
     width: 100%;
+    justify-self: center;
 }
 
 .portfolio-item:hover {
