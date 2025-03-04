@@ -113,9 +113,12 @@
 
 #Portfolio .portfolio {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     padding: 0 15px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #filters {
@@ -157,11 +160,23 @@
 
 #portfolio_wrapper {
     width: 100%;
-    max-width: 100%;
+    max-width: 1200px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
     margin: 0 auto;
+}
+
+@media (max-width: 992px) {
+    #portfolio_wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    #portfolio_wrapper {
+        grid-template-columns: 1fr;
+    }
 }
 
 .portfolio-item {
@@ -174,6 +189,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 10px;
+    width: 100%;
 }
 
 .portfolio-item:hover {

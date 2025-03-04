@@ -178,7 +178,7 @@ function generatePortfolioItems() {
     
     portfolioItems.forEach(item => {
         const figure = document.createElement('figure');
-        figure.className = `portfolio-item ${item.category} isotope-item`;
+        figure.className = `portfolio-item ${item.category} isotope-item effect-oscar`;
         
         figure.innerHTML = `
             <span class="category-badge">${item.category}</span>
@@ -202,10 +202,12 @@ function generatePortfolioItems() {
         if (typeof $.fn.isotope !== 'undefined') {
             $('#portfolio_wrapper').isotope({
                 itemSelector: '.portfolio-item',
-                layoutMode: 'fitRows',
-                fitRows: {
-                    gutter: 25
-                }
+                layoutMode: 'masonry',
+                masonry: {
+                    columnWidth: '.portfolio-item',
+                    gutter: 30
+                },
+                percentPosition: true
             });
         }
     }, 100);
