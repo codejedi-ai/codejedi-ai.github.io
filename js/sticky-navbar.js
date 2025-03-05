@@ -21,4 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Listen for scroll events
     window.addEventListener('scroll', handleScroll);
+    
+    // Initial check in case page is loaded scrolled down
+    handleScroll();
 });
