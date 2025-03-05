@@ -77,7 +77,7 @@ function generateSkillRow(rowItems) {
         <div class="row justify-content-center mb-4">
             ${rowItems.map(skill => `
                 <div class="col-md-${colWidth} text-center">
-                    <div class="skills_icon delay-03s animated wow zoomIn">
+                    <div class="skills_icon delay-03s animated wow zoomIn" style="background: none !important;">
                         ${skill.img ? `<img src="${skill.img}" alt="${skill.alt}" class="mx-auto d-block"/>` : '<span></span>'}
                     </div>
                     <div class="skills_block">
