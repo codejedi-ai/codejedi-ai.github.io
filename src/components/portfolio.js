@@ -209,6 +209,8 @@ function renderFilters() {
     });
     
     filterContainer.appendChild(filterItem);
+    // Recompute and display projects based on the selected category
+    renderProjects();
   });
   
   // Add animation to filters
