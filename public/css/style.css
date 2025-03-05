@@ -212,14 +212,14 @@ p {
 ---------------------------------*/
 
 #header_wrapper {
-    background: #ffffff;
+    background: transparent;
     padding: 20px 0px;
     margin-left: auto;
     margin-right: auto;
     position: center;
-    border-top: bisque;
-    box-shadow: 1px 1px 4px rgba(60, 60, 60, 0.44);
-    border-bottom: 1px solid #D2D2D2;
+    border-top: none;
+    box-shadow: none;
+    border-bottom: none;
 }
 
 .header_box {
@@ -348,9 +348,9 @@ a.read_more:hover {
 }
 
 a.read_more:hover {
-    background: #fff;
+    background: transparent;
     color: #ED5441;
-    border: 1px solid #ED5441;
+    border: 1px solid transparent;
 }
 
 
