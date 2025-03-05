@@ -7,7 +7,31 @@
  * - Handling filter functionality
  */
 
-// Import the portfolio selection component
+/**
+ * Fetch portfolio options from JSON file
+ */
+async function fetchPortfolioOptions() {
+  try {
+    const response = await fetch('/src/data/portfolio-options.json');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const optionsData = await response.json();
+    
+    // Populate the view selector dropdown
+    const viewDropdown = document.querySelector('#view-dropdown');
+    if (viewDropdown) {
+      viewDropdown.innerHTML = optionsData.viewOptions.map(option =>
+        `<option value="${option.id}">${option.label}</option>`
+      ).join('');
+    }
+    
+  } catch (error) {
+    console.error('Error fetching portfolio options:', error);
+  }
+}
 import { initPortfolioSelection } from './portfolio-selection.js';
 import { PortfolioViewModel, ViewTypes } from '../models/portfolio-view-model.js';
 
@@ -38,11 +62,14 @@ function initPortfolio() {
     return;
   }
   
-  // Create initial structure
-  createPortfolioStructure();
-  
-  // Fetch data and render
-  fetchPortfolioData()
+  // Fetch portfolio options
+  fetchPortfolioOptions().then(() => {
+    // Create initial structure
+    createPortfolioStructure();
+    
+    // Fetch data and render
+    fetchPortfolioData()
+  });
     .then(() => {
       // Render the portfolio section
       renderFilters();
