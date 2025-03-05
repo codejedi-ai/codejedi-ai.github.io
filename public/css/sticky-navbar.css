@@ -5,62 +5,84 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    animation: slideDown 0.5s;
+    animation: slideDown 0.4s;
 }
 
 /* Add a transition effect for smoother navigation highlighting */
 #mainNav li {
-    transition: background-color 0.3s ease;
+    transition: all 0.2s ease;
 }
 
-/* Highlight the active navigation item more prominently */
+/* Subtle highlighting for active navigation item */
 #mainNav li.active a {
-    color: #e74c3c !important;
-    font-weight: bold;
+    font-weight: 600;
+    border-bottom: 2px solid #222;
 }
 
 @keyframes slideDown {
     from {
         transform: translateY(-100%);
+        opacity: 0;
     }
     to {
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
 /* Add padding to the body when navbar is sticky to prevent content jump */
 body.has-sticky-nav {
-    padding-top: 80px; /* Adjust this value to match your navbar height */
+    padding-top: 70px; /* Slightly reduced padding */
 }
 
 /* Make the navbar more compact when sticky */
 #header_wrapper.sticky .header_box {
-    padding: 5px 0;
+    padding: 8px 0;
 }
 
 /* Adjust the logo size when navbar is sticky */
 #header_wrapper.sticky .logo img {
-    max-height: 40px;
+    max-height: 38px;
     transition: all 0.3s ease;
 }
 
 /* Enhance navbar links when sticky */
 #header_wrapper.sticky .navbar-nav > li > a {
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Add hover effect to navbar links */
+#header_wrapper.sticky .navbar-nav > li > a:hover {
+    background-color: transparent;
+    opacity: 0.8;
 }
 
 /* Responsive adjustments */
 @media (max-width: 767px) {
     body.has-sticky-nav {
-        padding-top: 60px; /* Smaller padding for mobile */
+        padding-top: 55px; /* Smaller padding for mobile */
     }
     
     #header_wrapper.sticky .navbar-toggle {
-        margin-top: 8px;
-        margin-bottom: 8px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: none;
+    }
+    
+    #header_wrapper.sticky .navbar-toggle:hover,
+    #header_wrapper.sticky .navbar-toggle:focus {
+        background-color: transparent;
+    }
+    
+    #header_wrapper.sticky .navbar-toggle .icon-bar {
+        background-color: #222;
     }
 }
