@@ -65,8 +65,10 @@ function createPortfolioStructure() {
 
     <!-- Portfolio Filters -->
     <div class="portfolio">
-      <div id="filters" class="sixteen columns">
-        <ul class="clearfix"></ul>
+      <div class="filter-container sixteen columns">
+        <div id="filters">
+          <ul class="clearfix"></ul>
+        </div>
       </div>
       <!--/Portfolio Filters -->
 
@@ -118,6 +120,12 @@ function renderFilters() {
   // Clear existing filters
   filterContainer.innerHTML = '';
   
+  // Add filter title
+  const filterTitle = document.createElement('div');
+  filterTitle.className = 'filter-title';
+  filterTitle.innerHTML = '<h4>Filter Projects:</h4>';
+  filterContainer.parentNode.insertBefore(filterTitle, filterContainer);
+  
   // Create filter elements
   portfolioData.filters.forEach(filter => {
     const filterItem = document.createElement('li');
@@ -140,6 +148,15 @@ function renderFilters() {
     
     filterContainer.appendChild(filterItem);
   });
+  
+  // Add animation to filters
+  setTimeout(() => {
+    const filterItems = filterContainer.querySelectorAll('li');
+    filterItems.forEach((item, index) => {
+      item.style.animation = `fadeInUp 0.3s ease forwards ${index * 0.05}s`;
+      item.style.opacity = '0';
+    });
+  }, 100);
 }
 
 /**
