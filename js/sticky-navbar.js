@@ -1,23 +1,19 @@
-// Sticky Navbar JavaScript
+/**
+ * Navbar JavaScript
+ * Handles smooth scrolling and active menu highlighting
+ */
 document.addEventListener('DOMContentLoaded', function() {
     // Get the navbar element
-    const header = document.getElementById('header_wrapper');
+    const navbar = document.querySelector('.navbar-fixed-top');
     const body = document.body;
-    const navLinks = document.querySelectorAll('#mainNav a');
+    const navLinks = document.querySelectorAll('.nav-links a');
     
-    // Get the hero section and navbar position
-    const heroSection = document.getElementById('hero_section');
+    // Add fixed class to navbar
+    navbar.classList.add('fixed');
     
-    function handleScroll() {
-        header.classList.add('sticky');
-        body.classList.add('has-sticky-nav');
-    }
-    
-    // Listen for scroll events
-    window.addEventListener('scroll', handleScroll);
-    
-    // Initial check in case page is loaded scrolled down
-    handleScroll();
+    // Add padding to body to prevent content from hiding behind navbar
+    const navbarHeight = navbar.offsetHeight;
+    document.body.style.paddingTop = `${navbarHeight}px`;
     
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
@@ -29,9 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                // Calculate offset for sticky header
-                const headerHeight = header.offsetHeight;
-                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                // Calculate offset for fixed header
+                const navbarHeight = navbar.offsetHeight;
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
                 
                 // Smooth scroll to the section
                 window.scrollTo({
@@ -40,24 +36,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 // Update active class
-                document.querySelectorAll('#mainNav li').forEach(item => {
+                document.querySelectorAll('.nav-links li').forEach(item => {
                     item.classList.remove('active');
                 });
                 this.parentElement.classList.add('active');
-                
-                // Close mobile menu if open
-                const navToggle = document.getElementById('nav-toggle');
-                const mainNav = document.getElementById('main-nav');
-                if (window.getComputedStyle(navToggle).display !== 'none' && mainNav.classList.contains('in')) {
-                    navToggle.click();
-                }
             }
         });
     });
     
     // Update active menu item based on scroll position
     window.addEventListener('scroll', function() {
-        let fromTop = window.scrollY + header.offsetHeight + 10;
+        let fromTop = window.scrollY + navbar.offsetHeight + 10;
         
         navLinks.forEach(link => {
             let section = document.querySelector(link.getAttribute('href'));
@@ -70,5 +59,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.parentElement.classList.remove('active');
             }
         });
+    });
+    
+    // Handle window resize to adjust body padding if navbar height changes
+    window.addEventListener('resize', () => {
+        const updatedNavbarHeight = navbar.offsetHeight;
+        document.body.style.paddingTop = `${updatedNavbarHeight}px`;
     });
 });

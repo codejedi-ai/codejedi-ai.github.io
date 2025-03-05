@@ -5,7 +5,7 @@
  * regardless of scroll position.
  */
 
-export function initStickyNavbar() {
+export function initNavbar() {
     // Get the navbar element
     const navbar = document.querySelector('.navbar-fixed-top');
     
@@ -30,7 +30,7 @@ export function initStickyNavbar() {
         document.body.style.paddingTop = `${updatedNavbarHeight}px`;
     });
     
-    console.log('Fixed navbar initialized');
+    console.log('Navbar initialized');
 }
 
 // Placeholder for any existing scroll handler that we're disabling
@@ -38,5 +38,5 @@ function handleScroll() {
     // This is intentionally empty as we're removing any existing scroll handlers
 }
 
-// Initialize the sticky navbar when the DOM is loaded
-document.addEventListener('DOMContentLoaded', initStickyNavbar);
+// Initialize the navbar when the DOM is loaded
+document.addEventListener('DOMContentLoaded', initNavbar);
