@@ -461,7 +461,45 @@ Licence: Creative Commons Attribution 3.0** - http://creativecommons.org/license
 
     <!-- Portfolio -->
     <section id="Portfolio">
-        <!-- Portfolio content will be dynamically loaded by portfolio.js -->
+        <div class="container portfolio_title">
+            <div class="section-title">
+                <h2>Projects</h2>
+                <h6>Necessity is the mother of invention</h6>
+            </div>
+        </div>
+
+        <div class="portfolio-top"></div>
+
+        <div class="container">
+            <div class="view-selector-container">
+                <div class="dropdown-view-selector">
+                    <select id="view-dropdown" class="view-dropdown">
+                        <option value="full-stack" selected>Full Stack</option>
+                        <option value="cloud-devops">Cloud Eng / DevOps</option>
+                        <option value="ai-ml">AI/ML</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="portfolio">
+            <div class="filter-container sixteen columns">
+                <div id="filters">
+                    <ul class="clearfix"></ul>
+                </div>
+            </div>
+
+            <div class="isotope grid" id="portfolio_wrapper">
+                <div class="loading-indicator">Loading projects...</div>
+            </div>
+        </div>
+
+        <div class="portfolio_btm"></div>
+
+        <div id="project_container">
+            <div class="clear"></div>
+            <div id="project_data"></div>
+        </div>
     </section>
     <!--/Portfolio -->
 
