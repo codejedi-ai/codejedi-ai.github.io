@@ -5,13 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const body = document.body;
     const navLinks = document.querySelectorAll('#mainNav a');
     
-    // Get the offset position of the navbar
-    const sticky = header.offsetTop;
+    // Get the hero section and navbar position
+    const heroSection = document.getElementById('hero_section');
     
-    // Add the sticky class to the navbar when you reach its scroll position
-    // Remove the sticky class when you leave the scroll position
     function handleScroll() {
-        if (window.pageYOffset > sticky) {
+        if (window.pageYOffset > heroSection.offsetHeight) {
             header.classList.add('sticky');
             body.classList.add('has-sticky-nav');
         } else {
