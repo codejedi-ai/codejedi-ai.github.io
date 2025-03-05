@@ -240,101 +240,7 @@ p {
 }
 (/
 
-/* Nav Styles
----------------------------------*/
-
-.navbar-inverse {
-    background-color: transparent;
-    border-color: transparent;
-}
-
-.navbar {
-    min-height: 40px;
-    margin-bottom: 0px;
-}
-
-.navbar-inverse .navbar-nav>li>a {
-    color: #222;
-}
-
-.navStyle {
-    float: right;
-}
-
-.navStyle ul {
-    list-style: none;
-    padding: 0px;
-}
-
-.navStyle ul li {
-    display: inline-block;
-    margin: 0 5px;
-}
-
-.navStyle ul li:first-child {
-    margin:0px;
-}
-
-.navStyle ul li:last-child {
-    margin: 0 0 0 23px;
-}
-
-.navStyle ul li a {
-    display: block;
-    font-size: 14px;
-    color: #222222;
-    font-family: 'Raleway', sans-serif;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 600;
-    transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.2s ease-in-out;
-}
-
-.navStyle ul li a:hover {
-    color: #ED5441;
-}
-
-.navStyle>li>a:hover,
-.nav>li>a:focus {
-    text-decoration: none;
-    color: #ED5441;
-    background-color: transparent;
-}
-
-.navbar-inverse .navbar-nav>li>a:hover,
-.navbar-inverse .navbar-nav>li>a:focus {
-    color: #CA133A;
-    background-color: transparent;
-}
-
-.navbar-inverse .navbar-nav>.active>a,
-.navbar-inverse .navbar-nav>.active>a:hover,
-.navbar-inverse .navbar-nav>.active>a:focus {
-    color: #CB143B;
-    background-color: transparent;
-}
-
-.navStyle>li.active>a,
-.navStyle>li.active>a:hover {
-    text-decoration: none;
-    color: #ED5441;
-    background-color: transparent;
-}
-
-.borderLeft {
-    border-left: 1px solid #DADADA;
-}
-
-.borderTop {
-    margin-top: 30px;
-    border-top: 1px solid #DADADA;
-}
-
-.mrgTop {
-    margin-top: 30px;
-}
+/* Removed Nav Styles */
 
 
 /* Top_content
@@ -1425,11 +1331,6 @@ img {
 }
 
 @media (max-width: 768px) {
-    .navStyle {
-        float: right;
-        width: auto;
-        text-align: center;
-    }
     .aboutUs-container {
         background-image: none;
     }
@@ -1501,58 +1402,9 @@ img {
     .page_section.contact {
         padding: 60px 0 50px;
     }
-    .navbar-inverse .navbar-toggle .icon-bar {
-        background: #ED5441;
-    }
-    .navbar-inverse .navbar-toggle {
-        border-color: transparent;
-    }
-    .navbar-inverse .navbar-toggle:hover,
-    .navbar-inverse .navbar-toggle:focus {
-        background: none;
-        outline: none;
-    }
-    .navStyle ul li {
-        display: block;
-    }
-    .navStyle {
-        float: right;
-        width: 100%;
-        text-align: center;
-    }
-    .navbar {
-        border: 0px solid #fff;
-        min-height: 40px;
-        margin-bottom: 0px;
-        float: right;
-    }
-    .navStyle ul li {
-        display: block;
-        margin: 0px;
-    }
-    .navStyle ul li:last-child {
-        margin: 0px;
-    }
-    .navbar-inverse .navbar-nav>li>a {
-        color: #222;
-        font-size: 12px;
-        padding: 10px 11px;
-    }
 }
 
 @media (max-width: 480px) {
-    .navStyle {
-        float: left;
-        width: 100%;
-        text-align: left;
-    }
-    .navbar {
-        border: 0px solid #fff;
-        min-height: 40px;
-        margin-bottom: 0px;
-        float: initial;
-        width: 100%;
-    }
     .team_area {
         width: 99%;
     }
