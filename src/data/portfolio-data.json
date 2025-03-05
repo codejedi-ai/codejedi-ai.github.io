@@ -116,39 +116,45 @@
   "filters": [
     {
       "id": "all",
-      "label": "All",
+      "label": "All Projects",
       "cssClass": "*",
-      "active": true
+      "active": true,
+      "description": "View all my projects across different domains"
     },
     {
       "id": "Nengo",
       "label": "Neuroscience",
       "cssClass": "Nengo",
-      "active": false
+      "active": false,
+      "description": "Projects related to neural engineering and brain simulation"
     },
     {
       "id": "RL",
       "label": "Reinforcement Learning",
       "cssClass": "RL",
-      "active": false
+      "active": false,
+      "description": "AI agents that learn through interaction with environments"
     },
     {
       "id": "CV",
       "label": "Computer Vision",
       "cssClass": "CV",
-      "active": false
+      "active": false,
+      "description": "Image processing and visual understanding systems"
     },
     {
       "id": "SWE",
-      "label": "Software Developments",
+      "label": "Software Development",
       "cssClass": "SWE",
-      "active": false
+      "active": false,
+      "description": "General software engineering and application development"
     },
     {
       "id": "AWS",
-      "label": "AWS",
+      "label": "AWS Cloud",
       "cssClass": "AWS",
-      "active": false
+      "active": false,
+      "description": "Cloud infrastructure and serverless applications"
     }
   ]
 }
