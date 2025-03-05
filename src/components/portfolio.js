@@ -92,7 +92,14 @@ function initPortfolio() {
 /**
  * Create the basic portfolio structure
  */
-function createPortfolioStructure() {
+async function createPortfolioStructure() {
+  const response = await fetch('/src/data/portfolio-options.json');
+  const optionsData = await response.json();
+
+  const viewOptions = optionsData.viewOptions.map(option =>
+    `<option value="${option.id}">${option.label}</option>`
+  ).join('');
+
   portfolioSection.innerHTML = `
     <!-- Container -->
     <div class="container portfolio_title">
@@ -111,9 +118,7 @@ function createPortfolioStructure() {
       <div class="view-selector-container">
         <div class="dropdown-view-selector">
           <select id="view-dropdown" class="view-dropdown">
-            <option value="full-stack" selected>Full Stack</option>
-            <option value="cloud-devops">Cloud Eng / DevOps</option>
-            <option value="ai-ml">AI/ML</option>
+            ${viewOptions}
           </select>
         </div>
       </div>
