@@ -211,16 +211,6 @@ p {
 /* Header Styles
 ---------------------------------*/
 
-#header_wrapper {
-    background: transparent;
-    padding: 20px 0px;
-    margin-left: auto;
-    margin-right: auto;
-    position: center;
-    border-top: none;
-    box-shadow: none;
-    border-bottom: none;
-}
 
 .header_box {
     position: relative;
