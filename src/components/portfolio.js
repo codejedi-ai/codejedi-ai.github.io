@@ -85,10 +85,9 @@ function createPortfolioStructure() {
       <div class="view-selector-container">
         <div class="dropdown-view-selector">
           <select id="view-dropdown" class="view-dropdown">
-            <option value="all" selected>All Projects</option>
-            <option value="featured">Featured Projects</option>
-            <option value="recent">Recent Projects</option>
-            <option value="category">Projects By Category</option>
+            <option value="full-stack" selected>Full Stack</option>
+            <option value="cloud-devops">Cloud Eng / DevOps</option>
+            <option value="ai-ml">AI/ML</option>
           </select>
         </div>
       </div>
