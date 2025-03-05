@@ -144,6 +144,14 @@ function addEventListeners() {
         portfolioFilter.click();
       }
       
+      // Also activate the category view in the view selector
+      const categoryViewBtn = document.querySelector('.view-btn[data-view="category"]');
+      if (categoryViewBtn) {
+        const viewButtons = document.querySelectorAll('.view-btn');
+        viewButtons.forEach(btn => btn.classList.remove('active'));
+        categoryViewBtn.classList.add('active');
+      }
+      
       // Scroll to portfolio section
       const portfolioSection = document.getElementById('Portfolio');
       if (portfolioSection) {

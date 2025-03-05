@@ -9,17 +9,22 @@
 
 // Import the portfolio selection component
 import { initPortfolioSelection } from './portfolio-selection.js';
+import { PortfolioViewModel, ViewTypes } from '../models/portfolio-view-model.js';
 
 // DOM elements
 let portfolioSection;
 let filterContainer;
 let projectsContainer;
+let viewSelector;
 
 // Data storage
 let portfolioData = {
   projects: [],
   filters: []
 };
+
+// View model
+let viewModel;
 
 /**
  * Initialize the portfolio component
@@ -47,6 +52,9 @@ function initPortfolio() {
       // This needs to happen after filters are rendered
       initPortfolioSelection(portfolioData);
       
+      // Set up view selector
+      setupViewSelector();
+      
       initializeIsotope();
     })
     .catch(error => {
@@ -71,6 +79,18 @@ function createPortfolioStructure() {
     <!-- Container -->
 
     <div class="portfolio-top"></div>
+    
+    <!-- View Selector -->
+    <div class="container">
+      <div class="view-selector-container">
+        <div class="view-selector">
+          <button class="view-btn active" data-view="all">All Projects</button>
+          <button class="view-btn" data-view="featured">Featured</button>
+          <button class="view-btn" data-view="recent">Recent</button>
+          <button class="view-btn" data-view="category">By Category</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Portfolio Filters -->
     <div class="portfolio">
@@ -115,6 +135,16 @@ async function fetchPortfolioData() {
     }
     
     portfolioData = await response.json();
+    
+    // Add featured flag to some projects for demo purposes
+    portfolioData.projects.forEach((project, index) => {
+      // Mark every third project as featured for demonstration
+      project.featured = index % 3 === 0;
+    });
+    
+    // Initialize the view model with the projects
+    viewModel = new PortfolioViewModel(portfolioData.projects);
+    
     return portfolioData;
   } catch (error) {
     console.error('Error fetching portfolio data:', error);
@@ -203,28 +233,16 @@ function handleFilterClick(filterElement, filter) {
   const filterValue = filterElement.getAttribute('data-filter');
   console.log('Applying filter:', filterValue);
   
-  // Get all portfolio items
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  // Update the view model to category view with the selected category
+  viewModel.setView(ViewTypes.CATEGORY, filter.id);
   
-  // Show/hide items based on filter
-  if (filter.id === 'all') {
-    // Show all items
-    portfolioItems.forEach(item => {
-      item.style.display = 'block';
-    });
-  } else {
-    // Show only items with matching category
-    portfolioItems.forEach(item => {
-      // Check if the item has a data-category attribute matching the filter
-      if (item.getAttribute('data-category') === filter.id) {
-        item.style.display = 'block';
-        item.classList.add('filtered-in');
-      } else {
-        item.style.display = 'none';
-        item.classList.remove('filtered-in');
-      }
-    });
-  }
+  // Update the view selector to show category is active
+  const viewButtons = document.querySelectorAll('.view-btn');
+  viewButtons.forEach(btn => btn.classList.remove('active'));
+  document.querySelector('.view-btn[data-view="category"]').classList.add('active');
+  
+  // Re-render the projects
+  renderProjects();
   
   // Add a class to the portfolio section to indicate filtering is active
   if (filter.id === 'all') {
@@ -276,8 +294,11 @@ function renderProjects() {
   // Clear loading indicator
   projectsContainer.innerHTML = '';
   
+  // Get projects from the view model
+  const projectsToShow = viewModel.getProjects();
+  
   // Create project elements
-  portfolioData.projects.forEach(project => {
+  projectsToShow.forEach(project => {
     const projectElement = document.createElement('figure');
     // Use the exact class requested for all items
     projectElement.className = `portfolio-item CV`;
@@ -289,10 +310,15 @@ function renderProjects() {
     projectElement.setAttribute('aria-labelledby', `project-title-${project.id}`);
     projectElement.setAttribute('role', 'article');
     
+    // Add featured badge if applicable
+    const featuredBadge = project.featured ? 
+      '<span class="featured-badge">Featured</span>' : '';
+    
     projectElement.innerHTML = `
       <a href="${project.href}" class="fancybox">
         <div class="portfolio_img">
           <img src="${project.imageUrl}" alt="${project.title}" />
+          ${featuredBadge}
         </div>
         <figcaption>
           <div>
@@ -307,18 +333,35 @@ function renderProjects() {
     projectsContainer.appendChild(projectElement);
   });
   
-  // Count projects by category for debugging
-  const categoryCounts = {};
-  portfolioData.projects.forEach(project => {
-    categoryCounts[project.category] = (categoryCounts[project.category] || 0) + 1;
-  });
-  console.log('Projects by category:', categoryCounts);
-  
   // Add a message for when no projects match the filter
-  const noResultsMessage = document.createElement('div');
-  noResultsMessage.className = 'no-results-message';
-  noResultsMessage.innerHTML = '<h3>No projects match the selected filter</h3><p>Try selecting a different category.</p>';
-  projectsContainer.appendChild(noResultsMessage);
+  if (projectsToShow.length === 0) {
+    const noResultsMessage = document.createElement('div');
+    noResultsMessage.className = 'no-results-message';
+    noResultsMessage.innerHTML = '<h3>No projects match the selected filter</h3><p>Try selecting a different view or category.</p>';
+    projectsContainer.appendChild(noResultsMessage);
+  }
+  
+  // Add view type indicator
+  const viewTypeIndicator = document.createElement('div');
+  viewTypeIndicator.className = 'view-type-indicator';
+  
+  let viewDescription = '';
+  switch (viewModel.getCurrentView()) {
+    case ViewTypes.FEATURED:
+      viewDescription = 'Showing featured projects';
+      break;
+    case ViewTypes.RECENT:
+      viewDescription = 'Showing most recent projects';
+      break;
+    case ViewTypes.CATEGORY:
+      viewDescription = `Showing ${viewModel.getCurrentCategory() === 'all' ? 'all' : viewModel.getCurrentCategory()} projects`;
+      break;
+    default:
+      viewDescription = 'Showing all projects';
+  }
+  
+  viewTypeIndicator.textContent = viewDescription;
+  projectsContainer.insertAdjacentElement('beforebegin', viewTypeIndicator);
 }
 
 /**
@@ -391,6 +434,53 @@ function displayErrorMessage() {
 }
 
 /**
+ * Set up the view selector buttons
+ */
+function setupViewSelector() {
+  viewSelector = document.querySelector('.view-selector');
+  if (!viewSelector) return;
+  
+  const viewButtons = viewSelector.querySelectorAll('.view-btn');
+  
+  viewButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active button
+      viewButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+      
+      // Get the view type
+      const viewType = button.getAttribute('data-view');
+      
+      // Update the view model
+      if (viewType === ViewTypes.CATEGORY) {
+        // For category view, use the current active filter
+        const activeFilter = document.querySelector('#filters a.active');
+        const categoryId = activeFilter ? 
+          activeFilter.getAttribute('id') : 'all';
+        
+        viewModel.setView(viewType, categoryId);
+        
+        // Show the filters
+        document.querySelector('.filter-container').style.display = 'block';
+      } else {
+        viewModel.setView(viewType);
+        
+        // Hide the filters for non-category views
+        document.querySelector('.filter-container').style.display = 
+          viewType === ViewTypes.CATEGORY ? 'block' : 'none';
+      }
+      
+      // Re-render the projects
+      renderProjects();
+    });
+  });
+  
+  // Initially hide filters if not in category view
+  document.querySelector('.filter-container').style.display = 
+    viewModel.getCurrentView() === ViewTypes.CATEGORY ? 'block' : 'none';
+}
+
+/**
  * Debug function to help troubleshoot portfolio issues
  */
 function debugPortfolio() {
@@ -420,6 +510,13 @@ function debugPortfolio() {
   console.log('Filter values:');
   filters.forEach(filter => {
     console.log(`- ${filter.textContent.trim()}: ${filter.getAttribute('data-filter')}, Active: ${filter.classList.contains('active')}`);
+  });
+  
+  // Log view model state
+  console.log('View Model:', {
+    currentView: viewModel.getCurrentView(),
+    currentCategory: viewModel.getCurrentCategory(),
+    projectCount: viewModel.getProjects().length
   });
 }
 
