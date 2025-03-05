@@ -39,6 +39,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  justify-content: flex-end;
 }
 
 .navbar-fixed-top .nav-links li {
@@ -77,6 +78,7 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     margin-top: 0;
+    width: auto;
   }
   
   .navbar-fixed-top .nav-links li {
@@ -90,14 +92,15 @@
 @media (max-width: 480px) {
   .navbar-fixed-top .container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
   
   .navbar-fixed-top .nav-links {
     flex-direction: column;
     width: 100%;
     margin-top: 10px;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
   }
   
   .navbar-fixed-top .nav-links li {
