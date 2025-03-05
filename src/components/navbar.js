@@ -14,11 +14,8 @@ export function initStickyNavbar() {
         return;
     }
     
-    // Always make the navbar fixed at the top
-    navbar.style.position = 'fixed';
-    navbar.style.top = '0';
-    navbar.style.width = '100%';
-    navbar.style.zIndex = '1000';
+    // Add the sticky class to enable our CSS styles
+    navbar.classList.add('sticky');
     
     // Add some padding to the body to prevent content from hiding behind the navbar
     const navbarHeight = navbar.offsetHeight;
@@ -26,6 +23,12 @@ export function initStickyNavbar() {
     
     // Remove any scroll event listeners that might be changing the navbar's position
     window.removeEventListener('scroll', handleScroll);
+    
+    // Handle window resize to adjust body padding if navbar height changes
+    window.addEventListener('resize', () => {
+        const updatedNavbarHeight = navbar.offsetHeight;
+        document.body.style.paddingTop = `${updatedNavbarHeight}px`;
+    });
     
     console.log('Sticky navbar initialized');
 }
