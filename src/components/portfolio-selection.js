@@ -144,12 +144,10 @@ function addEventListeners() {
         portfolioFilter.click();
       }
       
-      // Also activate the category view in the view selector
-      const categoryViewBtn = document.querySelector('.view-btn[data-view="category"]');
-      if (categoryViewBtn) {
-        const viewButtons = document.querySelectorAll('.view-btn');
-        viewButtons.forEach(btn => btn.classList.remove('active'));
-        categoryViewBtn.classList.add('active');
+      // Also update the view dropdown to show category view
+      const viewDropdown = document.querySelector('#view-dropdown');
+      if (viewDropdown) {
+        viewDropdown.value = 'category';
       }
       
       // Scroll to portfolio section

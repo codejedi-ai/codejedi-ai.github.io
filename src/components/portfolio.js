@@ -83,11 +83,13 @@ function createPortfolioStructure() {
     <!-- View Selector -->
     <div class="container">
       <div class="view-selector-container">
-        <div class="view-selector">
-          <button class="view-btn active" data-view="all">All Projects</button>
-          <button class="view-btn" data-view="featured">Featured</button>
-          <button class="view-btn" data-view="recent">Recent</button>
-          <button class="view-btn" data-view="category">By Category</button>
+        <div class="dropdown-view-selector">
+          <select id="view-dropdown" class="view-dropdown">
+            <option value="all" selected>All Projects</option>
+            <option value="featured">Featured Projects</option>
+            <option value="recent">Recent Projects</option>
+            <option value="category">Projects By Category</option>
+          </select>
         </div>
       </div>
     </div>
@@ -236,10 +238,11 @@ function handleFilterClick(filterElement, filter) {
   // Update the view model to category view with the selected category
   viewModel.setView(ViewTypes.CATEGORY, filter.id);
   
-  // Update the view selector to show category is active
-  const viewButtons = document.querySelectorAll('.view-btn');
-  viewButtons.forEach(btn => btn.classList.remove('active'));
-  document.querySelector('.view-btn[data-view="category"]').classList.add('active');
+  // Update the view dropdown to show category is selected
+  const viewDropdown = document.querySelector('#view-dropdown');
+  if (viewDropdown) {
+    viewDropdown.value = 'category';
+  }
   
   // Re-render the projects
   renderProjects();
@@ -434,45 +437,37 @@ function displayErrorMessage() {
 }
 
 /**
- * Set up the view selector buttons
+ * Set up the view selector dropdown
  */
 function setupViewSelector() {
-  viewSelector = document.querySelector('.view-selector');
+  viewSelector = document.querySelector('#view-dropdown');
   if (!viewSelector) return;
   
-  const viewButtons = viewSelector.querySelectorAll('.view-btn');
-  
-  viewButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Update active button
-      viewButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
+  viewSelector.addEventListener('change', () => {
+    // Get the selected view type
+    const viewType = viewSelector.value;
+    
+    // Update the view model
+    if (viewType === ViewTypes.CATEGORY) {
+      // For category view, use the current active filter
+      const activeFilter = document.querySelector('#filters a.active');
+      const categoryId = activeFilter ? 
+        activeFilter.getAttribute('id') : 'all';
       
-      // Get the view type
-      const viewType = button.getAttribute('data-view');
+      viewModel.setView(viewType, categoryId);
       
-      // Update the view model
-      if (viewType === ViewTypes.CATEGORY) {
-        // For category view, use the current active filter
-        const activeFilter = document.querySelector('#filters a.active');
-        const categoryId = activeFilter ? 
-          activeFilter.getAttribute('id') : 'all';
-        
-        viewModel.setView(viewType, categoryId);
-        
-        // Show the filters
-        document.querySelector('.filter-container').style.display = 'block';
-      } else {
-        viewModel.setView(viewType);
-        
-        // Hide the filters for non-category views
-        document.querySelector('.filter-container').style.display = 
-          viewType === ViewTypes.CATEGORY ? 'block' : 'none';
-      }
+      // Show the filters
+      document.querySelector('.filter-container').style.display = 'block';
+    } else {
+      viewModel.setView(viewType);
       
-      // Re-render the projects
-      renderProjects();
-    });
+      // Hide the filters for non-category views
+      document.querySelector('.filter-container').style.display = 
+        viewType === ViewTypes.CATEGORY ? 'block' : 'none';
+    }
+    
+    // Re-render the projects
+    renderProjects();
   });
   
   // Initially hide filters if not in category view
