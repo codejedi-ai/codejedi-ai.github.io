@@ -141,6 +141,48 @@
   font-size: 12px;
   font-weight: bold;
   z-index: 10;
+  transition: all 0.3s ease;
+}
+
+/* Filtered items styling */
+.filtering-active .portfolio-item {
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all 0.3s ease;
+}
+
+.filtering-active .portfolio-item.filtered-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* No results message */
+.no-results-message {
+  display: none;
+  text-align: center;
+  padding: 40px;
+  width: 100%;
+}
+
+.filtering-active .no-results-message {
+  display: block;
+}
+
+.filtering-active .portfolio-item:not(.filtered-in) + .no-results-message {
+  display: none;
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 /* Responsive adjustments */

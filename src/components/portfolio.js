@@ -126,33 +126,32 @@ function renderFilters() {
   filterTitle.innerHTML = '<h4>Filter Projects:</h4>';
   filterContainer.parentNode.insertBefore(filterTitle, filterContainer);
   
-  // Create "All" filter first
-  const allFilterItem = document.createElement('li');
-  allFilterItem.innerHTML = `
-    <a id="all" href="#" data-filter="*" class="active">
-      <h5>All</h5>
-    </a>
-  `;
+  // Use the filters from the JSON data if available, otherwise generate from project categories
+  const filtersToUse = portfolioData.filters && portfolioData.filters.length > 0 
+    ? portfolioData.filters 
+    : [
+        { id: 'all', label: 'All', active: true },
+        ...[...new Set(portfolioData.projects.map(project => project.category))]
+          .filter(category => category) // Remove empty categories
+          .map(category => ({ 
+            id: category, 
+            label: category, 
+            active: false 
+          }))
+      ];
   
-  // Add click event listener for All filter
-  const allFilterLink = allFilterItem.querySelector('a');
-  allFilterLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    handleFilterClick(allFilterLink, { id: 'all', label: 'All' });
-  });
-  
-  filterContainer.appendChild(allFilterItem);
-  
-  // Get unique categories from projects
-  const categories = [...new Set(portfolioData.projects.map(project => project.category))];
-  
-  // Create filter elements for each category
-  categories.forEach(category => {
+  // Create filter elements
+  filtersToUse.forEach(filter => {
     const filterItem = document.createElement('li');
     
     filterItem.innerHTML = `
-      <a id="${category}" href="#" data-filter=".${category}">
-        <h5>${category}</h5>
+      <a id="${filter.id}" 
+         href="#" 
+         data-filter="${filter.id === 'all' ? '*' : '.' + filter.id}"
+         class="${filter.active ? 'active' : ''}"
+         role="button"
+         aria-pressed="${filter.active ? 'true' : 'false'}">
+        <h5>${filter.label}</h5>
       </a>
     `;
     
@@ -160,7 +159,13 @@ function renderFilters() {
     const filterLink = filterItem.querySelector('a');
     filterLink.addEventListener('click', (e) => {
       e.preventDefault();
-      handleFilterClick(filterLink, { id: category, label: category });
+      handleFilterClick(filterLink, filter);
+      
+      // Update aria-pressed state
+      document.querySelectorAll('#filters a').forEach(a => {
+        a.setAttribute('aria-pressed', 'false');
+      });
+      filterLink.setAttribute('aria-pressed', 'true');
     });
     
     filterContainer.appendChild(filterItem);
@@ -204,11 +209,33 @@ function handleFilterClick(filterElement, filter) {
       // Check if the item has a data-category attribute matching the filter
       if (item.getAttribute('data-category') === filter.id) {
         item.style.display = 'block';
+        item.classList.add('filtered-in');
       } else {
         item.style.display = 'none';
+        item.classList.remove('filtered-in');
       }
     });
   }
+  
+  // Add a class to the portfolio section to indicate filtering is active
+  if (filter.id === 'all') {
+    portfolioSection.classList.remove('filtering-active');
+  } else {
+    portfolioSection.classList.add('filtering-active');
+  }
+  
+  // Announce filter change for accessibility
+  const filterAnnouncement = document.getElementById('filter-announcement') || 
+    (() => {
+      const el = document.createElement('div');
+      el.id = 'filter-announcement';
+      el.className = 'sr-only';
+      el.setAttribute('aria-live', 'polite');
+      document.body.appendChild(el);
+      return el;
+    })();
+  
+  filterAnnouncement.textContent = `Showing ${filter.id === 'all' ? 'all' : filter.id} projects`;
 }
 
 /**
@@ -227,6 +254,10 @@ function renderProjects() {
     // Add data-category attribute for filtering
     projectElement.setAttribute('data-category', project.category);
     
+    // Add additional attributes for accessibility and filtering
+    projectElement.setAttribute('aria-labelledby', `project-title-${project.id}`);
+    projectElement.setAttribute('role', 'article');
+    
     projectElement.innerHTML = `
       <a href="${project.href}" class="fancybox">
         <div class="portfolio_img">
@@ -234,7 +265,7 @@ function renderProjects() {
         </div>
         <figcaption>
           <div>
-            <h2><span>${project.title}</span></h2>
+            <h2 id="project-title-${project.id}"><span>${project.title}</span></h2>
             <p>${project.description}</p>
             <span class="category-tag">${project.category}</span>
           </div>
@@ -244,6 +275,12 @@ function renderProjects() {
     
     projectsContainer.appendChild(projectElement);
   });
+  
+  // Add a message for when no projects match the filter
+  const noResultsMessage = document.createElement('div');
+  noResultsMessage.className = 'no-results-message';
+  noResultsMessage.innerHTML = '<h3>No projects match the selected filter</h3><p>Try selecting a different category.</p>';
+  projectsContainer.appendChild(noResultsMessage);
 }
 
 /**
@@ -259,12 +296,44 @@ function initializeIsotope() {
       // Make all items visible initially
       portfolioItems.forEach(item => {
         item.style.display = 'block';
+        item.classList.add('filtered-in');
       });
+      
+      // Check if there's a hash in the URL for direct filtering
+      const hash = window.location.hash;
+      if (hash && hash.startsWith('#filter-')) {
+        const filterValue = hash.replace('#filter-', '');
+        const filterLink = document.querySelector(`#filters a[id="${filterValue}"]`);
+        
+        if (filterLink) {
+          // Find the corresponding filter object
+          const filter = portfolioData.filters.find(f => f.id === filterValue) || 
+                        { id: filterValue, label: filterValue };
+          
+          // Trigger the filter
+          handleFilterClick(filterLink, filter);
+        }
+      }
       
       console.log('Portfolio grid initialized successfully');
       
       // Trigger a resize event to force layout recalculation
       window.dispatchEvent(new Event('resize'));
+      
+      // Add event listener for filter changes via URL hash
+      window.addEventListener('hashchange', function() {
+        const hash = window.location.hash;
+        if (hash && hash.startsWith('#filter-')) {
+          const filterValue = hash.replace('#filter-', '');
+          const filterLink = document.querySelector(`#filters a[id="${filterValue}"]`);
+          
+          if (filterLink) {
+            const filter = portfolioData.filters.find(f => f.id === filterValue) || 
+                          { id: filterValue, label: filterValue };
+            handleFilterClick(filterLink, filter);
+          }
+        }
+      });
     } catch (error) {
       console.error('Error initializing portfolio grid:', error);
     }
