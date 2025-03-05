@@ -26,7 +26,7 @@
     },
     {
       "id": 4,
-      "category": "Nengo",
+      "category": "CV",
       "href": "/vids/Real-Time Online Learning with PES Rule.mp4",
       "imageUrl": "/img/nengo/RTRL.png",
       "title": "Real-Time Online Learning with PES Rule",
@@ -34,7 +34,7 @@
     },
     {
       "id": 5,
-      "category": "RL",
+      "category": "CV",
       "href": "/vids/CartpoleRenforcementLearning_1.mp4",
       "imageUrl": "/img/RL_CartPole.png",
       "title": "Tackling CartPole with OpenAI Gym",
@@ -42,7 +42,7 @@
     },
     {
       "id": 6,
-      "category": "Nengo",
+      "category": "CV",
       "href": "/vids/ParlovDog.mp4",
       "imageUrl": "/img/nengo/classical_conditioning.png",
       "title": "Pavlov's Dog Conditional Stimulus Simulation",
@@ -50,7 +50,7 @@
     },
     {
       "id": 7,
-      "category": "Nengo",
+      "category": "CV",
       "href": "/vids/Accumulate-to-Threshold Decision Making Model.mp4",
       "imageUrl": "/img/nengo/accumulator.png",
       "title": "Decision Making Model with Nengo Neural Simulator",
@@ -66,7 +66,7 @@
     },
     {
       "id": 9,
-      "category": "AWS",
+      "category": "CV",
       "href": "/pdfs/WildRydeReport.pdf",
       "imageUrl": "/img/wildrydes-architecture.jpeg",
       "title": "Wild Rydes",
@@ -74,7 +74,7 @@
     },
     {
       "id": 10,
-      "category": "AWS",
+      "category": "CV",
       "href": "/pdfs/DevSecOpsReport.pdf",
       "imageUrl": "/img/TrendMicroControlPanel.png",
       "title": "Trend Micro One",
@@ -82,7 +82,7 @@
     },
     {
       "id": 11,
-      "category": "AWS",
+      "category": "CV",
       "href": "/#",
       "imageUrl": "/img/DevSecOps.JPG",
       "title": "DevSecOps",
@@ -90,7 +90,7 @@
     },
     {
       "id": 12,
-      "category": "AWS",
+      "category": "CV",
       "href": "https://catalog.us-east-1.prod.workshops.aws/v2/workshops/44d3e2a0-ec6f-44df-9397-bcfdf129cadf/en-US/",
       "imageUrl": "img/devmlops.png",
       "title": "DEVMLOPS",
@@ -98,7 +98,7 @@
     },
     {
       "id": 13,
-      "category": "SWE",
+      "category": "CV",
       "href": "https://github.com/codejedi-ai/Nationstate-LLM",
       "imageUrl": "img/Nationstates-LLM.png",
       "title": "Analyze progressive bias in the GPT-4 model: Nationstates-LLM",
@@ -106,7 +106,7 @@
     },
     {
       "id": 14,
-      "category": "SWE",
+      "category": "CV",
       "href": "https://github.com/codejedi-ai/GMM-Segmentation",
       "imageUrl": "img/SegmanticPic.png",
       "title": "GMM-Segmentation",

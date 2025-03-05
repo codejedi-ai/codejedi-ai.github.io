@@ -173,7 +173,9 @@ function handleFilterClick(filterElement, filter) {
   console.log('Applying filter:', filterValue);
   
   if (window.jQuery && window.jQuery('#portfolio_wrapper').data('isotope')) {
-    window.jQuery('#portfolio_wrapper').isotope({ filter: filterValue });
+    // Since all items have the CV class, we'll always show all items
+    // The filter is just for visual indication in the UI
+    window.jQuery('#portfolio_wrapper').isotope({ filter: '.CV' });
   } else {
     console.error('Isotope not properly initialized');
   }
@@ -189,8 +191,8 @@ function renderProjects() {
   // Create project elements
   portfolioData.projects.forEach(project => {
     const projectElement = document.createElement('figure');
-    // Make sure the category class matches what we're filtering on
-    projectElement.className = `portfolio-item one-four ${project.category} isotope-item effect-oscar`;
+    // Use the exact class requested for all items
+    projectElement.className = `portfolio-item one-four CV isotope-item`;
     
     projectElement.innerHTML = `
       <a href="${project.href}" class="fancybox">
