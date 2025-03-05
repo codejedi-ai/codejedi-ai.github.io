@@ -29,16 +29,13 @@ class PortfolioViewModel {
   getProjects() {
     switch (this.currentView) {
       case ViewTypes.CATEGORY:
-        return this.allProjects.filter(p => 
-          this.currentCategory === 'all' || p.category === this.currentCategory
-        );
+        return this.allProjects.filter(p => p.category === this.currentCategory);
       case ViewTypes.FEATURED:
         return this.featuredProjects;
       case ViewTypes.RECENT:
         return this.recentProjects;
-      case ViewTypes.ALL:
       default:
-        return this.allProjects;
+        return [];
     }
   }
 

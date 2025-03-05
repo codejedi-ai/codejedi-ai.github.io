@@ -237,12 +237,6 @@ function handleFilterClick(filterElement, filter) {
   // Update the view model to category view with the selected category
   viewModel.setView(ViewTypes.CATEGORY, filter.id);
   
-  // Update the view dropdown to show category is selected
-  const viewDropdown = document.querySelector('#view-dropdown');
-  if (viewDropdown) {
-    viewDropdown.value = 'category';
-  }
-  
   // Re-render the projects
   renderProjects();
   
