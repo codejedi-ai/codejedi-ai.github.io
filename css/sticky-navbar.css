@@ -11,6 +11,17 @@
     animation: slideDown 0.5s;
 }
 
+/* Add a transition effect for smoother navigation highlighting */
+#mainNav li {
+    transition: background-color 0.3s ease;
+}
+
+/* Highlight the active navigation item more prominently */
+#mainNav li.active a {
+    color: #e74c3c !important;
+    font-weight: bold;
+}
+
 @keyframes slideDown {
     from {
         transform: translateY(-100%);
