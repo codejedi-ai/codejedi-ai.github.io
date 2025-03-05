@@ -17,7 +17,6 @@ class PortfolioViewModel {
   constructor(projects = []) {
     this.allProjects = projects;
     this.currentView = ViewTypes.ALL;
-    this.currentCategory = null;
     this.featuredProjects = projects.filter(p => p.featured);
     this.recentProjects = [...projects].sort((a, b) => b.id - a.id).slice(0, 6);
   }
@@ -44,11 +43,8 @@ class PortfolioViewModel {
    * @param {string} viewType - The view type to set
    * @param {string} [category] - Optional category for category view
    */
-  setView(viewType, category = null) {
-    this.currentView = viewType;
-    if (viewType === ViewTypes.CATEGORY) {
-      this.currentCategory = category;
-    }
+  setView(category) {
+    this.currentCategory = category;
     return this;
   }
 

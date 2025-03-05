@@ -398,23 +398,14 @@ function setupViewSelector() {
   if (!viewSelector) return;
   
   viewSelector.addEventListener('change', () => {
-    // Get the selected view type
-    const viewType = viewSelector.value;
-    
-    // Update the view model
-    if (viewType === ViewTypes.CATEGORY) {
-      // For category view, use the current active filter
-      const activeFilter = document.querySelector('#filters a.active');
-      const categoryId = activeFilter ? 
-        activeFilter.getAttribute('id') : 'all';
-      
-      viewModel.setView(viewType, categoryId);
-    } else {
-      viewModel.setView(viewType);
-    }
+    // Get the selected category
+    const categoryId = viewSelector.value;
 
-    // Log the selected view
-    console.log("Selected Category:", viewModel.getCurrentCategory());
+    // Update the view model
+    viewModel.setView(categoryId);
+
+    // Log the selected category
+    console.log("Selected Category:", categoryId);
   });
   
   // Initially hide filters if not in category view
