@@ -1,0 +1,52 @@
+/* Portfolio Section Styles */
+
+/* Loading indicator */
+.loading-indicator {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+  color: #777;
+}
+
+/* Error message */
+.error-message {
+  text-align: center;
+  padding: 40px;
+  background-color: #fff3f3;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.error-message h3 {
+  color: #e74c3c;
+  margin-bottom: 10px;
+}
+
+/* Filter active state */
+#filters ul li a.active h5 {
+  color: #e74c3c;
+}
+
+/* Hover effects for filter items */
+#filters ul li a:hover h5 {
+  color: #e74c3c;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 767px) {
+  .portfolio-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  #filters ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  #filters ul li {
+    margin: 5px;
+  }
+}
