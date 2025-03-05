@@ -1,0 +1,15 @@
+{
+    "viewOptions": [
+        { "id": "full-stack", "label": "Full Stack" },
+        { "id": "cloud-devops", "label": "Cloud Eng / DevOps" },
+        { "id": "ai-ml", "label": "AI/ML" }
+    ],
+    "filterOptions": [
+        { "id": "all", "label": "All", "filter": "*" },
+        { "id": "nengo", "label": "Neuroscience", "filter": ".Nengo" },
+        { "id": "rl", "label": "Reinforcement Learning", "filter": ".RL" },
+        { "id": "cv", "label": "Computer Vision", "filter": ".CV" },
+        { "id": "swe", "label": "Software Developments", "filter": ".SWE" },
+        { "id": "aws", "label": "AWS", "filter": ".AWS" }
+    ]
+}
