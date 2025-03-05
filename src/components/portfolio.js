@@ -306,7 +306,7 @@ function renderProjects() {
           <div>
             <h2 id="project-title-${project.id}"><span>${project.title}</span></h2>
             <p>${project.description}</p>
-            <span class="category-tag">${project.category}</span>
+            <span class="category-tag">${project.tags.join(', ')}</span>
           </div>
         </figcaption>
       </a>
