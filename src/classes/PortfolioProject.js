@@ -58,7 +58,7 @@ export class PortfolioProject {
      */
     toHTML() {
         return `
-            <figure class="portfolio-item one-four ${this.category} isotope-item effect-oscar">
+            <figure class="portfolio-item ${this.category} isotope-item effect-oscar">
                 <a href="${this.href}" class="fancybox">
                     <div class="portfolio_img">
                         <img src="${this.imageUrl}" alt="${this.title}" />

@@ -28,7 +28,7 @@ async function fetchPortfolioData() {
                 description: 'Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension.'
             },
             {
-                category: 'CV',
+                category: 'AWS',
                 title: 'CNN for Hurricane Damage Classification',
                 image: 'img/damage_no_damage.png',
                 link: 'vids/Hurricane.mp4',
