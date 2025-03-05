@@ -254,8 +254,7 @@ function handleFilterClick(filterElement, filter) {
     portfolioSection.classList.add('filtering-active');
   }
   
-  // Update the selection component to match the current filter
-  updateSelectionComponent(filter.id);
+  // Selection component has been removed
   
   // Announce filter change for accessibility
   const filterAnnouncement = document.getElementById('filter-announcement') || 
@@ -271,24 +270,7 @@ function handleFilterClick(filterElement, filter) {
   filterAnnouncement.textContent = `Showing ${filter.id === 'all' ? 'all' : filter.id} projects`;
 }
 
-/**
- * Update the selection component to match the current filter
- * @param {string} filterId - The ID of the active filter
- */
-function updateSelectionComponent(filterId) {
-  // Find all category buttons in the selection component
-  const categoryButtons = document.querySelectorAll('.category-button');
-  
-  // Update active state
-  categoryButtons.forEach(button => {
-    const buttonCategory = button.getAttribute('data-category');
-    if (buttonCategory === filterId) {
-      button.classList.add('active');
-    } else {
-      button.classList.remove('active');
-    }
-  });
-}
+// Selection component update function removed
 
 /**
  * Render projects to the DOM

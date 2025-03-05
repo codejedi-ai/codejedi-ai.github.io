@@ -33,72 +33,18 @@ function initPortfolioSelection(data) {
  * Create the selection section structure
  */
 function createSelectionSection() {
-  // Create the section element
-  selectionSection = document.createElement('div');
-  selectionSection.id = 'portfolio-selection';
-  selectionSection.className = 'portfolio-selection-section';
-  
-  // Create the inner HTML structure
-  selectionSection.innerHTML = `
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h3 class="selection-title">Explore My Work By Category</h3>
-          <div class="category-buttons-container">
-            <!-- Category buttons will be inserted here -->
-          </div>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  // Find the portfolio section
-  const portfolioSection = document.getElementById('Portfolio');
-  if (portfolioSection) {
-    // Insert after the portfolio title but before the filters
-    const portfolioTitle = portfolioSection.querySelector('.portfolio_title');
-    if (portfolioTitle && portfolioTitle.nextElementSibling) {
-      portfolioSection.insertBefore(selectionSection, portfolioTitle.nextElementSibling);
-    } else {
-      // Fallback - append to portfolio section
-      portfolioSection.appendChild(selectionSection);
-    }
-  } else {
-    // Fallback - append to body
-    document.body.appendChild(selectionSection);
-  }
-  
-  // Update the reference to the buttons container
-  categoryButtons = selectionSection.querySelector('.category-buttons-container');
+  // We're not creating the selection section anymore
+  // Just set up references to null
+  selectionSection = null;
+  categoryButtons = null;
 }
 
 /**
  * Render the category buttons based on portfolio filters
  */
 function renderCategoryButtons() {
-  if (!categoryButtons || !portfolioData || !portfolioData.filters) return;
-  
-  // Clear existing buttons
-  categoryButtons.innerHTML = '';
-  
-  // Create a button for each filter
-  portfolioData.filters.forEach(filter => {
-    const button = document.createElement('div');
-    button.className = `category-button ${filter.active ? 'active' : ''}`;
-    button.setAttribute('data-category', filter.id);
-    
-    // Create icon based on category
-    const iconClass = getCategoryIcon(filter.id);
-    
-    button.innerHTML = `
-      <div class="category-icon">
-        <i class="${iconClass}"></i>
-      </div>
-      <div class="category-label">${filter.label}</div>
-    `;
-    
-    categoryButtons.appendChild(button);
-  });
+  // No-op since we're not showing category buttons anymore
+  return;
 }
 
 /**
@@ -123,40 +69,8 @@ function getCategoryIcon(category) {
  * Add event listeners to the category buttons
  */
 function addEventListeners() {
-  if (!categoryButtons) return;
-  
-  // Get all buttons
-  const buttons = categoryButtons.querySelectorAll('.category-button');
-  
-  // Add click event to each button
-  buttons.forEach(button => {
-    button.addEventListener('click', function() {
-      const category = this.getAttribute('data-category');
-      
-      // Update active state in UI
-      buttons.forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
-      
-      // Find the corresponding filter in the portfolio section
-      const portfolioFilter = document.querySelector(`#filters a[id="${category}"]`);
-      if (portfolioFilter) {
-        // Trigger a click on the portfolio filter
-        portfolioFilter.click();
-      }
-      
-      // Also update the view dropdown to show category view
-      const viewDropdown = document.querySelector('#view-dropdown');
-      if (viewDropdown) {
-        viewDropdown.value = 'category';
-      }
-      
-      // Scroll to portfolio section
-      const portfolioSection = document.getElementById('Portfolio');
-      if (portfolioSection) {
-        portfolioSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
+  // No-op since we don't have category buttons anymore
+  return;
 }
 
 // Export the initialization function
