@@ -68,6 +68,27 @@
   }
   
   .navbar-fixed-top .container {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .navbar-fixed-top .nav-links {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 0;
+  }
+  
+  .navbar-fixed-top .nav-links li {
+    margin-left: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+  .navbar-fixed-top .container {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -76,6 +97,7 @@
     flex-direction: column;
     width: 100%;
     margin-top: 10px;
+    align-items: flex-start;
   }
   
   .navbar-fixed-top .nav-links li {
