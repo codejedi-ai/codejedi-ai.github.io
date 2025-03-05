@@ -1,7 +1,7 @@
 {
     "items": [
         {
-            "category": "CV",
+            "category": "Computer Vision",
             "title": "K-Means Algorithm for Unsupervised Learning",
             "image": "img/bunny.bmp",
             "link": "vids/K-means_V1.mp4",
