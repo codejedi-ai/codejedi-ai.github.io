@@ -9,13 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const heroSection = document.getElementById('hero_section');
     
     function handleScroll() {
-        if (window.pageYOffset > heroSection.offsetHeight) {
-            header.classList.add('sticky');
-            body.classList.add('has-sticky-nav');
-        } else {
-            header.classList.remove('sticky');
-            body.classList.remove('has-sticky-nav');
-        }
+        header.classList.add('sticky');
+        body.classList.add('has-sticky-nav');
     }
     
     // Listen for scroll events
