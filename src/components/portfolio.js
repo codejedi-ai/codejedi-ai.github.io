@@ -414,7 +414,6 @@ function setupViewSelector() {
     }
 
     // Log the selected view
-    console.log("Selected View:", viewModel.getCurrentView());
     console.log("Selected Category:", viewModel.getCurrentCategory());
   });
   
