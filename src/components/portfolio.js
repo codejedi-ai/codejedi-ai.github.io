@@ -409,19 +409,13 @@ function setupViewSelector() {
         activeFilter.getAttribute('id') : 'all';
       
       viewModel.setView(viewType, categoryId);
-      
-      // Show the filters
-      document.querySelector('.filter-container').style.display = 'block';
     } else {
       viewModel.setView(viewType);
-      
-      // Hide the filters for non-category views
-      document.querySelector('.filter-container').style.display = 
-        viewType === ViewTypes.CATEGORY ? 'block' : 'none';
     }
-    
-    // Re-render the projects
-    renderProjects();
+
+    // Log the selected view
+    console.log("Selected View:", viewModel.getCurrentView());
+    console.log("Selected Category:", viewModel.getCurrentCategory());
   });
   
   // Initially hide filters if not in category view
