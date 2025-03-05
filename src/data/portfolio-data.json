@@ -111,6 +111,70 @@
       "imageUrl": "img/SegmanticPic.png",
       "title": "GMM-Segmentation",
       "description": "Implemented the Gaussian mixture model (GMM) for image segmentation, effectively distinguishing foreground and background. This segmentation facilitated the identification of prominent features, thereby enhancing overall image comprehension and visual understanding."
+    },
+    {
+      "id": 15,
+      "category": "RL",
+      "href": "https://github.com/codejedi-ai/deep-q-learning",
+      "imageUrl": "img/RL_CartPole.png",
+      "title": "Deep Q-Learning for Game AI",
+      "description": "Implemented a Deep Q-Network (DQN) to train an agent to play Atari games. The agent learns optimal strategies through trial and error, demonstrating the power of reinforcement learning in complex environments."
+    },
+    {
+      "id": 16,
+      "category": "RL",
+      "href": "https://github.com/codejedi-ai/policy-gradient",
+      "imageUrl": "img/RL_CartPole.png",
+      "title": "Policy Gradient Methods",
+      "description": "Explored various policy gradient algorithms including REINFORCE and Proximal Policy Optimization (PPO) for continuous control tasks. These methods directly optimize the policy without needing a value function."
+    },
+    {
+      "id": 17,
+      "category": "Nengo",
+      "href": "https://github.com/codejedi-ai/spiking-neural-networks",
+      "imageUrl": "img/nengo/accumulator.png",
+      "title": "Spiking Neural Networks",
+      "description": "Developed biologically plausible neural models using spiking neurons. These networks more accurately represent how the brain processes information through discrete spike events rather than continuous activation."
+    },
+    {
+      "id": 18,
+      "category": "Nengo",
+      "href": "https://github.com/codejedi-ai/neural-engineering",
+      "imageUrl": "img/nengo/RTRL.png",
+      "title": "Neural Engineering Framework",
+      "description": "Applied the Neural Engineering Framework (NEF) to build large-scale brain models. This approach allows for the systematic construction of neural networks that implement specific mathematical functions."
+    },
+    {
+      "id": 19,
+      "category": "SWE",
+      "href": "https://github.com/codejedi-ai/microservices-architecture",
+      "imageUrl": "img/Nationstates-LLM.png",
+      "title": "Microservices Architecture",
+      "description": "Designed and implemented a scalable microservices architecture using Docker and Kubernetes. This approach enables independent deployment and scaling of application components."
+    },
+    {
+      "id": 20,
+      "category": "SWE",
+      "href": "https://github.com/codejedi-ai/event-driven-system",
+      "imageUrl": "img/Nationstates-LLM.png",
+      "title": "Event-Driven System",
+      "description": "Built an event-driven system using Apache Kafka for real-time data processing. This architecture allows for loose coupling between services and improved scalability."
+    },
+    {
+      "id": 21,
+      "category": "AWS",
+      "href": "https://github.com/codejedi-ai/serverless-application",
+      "imageUrl": "img/wildrydes-architecture.jpeg",
+      "title": "Serverless Application",
+      "description": "Developed a fully serverless application using AWS Lambda, API Gateway, and DynamoDB. This approach eliminates the need for server management and provides automatic scaling."
+    },
+    {
+      "id": 22,
+      "category": "AWS",
+      "href": "https://github.com/codejedi-ai/cloud-infrastructure",
+      "imageUrl": "img/TrendMicroControlPanel.png",
+      "title": "Infrastructure as Code",
+      "description": "Implemented infrastructure as code using AWS CloudFormation and Terraform. This approach enables version-controlled, reproducible infrastructure deployments."
     }
   ],
   "filters": [

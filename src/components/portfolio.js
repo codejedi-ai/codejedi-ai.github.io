@@ -39,12 +39,14 @@ function initPortfolio() {
   // Fetch data and render
   fetchPortfolioData()
     .then(() => {
-      // Initialize the portfolio selection component with the data
-      initPortfolioSelection(portfolioData);
-      
       // Render the portfolio section
       renderFilters();
       renderProjects();
+      
+      // Initialize the portfolio selection component with the data
+      // This needs to happen after filters are rendered
+      initPortfolioSelection(portfolioData);
+      
       initializeIsotope();
     })
     .catch(error => {
@@ -304,6 +306,13 @@ function renderProjects() {
     
     projectsContainer.appendChild(projectElement);
   });
+  
+  // Count projects by category for debugging
+  const categoryCounts = {};
+  portfolioData.projects.forEach(project => {
+    categoryCounts[project.category] = (categoryCounts[project.category] || 0) + 1;
+  });
+  console.log('Projects by category:', categoryCounts);
   
   // Add a message for when no projects match the filter
   const noResultsMessage = document.createElement('div');

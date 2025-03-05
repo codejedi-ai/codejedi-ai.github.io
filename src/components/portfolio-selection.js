@@ -34,7 +34,7 @@ function initPortfolioSelection(data) {
  */
 function createSelectionSection() {
   // Create the section element
-  selectionSection = document.createElement('section');
+  selectionSection = document.createElement('div');
   selectionSection.id = 'portfolio-selection';
   selectionSection.className = 'portfolio-selection-section';
   
@@ -52,10 +52,17 @@ function createSelectionSection() {
     </div>
   `;
   
-  // Insert the section before the portfolio section
+  // Find the portfolio section
   const portfolioSection = document.getElementById('Portfolio');
   if (portfolioSection) {
-    portfolioSection.parentNode.insertBefore(selectionSection, portfolioSection);
+    // Insert after the portfolio title but before the filters
+    const portfolioTitle = portfolioSection.querySelector('.portfolio_title');
+    if (portfolioTitle && portfolioTitle.nextElementSibling) {
+      portfolioSection.insertBefore(selectionSection, portfolioTitle.nextElementSibling);
+    } else {
+      // Fallback - append to portfolio section
+      portfolioSection.appendChild(selectionSection);
+    }
   } else {
     // Fallback - append to body
     document.body.appendChild(selectionSection);
@@ -101,15 +108,15 @@ function renderCategoryButtons() {
  */
 function getCategoryIcon(category) {
   const iconMap = {
-    'all': 'fa fa-th',
-    'CV': 'fa fa-eye',
-    'Nengo': 'fa fa-brain',
-    'RL': 'fa fa-robot',
-    'SWE': 'fa fa-code',
-    'AWS': 'fa fa-cloud'
+    'all': 'fas fa-th',
+    'CV': 'fas fa-eye',
+    'Nengo': 'fas fa-brain',
+    'RL': 'fas fa-robot',
+    'SWE': 'fas fa-code',
+    'AWS': 'fab fa-aws'
   };
   
-  return iconMap[category] || 'fa fa-folder';
+  return iconMap[category] || 'fas fa-folder';
 }
 
 /**
