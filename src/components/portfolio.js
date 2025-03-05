@@ -69,8 +69,7 @@ function initPortfolio() {
     
     // Fetch data and render
     fetchPortfolioData()
-  });
-    .then(() => {
+  }).then(() => {
       // Render the portfolio section
       renderFilters();
       renderProjects();
