@@ -126,16 +126,33 @@ function renderFilters() {
   filterTitle.innerHTML = '<h4>Filter Projects:</h4>';
   filterContainer.parentNode.insertBefore(filterTitle, filterContainer);
   
-  // Create filter elements
-  portfolioData.filters.forEach(filter => {
+  // Create "All" filter first
+  const allFilterItem = document.createElement('li');
+  allFilterItem.innerHTML = `
+    <a id="all" href="#" data-filter="*" class="active">
+      <h5>All</h5>
+    </a>
+  `;
+  
+  // Add click event listener for All filter
+  const allFilterLink = allFilterItem.querySelector('a');
+  allFilterLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    handleFilterClick(allFilterLink, { id: 'all', label: 'All' });
+  });
+  
+  filterContainer.appendChild(allFilterItem);
+  
+  // Get unique categories from projects
+  const categories = [...new Set(portfolioData.projects.map(project => project.category))];
+  
+  // Create filter elements for each category
+  categories.forEach(category => {
     const filterItem = document.createElement('li');
     
     filterItem.innerHTML = `
-      <a ${filter.id ? `id="${filter.id}"` : ''} 
-         href="#" 
-         data-filter="${filter.id === 'all' ? '*' : '.' + filter.cssClass}" 
-         class="${filter.active ? 'active' : ''}">
-          <h5>${filter.label}</h5>
+      <a id="${category}" href="#" data-filter=".${category}">
+        <h5>${category}</h5>
       </a>
     `;
     
@@ -143,7 +160,7 @@ function renderFilters() {
     const filterLink = filterItem.querySelector('a');
     filterLink.addEventListener('click', (e) => {
       e.preventDefault();
-      handleFilterClick(filterLink, filter);
+      handleFilterClick(filterLink, { id: category, label: category });
     });
     
     filterContainer.appendChild(filterItem);
@@ -168,16 +185,29 @@ function handleFilterClick(filterElement, filter) {
   allFilters.forEach(el => el.classList.remove('active'));
   filterElement.classList.add('active');
   
-  // Apply filter using Isotope
+  // Get filter value
   const filterValue = filterElement.getAttribute('data-filter');
   console.log('Applying filter:', filterValue);
   
-  if (window.jQuery && window.jQuery('#portfolio_wrapper').data('isotope')) {
-    // Since all items have the CV class, we'll always show all items
-    // The filter is just for visual indication in the UI
-    window.jQuery('#portfolio_wrapper').isotope({ filter: '.CV' });
+  // Get all portfolio items
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+  
+  // Show/hide items based on filter
+  if (filter.id === 'all') {
+    // Show all items
+    portfolioItems.forEach(item => {
+      item.style.display = 'block';
+    });
   } else {
-    console.error('Isotope not properly initialized');
+    // Show only items with matching category
+    portfolioItems.forEach(item => {
+      // Check if the item has a data-category attribute matching the filter
+      if (item.getAttribute('data-category') === filter.id) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
   }
 }
 
@@ -192,7 +222,10 @@ function renderProjects() {
   portfolioData.projects.forEach(project => {
     const projectElement = document.createElement('figure');
     // Use the exact class requested for all items
-    projectElement.className = `portfolio-item one-four CV isotope-item`;
+    projectElement.className = `portfolio-item CV`;
+    
+    // Add data-category attribute for filtering
+    projectElement.setAttribute('data-category', project.category);
     
     projectElement.innerHTML = `
       <a href="${project.href}" class="fancybox">
@@ -203,6 +236,7 @@ function renderProjects() {
           <div>
             <h2><span>${project.title}</span></h2>
             <p>${project.description}</p>
+            <span class="category-tag">${project.category}</span>
           </div>
         </figcaption>
       </a>
@@ -213,46 +247,26 @@ function renderProjects() {
 }
 
 /**
- * Initialize Isotope for filtering and layout
+ * Initialize portfolio layout
  */
 function initializeIsotope() {
-  // Make sure jQuery and Isotope are available
-  if (typeof jQuery === 'undefined' || typeof jQuery.fn.isotope === 'undefined') {
-    console.error('jQuery or Isotope not loaded');
-    return;
-  }
-  
   // Wait a bit to ensure all images are loaded
   setTimeout(() => {
     try {
-      // Initialize Isotope with options
-      const $grid = jQuery('#portfolio_wrapper');
-      $grid.isotope({
-        itemSelector: '.portfolio-item',
-        layoutMode: 'fitRows',
-        animationOptions: {
-          duration: 750,
-          easing: 'linear',
-          queue: false
-        }
+      // Apply simple grid layout
+      const portfolioItems = document.querySelectorAll('.portfolio-item');
+      
+      // Make all items visible initially
+      portfolioItems.forEach(item => {
+        item.style.display = 'block';
       });
       
-      console.log('Isotope initialized successfully');
+      console.log('Portfolio grid initialized successfully');
       
-      // Store reference for later use
-      window.isotope = $grid.data('isotope');
-      
-      // Trigger a resize event to force Isotope to recalculate layout
+      // Trigger a resize event to force layout recalculation
       window.dispatchEvent(new Event('resize'));
-      
-      // Set initial filter if needed
-      const activeFilter = document.querySelector('#filters a.active');
-      if (activeFilter) {
-        const filterValue = activeFilter.getAttribute('data-filter');
-        $grid.isotope({ filter: filterValue });
-      }
     } catch (error) {
-      console.error('Error initializing Isotope:', error);
+      console.error('Error initializing portfolio grid:', error);
     }
   }, 500);
 }
@@ -270,44 +284,35 @@ function displayErrorMessage() {
 }
 
 /**
- * Debug function to help troubleshoot Isotope issues
+ * Debug function to help troubleshoot portfolio issues
  */
-function debugIsotope() {
-  console.log('Debugging Isotope:');
-  
-  // Check if jQuery is loaded
-  console.log('jQuery loaded:', typeof jQuery !== 'undefined');
-  
-  // Check if Isotope plugin is available
-  console.log('Isotope plugin available:', typeof jQuery !== 'undefined' && typeof jQuery.fn.isotope !== 'undefined');
+function debugPortfolio() {
+  console.log('Debugging Portfolio:');
   
   // Check portfolio wrapper
-  const $wrapper = jQuery('#portfolio_wrapper');
-  console.log('Portfolio wrapper exists:', $wrapper.length > 0);
-  
-  // Check if Isotope is initialized on the wrapper
-  console.log('Isotope initialized on wrapper:', $wrapper.data('isotope') !== undefined);
+  const wrapper = document.getElementById('portfolio_wrapper');
+  console.log('Portfolio wrapper exists:', !!wrapper);
   
   // Check portfolio items
-  const $items = $wrapper.find('.portfolio-item');
-  console.log('Number of portfolio items:', $items.length);
+  const items = document.querySelectorAll('.portfolio-item');
+  console.log('Number of portfolio items:', items.length);
   
   // Log categories of all items
   console.log('Item categories:');
-  $items.each(function() {
-    const classes = this.className.split(' ');
-    const category = classes.find(cls => ['CV', 'Nengo', 'RL', 'SWE', 'AWS'].includes(cls));
-    console.log(`- ${this.querySelector('h2 span').textContent}: ${category || 'No category'}`);
+  items.forEach(item => {
+    const title = item.querySelector('h2 span')?.textContent || 'No title';
+    const category = item.getAttribute('data-category') || 'No category';
+    console.log(`- ${title}: ${category}`);
   });
   
   // Check filters
-  const $filters = jQuery('#filters a');
-  console.log('Number of filters:', $filters.length);
+  const filters = document.querySelectorAll('#filters a');
+  console.log('Number of filters:', filters.length);
   
   // Log filter values
   console.log('Filter values:');
-  $filters.each(function() {
-    console.log(`- ${this.textContent.trim()}: ${this.getAttribute('data-filter')}`);
+  filters.forEach(filter => {
+    console.log(`- ${filter.textContent.trim()}: ${filter.getAttribute('data-filter')}, Active: ${filter.classList.contains('active')}`);
   });
 }
 
@@ -318,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add debug button in development
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     const debugBtn = document.createElement('button');
-    debugBtn.textContent = 'Debug Isotope';
+    debugBtn.textContent = 'Debug Portfolio';
     debugBtn.style.position = 'fixed';
     debugBtn.style.bottom = '10px';
     debugBtn.style.right = '10px';
@@ -328,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
     debugBtn.style.border = '1px solid #ddd';
     debugBtn.style.borderRadius = '4px';
     debugBtn.style.cursor = 'pointer';
-    debugBtn.addEventListener('click', debugIsotope);
+    debugBtn.addEventListener('click', debugPortfolio);
     document.body.appendChild(debugBtn);
   }
 });
@@ -339,5 +344,5 @@ export {
   fetchPortfolioData,
   renderProjects,
   renderFilters,
-  debugIsotope
+  debugPortfolio
 };
