@@ -277,6 +277,8 @@ function renderProjects() {
   // Get projects from the view model
   const projectsToShow = viewModel.getProjects();
   
+  console.log("Projects to be displayed:", projectsToShow);
+
   // Create project elements
   projectsToShow.forEach(project => {
     const projectElement = document.createElement('figure');
