@@ -1,7 +1,7 @@
 /**
- * Sticky Navbar Component
+ * Navbar Component
  * 
- * This component creates a navbar that always sticks to the top of the page,
+ * This component creates a navbar that always stays at the top of the page,
  * regardless of scroll position.
  */
 
@@ -14,8 +14,8 @@ export function initStickyNavbar() {
         return;
     }
     
-    // Add the sticky class to enable our CSS styles
-    navbar.classList.add('sticky');
+    // Add fixed styling
+    navbar.classList.add('fixed');
     
     // Add some padding to the body to prevent content from hiding behind the navbar
     const navbarHeight = navbar.offsetHeight;
@@ -30,7 +30,7 @@ export function initStickyNavbar() {
         document.body.style.paddingTop = `${updatedNavbarHeight}px`;
     });
     
-    console.log('Sticky navbar initialized');
+    console.log('Fixed navbar initialized');
 }
 
 // Placeholder for any existing scroll handler that we're disabling

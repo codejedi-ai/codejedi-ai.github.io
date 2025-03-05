@@ -1,5 +1,5 @@
 /**
- * Sticky Navbar Component Styles
+ * Navbar Component Styles
  * 
  * These styles ensure the navbar is always fixed at the top of the page
  * and properly styled for visibility and usability.
@@ -15,8 +15,8 @@
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Style for the navbar when it's sticky */
-.navbar-fixed-top.sticky {
+/* Style for the navbar when it's fixed */
+.navbar-fixed-top.fixed {
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
