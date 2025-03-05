@@ -73,7 +73,7 @@ function createPortfolioStructure() {
       <!--/Portfolio Filters -->
 
       <!-- Portfolio Wrapper -->
-      <div class="isotope fadeInLeft animated wow grid" id="portfolio_wrapper">
+      <div class="isotope grid" id="portfolio_wrapper">
         <!-- Projects will be loaded here -->
         <div class="loading-indicator">Loading projects...</div>
       </div>

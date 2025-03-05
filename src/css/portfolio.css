@@ -118,6 +118,17 @@
   opacity: 0;
 }
 
+/* Remove animations from portfolio section */
+#Portfolio .wow {
+  animation-name: none !important;
+  opacity: 1 !important;
+}
+
+#Portfolio .animated {
+  animation-duration: 0s !important;
+  opacity: 1 !important;
+}
+
 /* Responsive adjustments */
 @media only screen and (max-width: 767px) {
   .portfolio-item {
