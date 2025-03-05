@@ -319,27 +319,6 @@ function renderProjects() {
     projectsContainer.appendChild(noResultsMessage);
   }
   
-  // Add view type indicator
-  const viewTypeIndicator = document.createElement('div');
-  viewTypeIndicator.className = 'view-type-indicator';
-  
-  let viewDescription = '';
-  switch (viewModel.getCurrentView()) {
-    case ViewTypes.FEATURED:
-      viewDescription = 'Showing featured projects';
-      break;
-    case ViewTypes.RECENT:
-      viewDescription = 'Showing most recent projects';
-      break;
-    case ViewTypes.CATEGORY:
-      viewDescription = `Showing ${viewModel.getCurrentCategory() === 'all' ? 'all' : viewModel.getCurrentCategory()} projects`;
-      break;
-    default:
-      viewDescription = 'Showing all projects';
-  }
-  
-  viewTypeIndicator.textContent = viewDescription;
-  projectsContainer.insertAdjacentElement('beforebegin', viewTypeIndicator);
 }
 
 /**
