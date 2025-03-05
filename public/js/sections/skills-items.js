@@ -50,7 +50,7 @@ const skillsData = [
   function generateSkillItems() {
     return skillsData.map(skill => `
         <div class="col-md-3">
-            <div class="skills_icon delay-03s animated wow zoomIn" style="background: none !important;">
+            <div class="skills_icon delay-03s animated wow zoomIn">
                 ${skill.img ? `<img src="${skill.img}" alt="${skill.alt}" />` : '<span></span>'}
             </div>
             <div class="skills_block">
