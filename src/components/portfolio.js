@@ -170,8 +170,12 @@ function handleFilterClick(filterElement, filter) {
   
   // Apply filter using Isotope
   const filterValue = filterElement.getAttribute('data-filter');
-  if (window.isotope) {
-    window.isotope.arrange({ filter: filterValue });
+  console.log('Applying filter:', filterValue);
+  
+  if (window.jQuery && window.jQuery('#portfolio_wrapper').data('isotope')) {
+    window.jQuery('#portfolio_wrapper').isotope({ filter: filterValue });
+  } else {
+    console.error('Isotope not properly initialized');
   }
 }
 
@@ -185,6 +189,7 @@ function renderProjects() {
   // Create project elements
   portfolioData.projects.forEach(project => {
     const projectElement = document.createElement('figure');
+    // Make sure the category class matches what we're filtering on
     projectElement.className = `portfolio-item one-four ${project.category} isotope-item effect-oscar`;
     
     projectElement.innerHTML = `
@@ -215,16 +220,39 @@ function initializeIsotope() {
     return;
   }
   
-  // Initialize Isotope with options
-  window.isotope = jQuery('#portfolio_wrapper').isotope({
-    itemSelector: '.portfolio-item',
-    layoutMode: 'fitRows',
-    animationOptions: {
-      duration: 750,
-      easing: 'linear',
-      queue: false
+  // Wait a bit to ensure all images are loaded
+  setTimeout(() => {
+    try {
+      // Initialize Isotope with options
+      const $grid = jQuery('#portfolio_wrapper');
+      $grid.isotope({
+        itemSelector: '.portfolio-item',
+        layoutMode: 'fitRows',
+        animationOptions: {
+          duration: 750,
+          easing: 'linear',
+          queue: false
+        }
+      });
+      
+      console.log('Isotope initialized successfully');
+      
+      // Store reference for later use
+      window.isotope = $grid.data('isotope');
+      
+      // Trigger a resize event to force Isotope to recalculate layout
+      window.dispatchEvent(new Event('resize'));
+      
+      // Set initial filter if needed
+      const activeFilter = document.querySelector('#filters a.active');
+      if (activeFilter) {
+        const filterValue = activeFilter.getAttribute('data-filter');
+        $grid.isotope({ filter: filterValue });
+      }
+    } catch (error) {
+      console.error('Error initializing Isotope:', error);
     }
-  });
+  }, 500);
 }
 
 /**
@@ -239,13 +267,75 @@ function displayErrorMessage() {
   `;
 }
 
+/**
+ * Debug function to help troubleshoot Isotope issues
+ */
+function debugIsotope() {
+  console.log('Debugging Isotope:');
+  
+  // Check if jQuery is loaded
+  console.log('jQuery loaded:', typeof jQuery !== 'undefined');
+  
+  // Check if Isotope plugin is available
+  console.log('Isotope plugin available:', typeof jQuery !== 'undefined' && typeof jQuery.fn.isotope !== 'undefined');
+  
+  // Check portfolio wrapper
+  const $wrapper = jQuery('#portfolio_wrapper');
+  console.log('Portfolio wrapper exists:', $wrapper.length > 0);
+  
+  // Check if Isotope is initialized on the wrapper
+  console.log('Isotope initialized on wrapper:', $wrapper.data('isotope') !== undefined);
+  
+  // Check portfolio items
+  const $items = $wrapper.find('.portfolio-item');
+  console.log('Number of portfolio items:', $items.length);
+  
+  // Log categories of all items
+  console.log('Item categories:');
+  $items.each(function() {
+    const classes = this.className.split(' ');
+    const category = classes.find(cls => ['CV', 'Nengo', 'RL', 'SWE', 'AWS'].includes(cls));
+    console.log(`- ${this.querySelector('h2 span').textContent}: ${category || 'No category'}`);
+  });
+  
+  // Check filters
+  const $filters = jQuery('#filters a');
+  console.log('Number of filters:', $filters.length);
+  
+  // Log filter values
+  console.log('Filter values:');
+  $filters.each(function() {
+    console.log(`- ${this.textContent.trim()}: ${this.getAttribute('data-filter')}`);
+  });
+}
+
 // Initialize portfolio when DOM is ready
-document.addEventListener('DOMContentLoaded', initPortfolio);
+document.addEventListener('DOMContentLoaded', () => {
+  initPortfolio();
+  
+  // Add debug button in development
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    const debugBtn = document.createElement('button');
+    debugBtn.textContent = 'Debug Isotope';
+    debugBtn.style.position = 'fixed';
+    debugBtn.style.bottom = '10px';
+    debugBtn.style.right = '10px';
+    debugBtn.style.zIndex = '9999';
+    debugBtn.style.padding = '5px 10px';
+    debugBtn.style.background = '#f8f8f8';
+    debugBtn.style.border = '1px solid #ddd';
+    debugBtn.style.borderRadius = '4px';
+    debugBtn.style.cursor = 'pointer';
+    debugBtn.addEventListener('click', debugIsotope);
+    document.body.appendChild(debugBtn);
+  }
+});
 
 // Export functions for potential reuse or testing
 export {
   initPortfolio,
   fetchPortfolioData,
   renderProjects,
-  renderFilters
+  renderFilters,
+  debugIsotope
 };
