@@ -1,0 +1,85 @@
+/* Experience Timeline Section Styles */
+#experience {
+    padding: 60px 0;
+}
+
+#timeline {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.timeline-movement {
+    margin-bottom: 30px;
+}
+
+.timeline-badge {
+    text-align: center;
+}
+
+.timeline-panel {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-panel:hover {
+    transform: translateY(-5px);
+}
+
+.credits {
+    background-color: #f8f9fa;
+    border-left: 4px solid #3498db;
+}
+
+.debits {
+    background-color: #f8f9fa;
+    border-right: 4px solid #2ecc71;
+}
+
+.timeline-panel-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.timeline-panel-ul li {
+    margin-bottom: 10px;
+}
+
+.importo {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.causale {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+.causale a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.causale a:hover {
+    text-decoration: underline;
+}
+
+.text-muted {
+    color: #999;
+    font-size: 12px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #timeline {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+}

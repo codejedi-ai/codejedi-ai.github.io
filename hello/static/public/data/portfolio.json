@@ -1,0 +1,54 @@
+{
+    "items": [
+        {
+            "category": "CV",
+            "title": "K-Means Algorithm for Unsupervised Learning",
+            "image": "img/bunny.bmp",
+            "link": "vids/K-means_V1.mp4",
+            "description": "Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension."
+        },
+        {
+            "category": "CV",
+            "title": "K-Means Algorithm for Unsupervised Learning",
+            "image": "img/bunny.bmp",
+            "link": "vids/K-means_V1.mp4",
+            "description": "Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension."
+        },
+        {
+            "category": "CV",
+            "title": "K-Means Algorithm for Unsupervised Learning",
+            "image": "img/bunny.bmp",
+            "link": "vids/K-means_V1.mp4",
+            "description": "Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension."
+        },
+        {
+            "category": "CV",
+            "title": "K-Means Algorithm for Unsupervised Learning",
+            "image": "img/bunny.bmp",
+            "link": "vids/K-means_V1.mp4",
+            "description": "Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension."
+        },
+        {
+            "category": "CV",
+            "title": "K-Means Algorithm for Unsupervised Learning",
+            "image": "img/bunny.bmp",
+            "link": "vids/K-means_V1.mp4",
+            "description": "Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension."
+        },
+        {
+            "category": "CV",
+            "title": "K-Means Algorithm for Unsupervised Learning",
+            "image": "img/bunny.bmp",
+            "link": "vids/K-means_V1.mp4",
+            "description": "Enhancing image understanding through the extraction of meaningful patterns from data, improving visual comprehension."
+        }
+    ],
+    "filters": [
+        {"id": "all", "label": "All", "filter": "*"},
+        {"id": "nengo", "label": "Neuroscience", "filter": ".Nengo"},
+        {"id": "rl", "label": "Reinforcement Learning", "filter": ".RL"},
+        {"id": "cv", "label": "Computer Vision", "filter": ".CV"}, 
+        {"id": "swe", "label": "Software Developments", "filter": ".SWE"},
+        {"id": "aws", "label": "AWS", "filter": ".AWS"}
+    ]
+}
