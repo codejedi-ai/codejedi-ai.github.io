@@ -1,0 +1,270 @@
+/* Footer Styles */
+.footer_wrapper {
+    background: #222;
+    color: #fff;
+    padding: 0;
+    position: relative;
+    clear: both;
+}
+
+.contact_section {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.contact_section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.contact-subtitle {
+    color: #ecf0f1;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.contact-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+}
+
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 2rem;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.contact-icon.linkedin {
+    background: linear-gradient(45deg, #0077b5, #00a0dc);
+}
+
+.contact-icon.github {
+    background: linear-gradient(45deg, #333, #6e5494);
+}
+
+.contact-icon.email {
+    background: linear-gradient(45deg, #d44638, #e74c3c);
+}
+
+.contact-card h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.contact-card p {
+    color: #ecf0f1;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.contact-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.footer-top {
+    background: #2c3e50;
+    padding: 60px 0 30px;
+}
+
+.footer-info {
+    margin-bottom: 30px;
+}
+
+.footer-info h3 {
+    font-size: 28px;
+    margin: 0 0 20px 0;
+    padding: 2px 0 2px 0;
+    line-height: 1;
+    font-weight: 700;
+    color: #fff;
+}
+
+.footer-info p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 0;
+    color: #ecf0f1;
+}
+
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+}
+
+.footer-social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover {
+    background: #3498db;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+.footer-links {
+    margin-bottom: 30px;
+}
+
+.footer-links h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.footer-links h4::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #3498db;
+    bottom: 0;
+    left: 0;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+}
+
+.footer-links ul li:first-child {
+    padding-top: 0;
+}
+
+.footer-links ul li a {
+    color: #ecf0f1;
+    transition: 0.3s;
+    display: inline-block;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+    color: #3498db;
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    background: #1a252f;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.copyright {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.credits {
+    font-size: 13px;
+    color: #bbb;
+}
+
+.credits a {
+    color: #3498db;
+    transition: 0.3s;
+}
+
+.credits a:hover {
+    color: #5dade2;
+}
+
+/* QR Code in footer */
+.footer_wrapper .qr-code-container {
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+}
+
+.footer_wrapper .qr-code-container h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    position: relative;
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+}
+
+.footer_wrapper .qr-code-container h4::after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: #3498db;
+    bottom: 0;
+    left: 0;
+}
+
+.footer_wrapper .qr-code-container img {
+    max-width: 150px;
+    border: 5px solid rgba(255, 255, 255, 0.1);
+    padding: 0;
+    background: white;
+    border-radius: 5px;
+}

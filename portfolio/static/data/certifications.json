@@ -1,0 +1,28 @@
+{
+    "items": [
+        {
+            "title": "AWS Certified Solutions Architect - Associate",
+            "issuer": "Amazon Web Services",
+            "date": "May 2023",
+            "credentialId": "AWS-ASA-12345",
+            "url": "https://www.credly.com/badges/example",
+            "image": "img/certifications/aws-sa.png"
+        },
+        {
+            "title": "AWS Certified Developer - Associate",
+            "issuer": "Amazon Web Services",
+            "date": "June 2023",
+            "credentialId": "AWS-DA-67890",
+            "url": "https://www.credly.com/badges/example2",
+            "image": "img/certifications/aws-dev.png"
+        },
+        {
+            "title": "Microsoft Certified: Azure Fundamentals",
+            "issuer": "Microsoft",
+            "date": "July 2023",
+            "credentialId": "MS-AZ-12345",
+            "url": "https://www.credly.com/badges/example3",
+            "image": "img/certifications/azure-fund.png"
+        }
+    ]
+}
