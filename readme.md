@@ -1,43 +1,45 @@
-Bootstrap Responsive Template
+# Python Getting Started
 
-Wow portfolio is clean multi purpose HTML5 template suits a profissional designer or developer in IT industry, such as webdesigner, web developr, UX/UI Developer, Programmer�s portfolio. This is a responsive web template you can use for personal portfolio�s websites to showcase your work and CV or Resume template. This template is built on top of Bootstrap html5 css3 which give flexibilty to customeise the theme easly as per the user requirements. 
+A barebones Django app, which can easily be deployed to Heroku.
 
+This application supports the tutorials for both the [Cedar and Fir generations](https://devcenter.heroku.com/articles/generations) of the Heroku platform. You can check them out here:
 
-Key features
--------------
-Twitter Bootstrap 3.3.1
-Clean & Developer-friendly HTML5 and CSS3 code
-100% Responsive Layout Design
-One Page
-Multipurpose theme
-Google Fonts Support
-Font Awesome 
-Smooth Scrolling 
-Fully Customizable
-Contact Form
+- [Getting Started on Heroku with Python](https://devcenter.heroku.com/articles/getting-started-with-python)
+- [Getting Started on Heroku Fir with Python](https://devcenter.heroku.com/articles/getting-started-with-python-fir)
 
+## Deploying to Heroku
 
-Credits :
--------
-=> Design and developed: "WebThemez"  http://webthemez.com
-=> Photos used in template: **Unsplash** - http://unsplash.com
-=> For more free web themes: http://webthemez.com
-=> Framework : http://getbootstrap.com
+Using resources for this example app counts towards your usage. [Delete your app](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-apps-destroy) and [database](https://devcenter.heroku.com/articles/heroku-postgresql#removing-the-add-on) as soon as you are done experimenting to control costs.
 
-Important Note:
----------------
-To remove backlink from the template, you need to donate to remove the backlink from the template.
-Any question contact us: webthemez@gmail.com
+### Deploy on Heroku [Cedar](https://devcenter.heroku.com/articles/generations#cedar)
 
+By default, apps use Eco dynos if you are subscribed to Eco. Otherwise, it defaults to Basic dynos. The Eco dynos plan is shared across all Eco dynos in your account and is recommended if you plan on deploying many small apps to Heroku. Learn more about our low-cost plans [here](https://blog.heroku.com/new-low-cost-plans).
 
-License :
--------
-**Creative Commons Attribution 3.0** - http://creativecommons.org/licenses/by/3.0/
+Eligible students can apply for platform credits through our new [Heroku for GitHub Students program](https://blog.heroku.com/github-student-developer-program).
 
+```term
+$ git clone https://github.com/heroku/python-getting-started
+$ cd python-getting-started
+$ heroku create
+$ git push heroku main
+$ heroku open
+```
 
-Note:
-All images user here is for demo purpose only, we are not responsible for any copyrights.
+### Deploy on Heroku [Fir](https://devcenter.heroku.com/articles/generations#fir)
 
-# Deploy instructions for vite
+By default, apps on [Fir](https://devcenter.heroku.com/articles/generations#fir) use 1X-Classic dynos. To create an app on [Fir](https://devcenter.heroku.com/articles/generations#fir) you'll need to
+[create a private space](https://devcenter.heroku.com/articles/working-with-private-spaces#create-a-private-space)
+first.
 
-https://github.com/sitek94/vite-deploy-demo
+```term
+$ git clone https://github.com/heroku/python-getting-started
+$ cd python-getting-started
+$ heroku create --space <space-name>
+$ git push heroku main
+$ heroku ps:wait
+$ heroku open
+```
+
+For more information about using Python on Heroku, see these Dev Center articles:
+
+- [Python on Heroku](https://devcenter.heroku.com/categories/python)
