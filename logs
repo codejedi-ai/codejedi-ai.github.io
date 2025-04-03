@@ -1,0 +1,38 @@
+2025-04-03T18:46:34.715406+00:00 app[api]: Initial release by user darcy.ldx@gmail.com
+2025-04-03T18:46:34.715406+00:00 app[api]: Release v1 created by user darcy.ldx@gmail.com
+2025-04-03T18:46:34.910693+00:00 app[api]: Release v2 created by user darcy.ldx@gmail.com
+2025-04-03T18:46:34.910693+00:00 app[api]: Enable Logplex by user darcy.ldx@gmail.com
+2025-04-03T18:47:16.000000+00:00 app[api]: Build started by user darcy.ldx@gmail.com
+2025-04-03T18:47:46.285674+00:00 app[api]: Deploy 4afb99a4 by user darcy.ldx@gmail.com
+2025-04-03T18:47:46.285674+00:00 app[api]: Release v3 created by user darcy.ldx@gmail.com
+2025-04-03T18:47:46.305633+00:00 app[api]: Scaled to web@1:Basic by user darcy.ldx@gmail.com
+2025-04-03T18:47:47.000000+00:00 app[api]: Build succeeded
+2025-04-03T18:47:57.521992+00:00 heroku[web.1]: Starting process with command `npm start`
+2025-04-03T18:47:58.323120+00:00 app[web.1]: npm error Missing script: "start"
+2025-04-03T18:47:58.323136+00:00 app[web.1]: npm error
+2025-04-03T18:47:58.323136+00:00 app[web.1]: npm error Did you mean one of these?
+2025-04-03T18:47:58.323138+00:00 app[web.1]: npm error   npm star # Mark your favorite packages
+2025-04-03T18:47:58.323138+00:00 app[web.1]: npm error   npm stars # View packages marked as favorites
+2025-04-03T18:47:58.323139+00:00 app[web.1]: npm error
+2025-04-03T18:47:58.323139+00:00 app[web.1]: npm error To see a list of scripts, run:
+2025-04-03T18:47:58.323141+00:00 app[web.1]: npm error   npm run
+2025-04-03T18:47:58.324070+00:00 app[web.1]: npm error A complete log of this run can be found in: /app/.npm/_logs/2025-04-03T18_47_58_093Z-debug-0.log
+2025-04-03T18:47:58.372142+00:00 heroku[web.1]: Process exited with status 1
+2025-04-03T18:47:58.397447+00:00 heroku[web.1]: State changed from starting to crashed
+2025-04-03T18:47:58.402004+00:00 heroku[web.1]: State changed from crashed to starting
+2025-04-03T18:48:09.634515+00:00 heroku[web.1]: Starting process with command `npm start`
+2025-04-03T18:48:10.562601+00:00 app[web.1]: npm error Missing script: "start"
+2025-04-03T18:48:10.562623+00:00 app[web.1]: npm error
+2025-04-03T18:48:10.562624+00:00 app[web.1]: npm error Did you mean one of these?
+2025-04-03T18:48:10.562624+00:00 app[web.1]: npm error   npm star # Mark your favorite packages
+2025-04-03T18:48:10.562625+00:00 app[web.1]: npm error   npm stars # View packages marked as favorites
+2025-04-03T18:48:10.562625+00:00 app[web.1]: npm error
+2025-04-03T18:48:10.562625+00:00 app[web.1]: npm error To see a list of scripts, run:
+2025-04-03T18:48:10.562645+00:00 app[web.1]: npm error   npm run
+2025-04-03T18:48:10.563627+00:00 app[web.1]: npm error A complete log of this run can be found in: /app/.npm/_logs/2025-04-03T18_48_10_258Z-debug-0.log
+2025-04-03T18:48:10.629273+00:00 heroku[web.1]: Process exited with status 1
+2025-04-03T18:48:10.648927+00:00 heroku[web.1]: State changed from starting to crashed
+2025-04-03T18:50:49.237484+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=sheltered-beach-35252-1c4f67acbc54.herokuapp.com request_id=367ed73c-eb6e-473f-b79a-11f4dc5bade0 fwd="129.97.124.160" dyno= connect= service= status=503 bytes= protocol=https
+2025-04-03T18:50:49.813536+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/favicon.ico" host=sheltered-beach-35252-1c4f67acbc54.herokuapp.com request_id=76cfd83b-5443-4bd3-a33e-b10fcd765cda fwd="129.97.124.160" dyno= connect= service= status=503 bytes= protocol=https
+2025-04-03T18:52:59.784139+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=sheltered-beach-35252-1c4f67acbc54.herokuapp.com request_id=b448698e-56f1-460e-aed9-fded85082e43 fwd="129.97.124.160" dyno= connect= service= status=503 bytes= protocol=https
+2025-04-03T18:55:31.039617+00:00 heroku[router]: at=error code=H10 desc="App crashed" method=GET path="/" host=sheltered-beach-35252-1c4f67acbc54.herokuapp.com request_id=a2f84685-68e9-4c40-8ac3-6656e593ca28 fwd="129.97.124.160" dyno= connect= service= status=503 bytes= protocol=https
