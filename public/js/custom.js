@@ -4,7 +4,7 @@ Note:
 Licence under Creative Commons Attribution 3.0 
 Do not remove the back-link in this web template 
 -------------------------------------------------------*/
-
+/*
 $(window).load(function() {
     jQuery('#all').click();
     return false;
@@ -130,6 +130,7 @@ wow = new WOW({
     offset: 100
 });
 wow.init();
+
 document.getElementById('').onclick = function() {
     var section = document.createElement('section');
     section.className = 'wow fadeInDown';
@@ -138,3 +139,4 @@ document.getElementById('').onclick = function() {
     section.className = 'wow lightSpeedIn';
     this.parentNode.insertBefore(section, this);
 };
+*/
