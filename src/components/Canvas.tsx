@@ -105,22 +105,8 @@ export default function Canvas() {
     }, [circles, buckets]);
 
     return (
-        <div>
-            <header 
-                style={{
-                    position: "fixed", 
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    background: "#333",
-                    color: "white",
-                    padding: "10px 0",
-                    zIndex: 1000,
-                    boxShadow: "0 2px 4px rgba(0,0,0,0.2)"
-                }}
-            >
-                <h1 style={{ textAlign: "center", margin: 0 }}>Drag Circles</h1>
-            </header>
+
+
             
             <div style={{ paddingTop: "60px" }}>
                 <canvas
@@ -136,6 +122,6 @@ export default function Canvas() {
                     }}
                 />
             </div>
-        </div>
+    
     );
 }
