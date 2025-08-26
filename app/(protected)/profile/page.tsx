@@ -51,7 +51,7 @@ export default function ProfilePage() {
 
       if (response.ok) {
         const result = await response.json()
-        setUserData(prev => ({
+        setUserData((prev: any) => ({
           ...prev,
           profile: {
             ...prev.profile,
@@ -65,6 +65,19 @@ export default function ProfilePage() {
     } finally {
       setUpdating(false)
     }
+  }
+
+  if (!user) {
+    return (
+      <div className="container mx-auto py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-red-600 mb-4">Authentication Error</h1>
+            <p className="text-gray-600">Unable to load user information. Please try signing in again.</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (loading) {
@@ -92,9 +105,9 @@ export default function ProfilePage() {
               <CardHeader>
                 <div className="flex items-center space-x-4">
                   <div className="h-16 w-16 rounded-full bg-gray-200 flex items-center justify-center">
-                    {user.picture ? (
+                    {user?.picture ? (
                       <img 
-                        src={user.picture} 
+                        src={user?.picture} 
                         alt={user.name || "Profile"} 
                         className="h-16 w-16 rounded-full object-cover"
                       />
@@ -103,10 +116,10 @@ export default function ProfilePage() {
                     )}
                   </div>
                   <div>
-                    <CardTitle className="text-2xl">{user.name}</CardTitle>
+                    <CardTitle className="text-2xl">{user?.name}</CardTitle>
                     <CardDescription className="flex items-center space-x-2">
                       <Mail className="h-4 w-4" />
-                      <span>{user.email}</span>
+                      <span>{user?.email}</span>
                     </CardDescription>
                   </div>
                 </div>
@@ -118,11 +131,11 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium text-gray-500">Full Name</label>
-                      <p className="text-lg">{user.name}</p>
+                      <p className="text-lg">{user?.name}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-500">Email</label>
-                      <p className="text-lg">{user.email}</p>
+                      <p className="text-lg">{user?.email}</p>
                     </div>
                     <div>
                       <label className="text-sm font-medium text-gray-500">Member Since</label>
@@ -131,8 +144,8 @@ export default function ProfilePage() {
                     <div>
                       <label className="text-sm font-medium text-gray-500">Email Verified</label>
                       <div className="mt-1">
-                        <Badge variant={user.email_verified ? "default" : "destructive"}>
-                          {user.email_verified ? "Verified" : "Not Verified"}
+                        <Badge variant={user?.email_verified ? "default" : "destructive"}>
+                          {user?.email_verified ? "Verified" : "Not Verified"}
                         </Badge>
                       </div>
                     </div>
