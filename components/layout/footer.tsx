@@ -14,8 +14,8 @@ export default function Footer() {
               </div>
               <span className="font-bold text-xl">Roguebreak</span>
             </div>
-            <p className="text-gray-400 leading-relaxed">
-              Fresh groceries delivered to your doorstep in minutes. Quality you can trust, convenience you deserve.
+            <p className="text-gray-400">
+              Fresh groceries delivered to your door in as fast as 1 hour. Quality guaranteed.
             </p>
             <div className="flex space-x-4">
               <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
@@ -56,22 +56,22 @@ export default function Footer() {
             <h3 className="font-semibold text-lg">Categories</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/category/fruits" className="text-gray-400 hover:text-white">
-                  Fresh Fruits
+                <Link href="/shop?category=fruits" className="text-gray-400 hover:text-white">
+                  Fruits & Vegetables
                 </Link>
               </li>
               <li>
-                <Link href="/category/vegetables" className="text-gray-400 hover:text-white">
-                  Vegetables
+                <Link href="/shop?category=dairy" className="text-gray-400 hover:text-white">
+                  Dairy & Eggs
                 </Link>
               </li>
               <li>
-                <Link href="/category/dairy" className="text-gray-400 hover:text-white">
-                  Dairy Products
+                <Link href="/shop?category=meat" className="text-gray-400 hover:text-white">
+                  Meat & Seafood
                 </Link>
               </li>
               <li>
-                <Link href="/category/bakery" className="text-gray-400 hover:text-white">
+                <Link href="/shop?category=bakery" className="text-gray-400 hover:text-white">
                   Bakery
                 </Link>
               </li>
@@ -98,8 +98,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
-          <p className="text-gray-400">© 2024 Roguebreak. All rights reserved. | Privacy Policy | Terms of Service</p>
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
+          <p className="text-gray-400">© 2024 Roguebreak. All rights reserved.</p>
         </div>
       </div>
     </footer>

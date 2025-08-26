@@ -9,7 +9,7 @@ import Navbar from "@/components/layout/navbar"
 import Footer from "@/components/layout/footer"
 
 export default function CartPage() {
-  const { items, total, updateQuantity, removeItem, clearCart } = useCart()
+  const { items, updateQuantity, removeItem, total, clearCart } = useCart()
 
   if (items.length === 0) {
     return (
@@ -19,9 +19,7 @@ export default function CartPage() {
           <div className="text-center space-y-6">
             <ShoppingBag className="h-24 w-24 text-gray-400 mx-auto" />
             <h1 className="text-3xl font-bold text-gray-900">Your cart is empty</h1>
-            <p className="text-gray-600 max-w-md mx-auto">
-              Looks like you haven't added any items to your cart yet. Start shopping to fill it up!
-            </p>
+            <p className="text-gray-600 text-lg">Add some delicious items to get started!</p>
             <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
               <Link href="/shop">Start Shopping</Link>
             </Button>
@@ -40,13 +38,9 @@ export default function CartPage() {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center justify-between">
-              <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={clearCart}
-                className="text-red-600 hover:text-red-700 bg-transparent"
-              >
+              <h1 className="text-3xl font-bold text-gray-900">Shopping Cart</h1>
+              <Button variant="outline" onClick={clearCart} className="text-red-600 hover:text-red-700 bg-transparent">
+                <Trash2 className="h-4 w-4 mr-2" />
                 Clear Cart
               </Button>
             </div>
@@ -61,20 +55,25 @@ export default function CartPage() {
                       className="w-20 h-20 object-cover rounded-lg"
                     />
                     <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900">{item.name}</h3>
-                      <p className="text-green-600 font-bold">${item.price.toFixed(2)}</p>
+                      <h3 className="font-semibold text-lg text-gray-900">{item.name}</h3>
+                      <p className="text-green-600 font-bold text-lg">${item.price.toFixed(2)}</p>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+                    <div className="flex items-center space-x-3">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        disabled={item.quantity <= 1}
+                      >
                         <Minus className="h-4 w-4" />
                       </Button>
-                      <span className="w-12 text-center font-medium">{item.quantity}</span>
+                      <span className="font-semibold text-lg w-8 text-center">{item.quantity}</span>
                       <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
                     <div className="text-right">
-                      <p className="font-bold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                      <p className="font-bold text-lg">${(item.price * item.quantity).toFixed(2)}</p>
                       <Button
                         variant="ghost"
                         size="sm"
@@ -98,18 +97,21 @@ export default function CartPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex justify-between">
-                  <span>Subtotal</span>
+                  <span>Subtotal ({items.length} items)</span>
                   <span>${total.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Delivery Fee</span>
-                  <span className="text-green-600">Free</span>
+                  <span className="text-green-600">FREE</span>
                 </div>
-                <div className="border-t pt-4">
-                  <div className="flex justify-between font-bold text-lg">
-                    <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
-                  </div>
+                <div className="flex justify-between">
+                  <span>Service Fee</span>
+                  <span>$2.99</span>
+                </div>
+                <hr />
+                <div className="flex justify-between font-bold text-lg">
+                  <span>Total</span>
+                  <span>${(total + 2.99).toFixed(2)}</span>
                 </div>
                 <Button className="w-full bg-green-600 hover:bg-green-700" size="lg">
                   Proceed to Checkout

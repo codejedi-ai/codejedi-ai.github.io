@@ -5,110 +5,129 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Plus, Star, Search } from "lucide-react"
+import { Star, Plus, Search } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
 import Navbar from "@/components/layout/navbar"
 import Footer from "@/components/layout/footer"
 
-const products = [
+const allProducts = [
   {
     id: 1,
     name: "Organic Bananas",
     price: 2.99,
     originalPrice: 3.49,
-    image: "/placeholder.svg?height=200&width=200&text=Bananas",
-    category: "Fruits",
+    image: "/organic-bananas.png",
     rating: 4.8,
+    reviews: 124,
+    category: "Fruits",
     discount: "15% OFF",
   },
   {
     id: 2,
     name: "Fresh Avocados",
     price: 4.99,
-    originalPrice: 5.99,
-    image: "/placeholder.svg?height=200&width=200&text=Avocados",
-    category: "Fruits",
+    originalPrice: null,
+    image: "/fresh-avocados.png",
     rating: 4.9,
-    discount: "17% OFF",
+    reviews: 89,
+    category: "Fruits",
+    discount: null,
   },
   {
     id: 3,
-    name: "Whole Milk",
-    price: 3.49,
-    originalPrice: null,
-    image: "/placeholder.svg?height=200&width=200&text=Milk",
-    category: "Dairy",
+    name: "Organic Milk",
+    price: 5.49,
+    originalPrice: 6.99,
+    image: "/organic-milk-carton.png",
     rating: 4.7,
-    discount: null,
+    reviews: 156,
+    category: "Dairy",
+    discount: "20% OFF",
   },
   {
     id: 4,
-    name: "Sourdough Bread",
-    price: 4.99,
-    originalPrice: 6.49,
-    image: "/placeholder.svg?height=200&width=200&text=Bread",
-    category: "Bakery",
+    name: "Whole Grain Bread",
+    price: 3.99,
+    originalPrice: null,
+    image: "/whole-grain-bread-loaf.png",
     rating: 4.6,
-    discount: "23% OFF",
+    reviews: 78,
+    category: "Bakery",
+    discount: null,
   },
   {
     id: 5,
-    name: "Organic Spinach",
-    price: 3.99,
-    originalPrice: null,
-    image: "/placeholder.svg?height=200&width=200&text=Spinach",
-    category: "Vegetables",
-    rating: 4.5,
-    discount: null,
+    name: "Free Range Eggs",
+    price: 6.99,
+    originalPrice: 7.99,
+    image: "/free-range-eggs-carton.png",
+    rating: 4.8,
+    reviews: 203,
+    category: "Dairy",
+    discount: "12% OFF",
   },
   {
     id: 6,
-    name: "Greek Yogurt",
-    price: 5.49,
-    originalPrice: 6.99,
-    image: "/placeholder.svg?height=200&width=200&text=Yogurt",
-    category: "Dairy",
-    rating: 4.8,
-    discount: "21% OFF",
-  },
-  {
-    id: 7,
-    name: "Fresh Strawberries",
-    price: 4.49,
+    name: "Fresh Spinach",
+    price: 2.49,
     originalPrice: null,
-    image: "/placeholder.svg?height=200&width=200&text=Strawberries",
-    category: "Fruits",
-    rating: 4.9,
+    image: "/fresh-spinach.png",
+    rating: 4.5,
+    reviews: 67,
+    category: "Vegetables",
     discount: null,
   },
   {
-    id: 8,
-    name: "Artisan Croissants",
-    price: 6.99,
-    originalPrice: 8.49,
-    image: "/placeholder.svg?height=200&width=200&text=Croissants",
-    category: "Bakery",
+    id: 7,
+    name: "Organic Apples",
+    price: 3.99,
+    originalPrice: 4.49,
+    image: "/organic-red-apples.png",
     rating: 4.7,
-    discount: "18% OFF",
+    reviews: 145,
+    category: "Fruits",
+    discount: "11% OFF",
+  },
+  {
+    id: 8,
+    name: "Greek Yogurt",
+    price: 4.49,
+    originalPrice: null,
+    image: "/greek-yogurt-container.png",
+    rating: 4.6,
+    reviews: 92,
+    category: "Dairy",
+    discount: null,
+  },
+  {
+    id: 9,
+    name: "Fresh Carrots",
+    price: 1.99,
+    originalPrice: null,
+    image: "/fresh-orange-carrots.png",
+    rating: 4.4,
+    reviews: 56,
+    category: "Vegetables",
+    discount: null,
   },
 ]
 
 const categories = ["All", "Fruits", "Vegetables", "Dairy", "Bakery"]
 
 export default function ShopPage() {
-  const [selectedCategory, setSelectedCategory] = useState("All")
   const [searchTerm, setSearchTerm] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState("All")
   const { addItem } = useCart()
   const { toast } = useToast()
 
-  const filteredProducts = products.filter((product) => {
-    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory
+  const filteredProducts = allProducts.filter((product) => {
     const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    return matchesCategory && matchesSearch
+    const matchesCategory = selectedCategory === "All" || product.category === selectedCategory
+    return matchesSearch && matchesCategory
   })
 
-  const handleAddToCart = (product: (typeof products)[0]) => {
+  const handleAddToCart = (product: (typeof allProducts)[0]) => {
     addItem({
       id: product.id,
       name: product.name,
@@ -128,12 +147,13 @@ export default function ShopPage() {
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">Shop Fresh Groceries</h1>
-          <p className="text-gray-600">Discover fresh, high-quality products delivered to your door.</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Shop Groceries</h1>
+          <p className="text-gray-600">Fresh, quality products delivered to your door</p>
         </div>
 
-        {/* Search and Filters */}
+        {/* Filters */}
         <div className="mb-8 space-y-4">
+          {/* Search */}
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
@@ -144,6 +164,7 @@ export default function ShopPage() {
             />
           </div>
 
+          {/* Categories */}
           <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <Button
@@ -173,6 +194,13 @@ export default function ShopPage() {
                   {product.discount && (
                     <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">{product.discount}</Badge>
                   )}
+                  <Button
+                    size="sm"
+                    className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    <Plus className="h-4 w-4" />
+                  </Button>
                 </div>
 
                 <div className="space-y-2">
@@ -182,27 +210,29 @@ export default function ShopPage() {
                     </Badge>
                     <div className="flex items-center space-x-1">
                       <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                      <span className="text-sm text-gray-600">{product.rating}</span>
+                      <span className="text-sm text-gray-600">
+                        {product.rating} ({product.reviews})
+                      </span>
                     </div>
                   </div>
 
-                  <h3 className="font-semibold text-gray-900">{product.name}</h3>
+                  <h3 className="font-semibold text-gray-900 text-lg">{product.name}</h3>
 
-                  <div className="flex items-center space-x-2">
-                    <span className="text-lg font-bold text-green-600">${product.price}</span>
-                    {product.originalPrice && (
-                      <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
-                    )}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xl font-bold text-green-600">${product.price}</span>
+                      {product.originalPrice && (
+                        <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
+                      )}
+                    </div>
+                    <Button
+                      size="sm"
+                      onClick={() => handleAddToCart(product)}
+                      className="bg-green-600 hover:bg-green-700"
+                    >
+                      Add to Cart
+                    </Button>
                   </div>
-
-                  <Button
-                    onClick={() => handleAddToCart(product)}
-                    className="w-full bg-green-600 hover:bg-green-700"
-                    size="sm"
-                  >
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add to Cart
-                  </Button>
                 </div>
               </CardContent>
             </Card>
