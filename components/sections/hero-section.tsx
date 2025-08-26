@@ -1,82 +1,63 @@
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Clock, Truck } from "lucide-react"
+import { ArrowRight, Clock, Truck, Shield } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-100 dark:from-green-950 dark:to-emerald-950">
-      <div className="container py-16 md:py-24 lg:py-32">
+    <section className="relative bg-gradient-to-br from-green-50 to-blue-50 py-20 lg:py-32">
+      <div className="container mx-auto px-4">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                Fresh groceries
-                <span className="text-green-600 dark:text-green-400"> delivered</span>
-                <br />
-                in minutes
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                Fresh groceries delivered in <span className="text-green-600">minutes</span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-lg">
-                Get everything you need from local stores delivered to your door. Fresh produce, pantry staples, and
-                more - all at your fingertips.
+              <p className="text-xl text-gray-600 leading-relaxed">
+                Get your favorite groceries delivered to your doorstep in as fast as 15 minutes. Fresh produce, pantry
+                essentials, and more from local stores.
               </p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" asChild className="bg-green-600 hover:bg-green-700">
+              <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
                 <Link href="/shop">
                   Start Shopping <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline">
-                How it works
+              <Button variant="outline" size="lg">
+                Learn More
               </Button>
             </div>
 
-            <div className="flex items-center space-x-8 text-sm text-muted-foreground">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-5 w-5 text-green-600" />
-                <span>Delivery in 30 mins</span>
+            {/* Features */}
+            <div className="grid grid-cols-3 gap-6 pt-8">
+              <div className="text-center">
+                <Clock className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                <p className="text-sm font-medium text-gray-900">15 min delivery</p>
               </div>
-              <div className="flex items-center space-x-2">
-                <Truck className="h-5 w-5 text-green-600" />
-                <span>Free delivery over $35</span>
+              <div className="text-center">
+                <Truck className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                <p className="text-sm font-medium text-gray-900">Free delivery</p>
+              </div>
+              <div className="text-center">
+                <Shield className="h-8 w-8 text-green-600 mx-auto mb-2" />
+                <p className="text-sm font-medium text-gray-900">100% fresh</p>
               </div>
             </div>
           </div>
 
+          {/* Right Content - Hero Image */}
           <div className="relative">
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              <Image
-                src="/placeholder.svg?height=600&width=600&text=Fresh+Groceries"
-                alt="Fresh groceries and produce"
-                fill
-                className="object-cover"
+            <div className="relative z-10">
+              <img
+                src="/placeholder.svg?height=600&width=500&text=Fresh+Groceries"
+                alt="Fresh groceries and delivery"
+                className="w-full h-auto rounded-2xl shadow-2xl"
               />
             </div>
-            {/* Floating cards */}
-            <div className="absolute -top-4 -left-4 bg-white dark:bg-card p-4 rounded-lg shadow-lg">
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
-                  <span className="text-green-600 text-sm">🥬</span>
-                </div>
-                <div>
-                  <p className="font-medium text-sm">Fresh Produce</p>
-                  <p className="text-xs text-muted-foreground">Farm to door</p>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -bottom-4 -right-4 bg-white dark:bg-card p-4 rounded-lg shadow-lg">
-              <div className="flex items-center space-x-2">
-                <div className="h-8 w-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                  <span className="text-blue-600 text-sm">⚡</span>
-                </div>
-                <div>
-                  <p className="font-medium text-sm">30 min delivery</p>
-                  <p className="text-xs text-muted-foreground">Lightning fast</p>
-                </div>
-              </div>
-            </div>
+            {/* Background decoration */}
+            <div className="absolute -top-4 -right-4 w-full h-full bg-green-200 rounded-2xl -z-10"></div>
           </div>
         </div>
       </div>

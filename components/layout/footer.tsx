@@ -1,123 +1,105 @@
 import Link from "next/link"
-import { Facebook, Twitter, Instagram, Mail } from "lucide-react"
+import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-muted/50 border-t">
-      <div className="container py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
+    <footer className="bg-gray-900 text-white">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Company Info */}
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
               <div className="h-8 w-8 bg-green-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">R</span>
               </div>
               <span className="font-bold text-xl">Roguebreak</span>
             </div>
-            <p className="text-sm text-muted-foreground mb-4">
-              Fresh groceries delivered to your door in minutes. Quality you can trust, convenience you'll love.
+            <p className="text-gray-400 leading-relaxed">
+              Fresh groceries delivered to your doorstep in minutes. Quality you can trust, convenience you deserve.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <Facebook className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <Twitter className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="text-muted-foreground hover:text-foreground">
-                <Mail className="h-5 w-5" />
-              </Link>
+              <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+              <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+              <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
             </div>
           </div>
 
-          <div>
-            <h3 className="font-semibold mb-4">Shop</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg">Quick Links</h3>
+            <ul className="space-y-2">
               <li>
-                <Link href="/shop" className="hover:text-foreground">
-                  All Products
+                <Link href="/shop" className="text-gray-400 hover:text-white">
+                  Shop
                 </Link>
               </li>
               <li>
-                <Link href="/shop/produce" className="hover:text-foreground">
-                  Fresh Produce
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/dairy" className="hover:text-foreground">
-                  Dairy & Eggs
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/meat" className="hover:text-foreground">
-                  Meat & Seafood
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/pantry" className="hover:text-foreground">
-                  Pantry Staples
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Support</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/help" className="hover:text-foreground">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-foreground">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/delivery" className="hover:text-foreground">
-                  Delivery Info
-                </Link>
-              </li>
-              <li>
-                <Link href="/returns" className="hover:text-foreground">
-                  Returns
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-4">Company</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/about" className="hover:text-foreground">
+                <Link href="/about" className="text-gray-400 hover:text-white">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="hover:text-foreground">
-                  Careers
+                <Link href="/contact" className="text-gray-400 hover:text-white">
+                  Contact
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="hover:text-foreground">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/terms" className="hover:text-foreground">
-                  Terms of Service
+                <Link href="/help" className="text-gray-400 hover:text-white">
+                  Help Center
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* Categories */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg">Categories</h3>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/category/fruits" className="text-gray-400 hover:text-white">
+                  Fresh Fruits
+                </Link>
+              </li>
+              <li>
+                <Link href="/category/vegetables" className="text-gray-400 hover:text-white">
+                  Vegetables
+                </Link>
+              </li>
+              <li>
+                <Link href="/category/dairy" className="text-gray-400 hover:text-white">
+                  Dairy Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/category/bakery" className="text-gray-400 hover:text-white">
+                  Bakery
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div className="space-y-4">
+            <h3 className="font-semibold text-lg">Contact Us</h3>
+            <div className="space-y-3">
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-green-600" />
+                <span className="text-gray-400">1-800-ROGUE-BREAK</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-green-600" />
+                <span className="text-gray-400">support@roguebreak.com</span>
+              </div>
+              <div className="flex items-center space-x-3">
+                <MapPin className="h-5 w-5 text-green-600" />
+                <span className="text-gray-400">Toronto, ON, Canada</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Roguebreak. All rights reserved.</p>
+        <div className="border-t border-gray-800 mt-12 pt-8 text-center">
+          <p className="text-gray-400">© 2024 Roguebreak. All rights reserved. | Privacy Policy | Terms of Service</p>
         </div>
       </div>
     </footer>

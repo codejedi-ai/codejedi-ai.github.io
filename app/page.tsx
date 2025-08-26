@@ -4,7 +4,7 @@ import FeaturedProducts from "@/components/sections/featured-products"
 import HowItWorks from "@/components/sections/how-it-works"
 import Footer from "@/components/layout/footer"
 
-export default function HomePage() {
+export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />

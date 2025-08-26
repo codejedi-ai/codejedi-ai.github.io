@@ -3,122 +3,126 @@
 import { useCart } from "@/contexts/cart-context"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Minus, Plus, Trash2, ArrowLeft } from "lucide-react"
-import Image from "next/image"
+import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react"
 import Link from "next/link"
-import { useUser } from "@auth0/nextjs-auth0/client"
+import Navbar from "@/components/layout/navbar"
+import Footer from "@/components/layout/footer"
 
 export default function CartPage() {
-  const { items, total, updateQuantity, removeItem } = useCart()
-  const { user } = useUser()
+  const { items, total, updateQuantity, removeItem, clearCart } = useCart()
 
   if (items.length === 0) {
     return (
-      <div className="container py-16 text-center">
-        <h1 className="text-3xl font-bold mb-4">Your cart is empty</h1>
-        <p className="text-muted-foreground mb-8">Add some delicious items to get started!</p>
-        <Button asChild>
-          <Link href="/shop">Start Shopping</Link>
-        </Button>
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-16">
+          <div className="text-center space-y-6">
+            <ShoppingBag className="h-24 w-24 text-gray-400 mx-auto" />
+            <h1 className="text-3xl font-bold text-gray-900">Your cart is empty</h1>
+            <p className="text-gray-600 max-w-md mx-auto">
+              Looks like you haven't added any items to your cart yet. Start shopping to fill it up!
+            </p>
+            <Button asChild size="lg" className="bg-green-600 hover:bg-green-700">
+              <Link href="/shop">Start Shopping</Link>
+            </Button>
+          </div>
+        </div>
+        <Footer />
       </div>
     )
   }
 
   return (
-    <div className="container py-8">
-      <div className="flex items-center mb-8">
-        <Button variant="ghost" size="sm" asChild className="mr-4">
-          <Link href="/shop">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Continue Shopping
-          </Link>
-        </Button>
-        <h1 className="text-3xl font-bold">Shopping Cart</h1>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Cart Items */}
+          <div className="lg:col-span-2 space-y-4">
+            <div className="flex items-center justify-between">
+              <h1 className="text-2xl font-bold text-gray-900">Shopping Cart</h1>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={clearCart}
+                className="text-red-600 hover:text-red-700 bg-transparent"
+              >
+                Clear Cart
+              </Button>
+            </div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-4">
-          {items.map((item) => (
-            <Card key={item.id}>
-              <CardContent className="p-6">
-                <div className="flex items-center space-x-4">
-                  <div className="relative h-16 w-16 flex-shrink-0">
-                    <Image
+            {items.map((item) => (
+              <Card key={item.id}>
+                <CardContent className="p-6">
+                  <div className="flex items-center space-x-4">
+                    <img
                       src={item.image || "/placeholder.svg"}
                       alt={item.name}
-                      fill
-                      className="object-cover rounded-lg"
+                      className="w-20 h-20 object-cover rounded-lg"
                     />
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-gray-900">{item.name}</h3>
+                      <p className="text-green-600 font-bold">${item.price.toFixed(2)}</p>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+                        <Minus className="h-4 w-4" />
+                      </Button>
+                      <span className="w-12 text-center font-medium">{item.quantity}</span>
+                      <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                        <Plus className="h-4 w-4" />
+                      </Button>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-gray-900">${(item.price * item.quantity).toFixed(2)}</p>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeItem(item.id)}
+                        className="text-red-600 hover:text-red-700 mt-2"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-                  <div className="flex-grow">
-                    <h3 className="font-medium">{item.name}</h3>
-                    <p className="text-sm text-muted-foreground">${item.price.toFixed(2)} each</p>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
-                      <Minus className="h-4 w-4" />
-                    </Button>
-                    <span className="w-8 text-center">{item.quantity}</span>
-                    <Button variant="outline" size="sm" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
-                      <Plus className="h-4 w-4" />
-                    </Button>
-                  </div>
-
-                  <div className="text-right">
-                    <p className="font-medium">${(item.price * item.quantity).toFixed(2)}</p>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => removeItem(item.id)}
-                      className="text-red-600 hover:text-red-700"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+          {/* Order Summary */}
+          <div className="lg:col-span-1">
+            <Card className="sticky top-24">
+              <CardHeader>
+                <CardTitle>Order Summary</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between">
+                  <span>Subtotal</span>
+                  <span>${total.toFixed(2)}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Delivery Fee</span>
+                  <span className="text-green-600">Free</span>
+                </div>
+                <div className="border-t pt-4">
+                  <div className="flex justify-between font-bold text-lg">
+                    <span>Total</span>
+                    <span>${total.toFixed(2)}</span>
                   </div>
                 </div>
+                <Button className="w-full bg-green-600 hover:bg-green-700" size="lg">
+                  Proceed to Checkout
+                </Button>
+                <Button variant="outline" className="w-full bg-transparent" asChild>
+                  <Link href="/shop">Continue Shopping</Link>
+                </Button>
               </CardContent>
             </Card>
-          ))}
-        </div>
-
-        <div>
-          <Card>
-            <CardHeader>
-              <CardTitle>Order Summary</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between">
-                <span>Subtotal</span>
-                <span>${total.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Delivery Fee</span>
-                <span>{total >= 35 ? "FREE" : "$4.99"}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Tax</span>
-                <span>${(total * 0.13).toFixed(2)}</span>
-              </div>
-              <div className="border-t pt-4">
-                <div className="flex justify-between font-bold text-lg">
-                  <span>Total</span>
-                  <span>${(total + (total >= 35 ? 0 : 4.99) + total * 0.13).toFixed(2)}</span>
-                </div>
-              </div>
-
-              {user ? (
-                <Button className="w-full bg-green-600 hover:bg-green-700">Proceed to Checkout</Button>
-              ) : (
-                <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                  <Link href="/api/auth/login">Sign in to Checkout</Link>
-                </Button>
-              )}
-            </CardContent>
-          </Card>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

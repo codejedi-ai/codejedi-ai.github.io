@@ -1,98 +1,111 @@
 "use client"
 
 import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Plus, Search, Filter } from "lucide-react"
-import Image from "next/image"
+import { Plus, Star, Search } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
+import { useToast } from "@/hooks/use-toast"
+import Navbar from "@/components/layout/navbar"
+import Footer from "@/components/layout/footer"
 
-// Mock product data - in a real app, this would come from an API
 const products = [
   {
-    id: "1",
+    id: 1,
     name: "Organic Bananas",
     price: 2.99,
     originalPrice: 3.49,
     image: "/placeholder.svg?height=200&width=200&text=Bananas",
-    category: "Produce",
-    unit: "per bunch",
-    discount: 15,
+    category: "Fruits",
+    rating: 4.8,
+    discount: "15% OFF",
   },
   {
-    id: "2",
+    id: 2,
     name: "Fresh Avocados",
-    price: 1.99,
+    price: 4.99,
+    originalPrice: 5.99,
     image: "/placeholder.svg?height=200&width=200&text=Avocados",
-    category: "Produce",
-    unit: "each",
+    category: "Fruits",
+    rating: 4.9,
+    discount: "17% OFF",
   },
   {
-    id: "3",
+    id: 3,
     name: "Whole Milk",
-    price: 4.29,
+    price: 3.49,
+    originalPrice: null,
     image: "/placeholder.svg?height=200&width=200&text=Milk",
     category: "Dairy",
-    unit: "1L",
+    rating: 4.7,
+    discount: null,
   },
   {
-    id: "4",
+    id: 4,
     name: "Sourdough Bread",
-    price: 3.99,
+    price: 4.99,
+    originalPrice: 6.49,
     image: "/placeholder.svg?height=200&width=200&text=Bread",
     category: "Bakery",
-    unit: "per loaf",
+    rating: 4.6,
+    discount: "23% OFF",
   },
   {
-    id: "5",
-    name: "Free Range Eggs",
-    price: 5.99,
-    image: "/placeholder.svg?height=200&width=200&text=Eggs",
-    category: "Dairy",
-    unit: "12 pack",
+    id: 5,
+    name: "Organic Spinach",
+    price: 3.99,
+    originalPrice: null,
+    image: "/placeholder.svg?height=200&width=200&text=Spinach",
+    category: "Vegetables",
+    rating: 4.5,
+    discount: null,
   },
   {
-    id: "6",
+    id: 6,
     name: "Greek Yogurt",
-    price: 6.49,
-    originalPrice: 7.99,
+    price: 5.49,
+    originalPrice: 6.99,
     image: "/placeholder.svg?height=200&width=200&text=Yogurt",
     category: "Dairy",
-    unit: "750g",
-    discount: 19,
-  },
-  // Add more products...
-  {
-    id: "7",
-    name: "Organic Spinach",
-    price: 3.49,
-    image: "/placeholder.svg?height=200&width=200&text=Spinach",
-    category: "Produce",
-    unit: "5oz bag",
+    rating: 4.8,
+    discount: "21% OFF",
   },
   {
-    id: "8",
-    name: "Chicken Breast",
-    price: 12.99,
-    image: "/placeholder.svg?height=200&width=200&text=Chicken",
-    category: "Meat",
-    unit: "per lb",
+    id: 7,
+    name: "Fresh Strawberries",
+    price: 4.49,
+    originalPrice: null,
+    image: "/placeholder.svg?height=200&width=200&text=Strawberries",
+    category: "Fruits",
+    rating: 4.9,
+    discount: null,
+  },
+  {
+    id: 8,
+    name: "Artisan Croissants",
+    price: 6.99,
+    originalPrice: 8.49,
+    image: "/placeholder.svg?height=200&width=200&text=Croissants",
+    category: "Bakery",
+    rating: 4.7,
+    discount: "18% OFF",
   },
 ]
 
-const categories = ["All", "Produce", "Dairy", "Bakery", "Meat", "Pantry"]
+const categories = ["All", "Fruits", "Vegetables", "Dairy", "Bakery"]
 
 export default function ShopPage() {
-  const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
+  const [searchTerm, setSearchTerm] = useState("")
   const { addItem } = useCart()
+  const { toast } = useToast()
 
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory
-    return matchesSearch && matchesCategory
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    return matchesCategory && matchesSearch
   })
 
   const handleAddToCart = (product: (typeof products)[0]) => {
@@ -103,16 +116,25 @@ export default function ShopPage() {
       image: product.image,
       quantity: 1,
     })
+    toast({
+      title: "Added to cart",
+      description: `${product.name} has been added to your cart.`,
+    })
   }
 
   return (
-    <div className="container py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">Shop Groceries</h1>
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <div className="container mx-auto px-4 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Shop Fresh Groceries</h1>
+          <p className="text-gray-600">Discover fresh, high-quality products delivered to your door.</p>
+        </div>
 
-        {/* Search and Filter */}
-        <div className="flex flex-col md:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
+        {/* Search and Filters */}
+        <div className="mb-8 space-y-4">
+          <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search products..."
@@ -121,78 +143,79 @@ export default function ShopPage() {
               className="pl-10"
             />
           </div>
-          <Button variant="outline" className="md:w-auto bg-transparent">
-            <Filter className="h-4 w-4 mr-2" />
-            Filters
-          </Button>
+
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "outline"}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+                className={selectedCategory === category ? "bg-green-600 hover:bg-green-700" : ""}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
         </div>
 
-        {/* Categories */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "outline"}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-              className={selectedCategory === category ? "bg-green-600 hover:bg-green-700" : ""}
-            >
-              {category}
-            </Button>
-          ))}
-        </div>
-      </div>
-
-      {/* Products Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
-        {filteredProducts.map((product) => (
-          <Card key={product.id} className="group hover:shadow-lg transition-shadow">
-            <CardContent className="p-4">
-              <div className="relative aspect-square mb-3">
-                <Image
-                  src={product.image || "/placeholder.svg"}
-                  alt={product.name}
-                  fill
-                  className="object-cover rounded-lg"
-                />
-                {product.discount && (
-                  <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">{product.discount}% OFF</Badge>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide">{product.category}</p>
-                  <h3 className="font-medium text-sm leading-tight">{product.name}</h3>
-                  <p className="text-xs text-muted-foreground">{product.unit}</p>
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredProducts.map((product) => (
+            <Card key={product.id} className="group hover:shadow-lg transition-shadow duration-300">
+              <CardContent className="p-4">
+                <div className="relative mb-4">
+                  <img
+                    src={product.image || "/placeholder.svg"}
+                    alt={product.name}
+                    className="w-full h-48 object-cover rounded-lg"
+                  />
+                  {product.discount && (
+                    <Badge className="absolute top-2 left-2 bg-red-500 hover:bg-red-600">{product.discount}</Badge>
+                  )}
                 </div>
 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-1">
-                    <span className="font-bold text-lg">${product.price}</span>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="text-xs">
+                      {product.category}
+                    </Badge>
+                    <div className="flex items-center space-x-1">
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <span className="text-sm text-gray-600">{product.rating}</span>
+                    </div>
+                  </div>
+
+                  <h3 className="font-semibold text-gray-900">{product.name}</h3>
+
+                  <div className="flex items-center space-x-2">
+                    <span className="text-lg font-bold text-green-600">${product.price}</span>
                     {product.originalPrice && (
-                      <span className="text-xs text-muted-foreground line-through">${product.originalPrice}</span>
+                      <span className="text-sm text-gray-500 line-through">${product.originalPrice}</span>
                     )}
                   </div>
+
                   <Button
-                    size="sm"
                     onClick={() => handleAddToCart(product)}
-                    className="h-8 w-8 p-0 bg-green-600 hover:bg-green-700"
+                    className="w-full bg-green-600 hover:bg-green-700"
+                    size="sm"
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="h-4 w-4 mr-2" />
+                    Add to Cart
                   </Button>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
-      {filteredProducts.length === 0 && (
-        <div className="text-center py-12">
-          <p className="text-muted-foreground">No products found matching your criteria.</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      )}
+
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-12">
+            <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
+          </div>
+        )}
+      </div>
+      <Footer />
     </div>
   )
 }

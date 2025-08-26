@@ -5,14 +5,10 @@ import { ShoppingCart, User, Search, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { useUser } from "@auth0/nextjs-auth0/client"
 import { useCart } from "@/contexts/cart-context"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 export default function Navbar() {
-  const { user, isLoading } = useUser()
   const { items } = useCart()
-
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
 
   return (
@@ -57,34 +53,11 @@ export default function Navbar() {
             </Button>
           </Link>
 
-          {/* User Menu */}
-          {isLoading ? (
-            <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />
-          ) : user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="flex items-center space-x-2">
-                  <User className="h-5 w-5" />
-                  <span className="hidden md:inline">{user.name}</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem asChild>
-                  <Link href="/profile">Profile</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/orders">Orders</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/api/auth/logout">Sign out</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          ) : (
-            <Button asChild>
-              <Link href="/api/auth/login">Sign in</Link>
-            </Button>
-          )}
+          {/* User Button */}
+          <Button variant="ghost" size="sm" className="flex items-center space-x-2">
+            <User className="h-5 w-5" />
+            <span className="hidden md:inline">Account</span>
+          </Button>
         </div>
       </div>
     </header>
