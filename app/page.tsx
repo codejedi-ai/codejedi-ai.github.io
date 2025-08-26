@@ -1,0 +1,19 @@
+import Navbar from "@/components/layout/navbar"
+import HeroSection from "@/components/sections/hero-section"
+import FeaturedProducts from "@/components/sections/featured-products"
+import HowItWorks from "@/components/sections/how-it-works"
+import Footer from "@/components/layout/footer"
+
+export default function HomePage() {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <HeroSection />
+        <FeaturedProducts />
+        <HowItWorks />
+      </main>
+      <Footer />
+    </div>
+  )
+}
