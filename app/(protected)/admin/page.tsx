@@ -1,12 +1,12 @@
 "use client"
 
 import { useUser } from "@/contexts/auth-context"
-import { withAuth } from "@/components/auth/with-auth"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Shield, Users, ShoppingCart, TrendingUp } from "lucide-react"
 
-function AdminPage() {
+export default function AdminPage() {
   const { user } = useUser()
 
   // In a real app, you would fetch this data from your database
@@ -17,8 +17,6 @@ function AdminPage() {
     revenue: 123456.78,
     activeUsers: 456
   }
-
-  if (!user) return null
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -108,4 +106,4 @@ function AdminPage() {
   )
 }
 
-export default withAuth(AdminPage)
+

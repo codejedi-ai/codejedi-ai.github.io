@@ -1,7 +1,7 @@
 "use client"
 
 import { useUser } from "@/contexts/auth-context"
-import { withAuth } from "@/components/auth/with-auth"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -17,10 +17,8 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
-function DashboardPage() {
+export default function DashboardPage() {
   const { user } = useUser()
-
-  if (!user) return null
 
   // Mock dashboard data
   const dashboardData = {
@@ -196,4 +194,4 @@ function DashboardPage() {
   )
 }
 
-export default withAuth(DashboardPage)
+

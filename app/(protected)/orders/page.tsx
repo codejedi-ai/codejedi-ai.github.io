@@ -1,13 +1,13 @@
 "use client"
 
 import { useUser } from "@/contexts/auth-context"
-import { withAuth } from "@/components/auth/with-auth"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Package, Calendar, DollarSign, MapPin, ShoppingBag } from "lucide-react"
 import { useState, useEffect } from "react"
 
-function OrdersPage() {
+export default function OrdersPage() {
   const { user } = useUser()
   const [orders, setOrders] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -34,8 +34,6 @@ function OrdersPage() {
       fetchOrders()
     }
   }, [user])
-
-  if (!user) return null
 
   if (loading) {
     return (
@@ -152,4 +150,4 @@ function OrdersPage() {
   )
 }
 
-export default withAuth(OrdersPage)
+

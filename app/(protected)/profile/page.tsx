@@ -1,7 +1,7 @@
 "use client"
 
 import { useUser } from "@/contexts/auth-context"
-import { withAuth } from "@/components/auth/with-auth"
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,7 +9,7 @@ import { Mail, User, Calendar, LogOut, Settings, MapPin, Star } from "lucide-rea
 import Link from "next/link"
 import { useState, useEffect } from "react"
 
-function ProfilePage() {
+export default function ProfilePage() {
   const { user } = useUser()
   const [userData, setUserData] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -66,8 +66,6 @@ function ProfilePage() {
       setUpdating(false)
     }
   }
-
-  if (!user) return null
 
   if (loading) {
     return (
@@ -257,4 +255,4 @@ function ProfilePage() {
   )
 }
 
-export default withAuth(ProfilePage)
+
