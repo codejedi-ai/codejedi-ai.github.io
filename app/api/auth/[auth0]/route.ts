@@ -110,7 +110,7 @@ async function handleCallback(request: NextRequest) {
       expiresAt: Date.now() + (tokens.expires_in * 1000)
     }
 
-    const response = NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/(protected)/dashboard`)
+    const response = NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/dashboard`)
     
     // Set session cookie with better production settings
     response.cookies.set('appSession', JSON.stringify(session), {
