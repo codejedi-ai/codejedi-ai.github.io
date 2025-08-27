@@ -110,15 +110,17 @@ async function handleCallback(request: NextRequest) {
       expiresAt: Date.now() + (tokens.expires_in * 1000)
     }
 
-    const response = NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/dashboard`)
+    const response = NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/(protected)/dashboard`)
     
-    // Set session cookie (in production, you'd want to encrypt this)
+    // Set session cookie with better production settings
     response.cookies.set('appSession', JSON.stringify(session), {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
       maxAge: tokens.expires_in,
-      path: '/'
+      path: '/',
+      // Ensure cookie persists across browser refresh
+      expires: new Date(Date.now() + (tokens.expires_in * 1000))
     })
 
     return response
@@ -130,6 +132,13 @@ async function handleCallback(request: NextRequest) {
 
 async function handleMe(request: NextRequest) {
   const sessionCookie = request.cookies.get('appSession')
+  
+  // Debug logging for production issues
+  console.log('🍪 Cookie check:', {
+    hasCookie: !!sessionCookie,
+    cookieValue: sessionCookie?.value?.substring(0, 50) + '...',
+    allCookies: Object.fromEntries(Array.from(request.cookies))
+  })
   
   if (!sessionCookie) {
     return NextResponse.json({ error: 'Not authenticated' }, { status: 401 })
