@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Star, Plus, Search } from "lucide-react"
 import { useCart } from "@/contexts/cart-context"
 import { useToast } from "@/hooks/use-toast"
-import Navbar from "@/components/layout/navbar"
+
 import Footer from "@/components/layout/footer"
 
 const allProducts = [
@@ -143,7 +143,6 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">

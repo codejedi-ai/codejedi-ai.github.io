@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react"
 import Link from "next/link"
-import Navbar from "@/components/layout/navbar"
+
 import Footer from "@/components/layout/footer"
 
 export default function CartPage() {
@@ -14,7 +14,6 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-background">
-        <Navbar />
         <div className="container mx-auto px-4 py-16">
           <div className="text-center space-y-6">
             <ShoppingBag className="h-24 w-24 text-gray-400 mx-auto" />
@@ -32,7 +31,6 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Cart Items */}
