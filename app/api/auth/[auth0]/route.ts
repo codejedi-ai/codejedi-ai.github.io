@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 
 export async function GET(request: NextRequest) {
-  const { pathname } = request.nextUrl
+  const { pathname } = new URL(request.url)
   const segment = pathname.split('/').pop()
 
   try {
@@ -53,16 +53,11 @@ function handleLogout() {
 }
 
 async function handleCallback(request: NextRequest) {
-  const url = new URL(request.url)
-  const code = url.searchParams.get('code')
-  const error = url.searchParams.get('error')
-
-  if (error) {
-    return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/?error=${error}`)
-  }
+  const { searchParams } = new URL(request.url)
+  const code = searchParams.get('code')
 
   if (!code) {
-    return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/?error=missing_code`)
+    return NextResponse.redirect(`${process.env.AUTH0_BASE_URL}/?error=no_code`)
   }
 
   try {
@@ -76,7 +71,7 @@ async function handleCallback(request: NextRequest) {
         grant_type: 'authorization_code',
         client_id: process.env.AUTH0_CLIENT_ID,
         client_secret: process.env.AUTH0_CLIENT_SECRET,
-        code,
+        code: code,
         redirect_uri: `${process.env.AUTH0_BASE_URL}/api/auth/callback`,
       }),
     })
@@ -97,14 +92,14 @@ async function handleCallback(request: NextRequest) {
     })
 
     if (!userResponse.ok) {
-      throw new Error('Failed to get user info')
+      throw new Error('Failed to fetch user info')
     }
 
-    const user = await userResponse.json()
+    const userInfo = await userResponse.json()
 
     // Create session
     const session = {
-      user,
+      user: userInfo,
       accessToken: tokens.access_token,
       idToken: tokens.id_token,
       expiresAt: Date.now() + (tokens.expires_in * 1000)
@@ -154,6 +149,7 @@ async function handleMe(request: NextRequest) {
 
     return NextResponse.json(session.user)
   } catch (error) {
+    console.error('Session parse error:', error)
     return NextResponse.json({ error: 'Invalid session' }, { status: 401 })
   }
 }
