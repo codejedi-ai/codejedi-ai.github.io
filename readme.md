@@ -1,45 +1,160 @@
-# Python Getting Started
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A barebones Django app, which can easily be deployed to Heroku.
+## Getting Started
 
-This application supports the tutorials for both the [Cedar and Fir generations](https://devcenter.heroku.com/articles/generations) of the Heroku platform. You can check them out here:
+First, run the development server:
 
-- [Getting Started on Heroku with Python](https://devcenter.heroku.com/articles/getting-started-with-python)
-- [Getting Started on Heroku Fir with Python](https://devcenter.heroku.com/articles/getting-started-with-python-fir)
+\`\`\`bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+\`\`\`
 
-## Deploying to Heroku
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-Using resources for this example app counts towards your usage. [Delete your app](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-apps-destroy) and [database](https://devcenter.heroku.com/articles/heroku-postgresql#removing-the-add-on) as soon as you are done experimenting to control costs.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Deploy on Heroku [Cedar](https://devcenter.heroku.com/articles/generations#cedar)
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-By default, apps use Eco dynos if you are subscribed to Eco. Otherwise, it defaults to Basic dynos. The Eco dynos plan is shared across all Eco dynos in your account and is recommended if you plan on deploying many small apps to Heroku. Learn more about our low-cost plans [here](https://blog.heroku.com/new-low-cost-plans).
+## Learn More
 
-Eligible students can apply for platform credits through our new [Heroku for GitHub Students program](https://blog.heroku.com/github-student-developer-program).
+To learn more about Next.js, take a look at the following resources:
 
-```term
-$ git clone https://github.com/heroku/python-getting-started
-$ cd python-getting-started
-$ heroku create
-$ git push heroku main
-$ heroku open
-```
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Deploy on Heroku [Fir](https://devcenter.heroku.com/articles/generations#fir)
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-By default, apps on [Fir](https://devcenter.heroku.com/articles/generations#fir) use 1X-Classic dynos. To create an app on [Fir](https://devcenter.heroku.com/articles/generations#fir) you'll need to
-[create a private space](https://devcenter.heroku.com/articles/working-with-private-spaces#create-a-private-space)
-first.
+## Deploy on Vercel
 
-```term
-$ git clone https://github.com/heroku/python-getting-started
-$ cd python-getting-started
-$ heroku create --space <space-name>
-$ git push heroku main
-$ heroku ps:wait
-$ heroku open
-```
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-For more information about using Python on Heroku, see these Dev Center articles:
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
+
+
+each block is in the format of
+
+\`\`\`json
+{
+  object: 'list',
+  results: [
+    {
+      object: 'block',
+      id: '18ba9ae1-b608-8015-b467-c1c485c2b7fe',
+      parent: [Object],
+      created_time: '2025-01-30T03:36:00.000Z',
+      last_edited_time: '2025-01-30T03:36:00.000Z',
+      created_by: [Object],
+      last_edited_by: [Object],
+      has_children: false,
+      archived: false,
+      in_trash: false,
+      type: 'bulleted_list_item',
+      bulleted_list_item: [Object]
+    },
+    {
+      object: 'block',
+      id: '18ba9ae1-b608-808b-aa96-dd6e2aec8643',
+      parent: [Object],
+      created_time: '2025-01-30T03:36:00.000Z',
+      last_edited_time: '2025-01-30T03:36:00.000Z',
+      created_by: [Object],
+      last_edited_by: [Object],
+      has_children: false,
+      archived: false,
+      in_trash: false,
+      type: 'bulleted_list_item',
+      bulleted_list_item: [Object]
+    },
+    {
+      object: 'block',
+      id: '18ba9ae1-b608-80ea-a38d-ebdef2bf1139',
+      parent: [Object],
+      created_time: '2025-01-30T03:36:00.000Z',
+      last_edited_time: '2025-01-30T03:36:00.000Z',
+      created_by: [Object],
+      last_edited_by: [Object],
+      has_children: false,
+      archived: false,
+      in_trash: false,
+      type: 'bulleted_list_item',
+      bulleted_list_item: [Object]
+    }
+  ],
+  next_cursor: null,
+  has_more: false,
+  type: 'block',
+  block: {},
+  request_id: '033cec8a-9479-44b5-b2aa-3613c18c6722'
+}
+\`\`\`
+
+Then there is a rich text array with the following text in it
+
+
+\`\`\`json
+{
+    type: 'text',
+    text: { content: 'OANDA  Point 3', link: null },
+    annotations: {
+        bold: false,
+        italic: false,
+        strikethrough: false,
+        underline: false,
+        code: false,
+        color: 'default'
+    },
+    plain_text: 'OANDA  Point 3',
+    href: null
+}
+\`\`\`
+
+
+# PAge Type
+
+
+\`\`\`json
+ {
+    object: 'page',
+    id: '9f2411e5-5c4c-48df-9119-4e865f82e346',
+    created_time: '2024-06-04T19:51:00.000Z',
+    last_edited_time: '2025-01-30T03:36:00.000Z',
+    created_by: { object: 'user', id: '2bd9406f-ec19-4724-9f9c-11bf4a06c369' },    
+    last_edited_by: { object: 'user', id: '2bd9406f-ec19-4724-9f9c-11bf4a06c369' },
+    cover: null,
+    icon: { type: 'emoji', emoji: '💎' },
+    parent: {
+      type: 'database_id',
+      database_id: 'ce4d8010-744e-4fc7-90d5-f1ca4e481955'
+    },
+    archived: false,
+    in_trash: false,
+    properties: {
+      Tenure: [Object],
+      'Company Name': [Object],
+      'Job Title': [Object]
+    },
+    url: 'https://www.notion.so/Software-Engeneer-9f2411e55c4c48df91194e865f82e346',
+    public_url: null
+  }
+\`\`\`
+
+# Properties 
+
+\`\`\`json
+{
+  Tenure: {
+    id: 'IYzK',
+    type: 'date',
+    date: { start: '2024-09-03', end: '2024-12-20', time_zone: null }
+  },
+  'Company Name': { id: 'U%60E~', type: 'rich_text', rich_text: [ [Object] ] },    
+  'Job Title': { id: 'title', type: 'title', title: [ [Object] ] }
+}
+
+\`\`\`
