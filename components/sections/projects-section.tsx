@@ -3,46 +3,52 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github } from "lucide-react"
 
-const projects = [
+interface NotionProject {
+  id: string
+  title: string
+  description: string
+  tags: string[]
+  github: string
+  featured: boolean
+}
+
+interface ProjectsSectionProps {
+  data: NotionProject[] | null
+}
+
+// Fallback projects data
+const fallbackProjects = [
   {
+    id: "1",
     title: "E-Commerce Platform",
     description: "A full-stack e-commerce solution with user authentication, payment processing, and admin dashboard.",
-    image: "/placeholder.jpg",
-    technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/darcyliu/ecommerce",
+    tags: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
+    github: "https://github.com/example/ecommerce",
     featured: true
   },
   {
+    id: "2",
     title: "Task Management App",
     description: "A collaborative task management application with real-time updates and team collaboration features.",
-    image: "/placeholder.jpg",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/darcyliu/taskmanager",
+    tags: ["React", "Node.js", "Socket.io", "MongoDB"],
+    github: "https://github.com/example/taskmanager",
     featured: true
   },
   {
+    id: "3",
     title: "Weather Dashboard",
     description: "A responsive weather dashboard with location-based forecasts and interactive charts.",
-    image: "/placeholder.jpg",
-    technologies: ["Vue.js", "Chart.js", "Weather API", "Tailwind CSS"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/darcyliu/weather-dashboard",
-    featured: false
-  },
-  {
-    title: "Portfolio Website",
-    description: "A modern, responsive portfolio website built with Next.js and Tailwind CSS.",
-    image: "/placeholder.jpg",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com/darcyliu/portfolio",
+    tags: ["Vue.js", "Chart.js", "Weather API", "Tailwind CSS"],
+    github: "https://github.com/example/weather-dashboard",
     featured: false
   }
 ]
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ data }: ProjectsSectionProps) {
+  // Use Notion data if available, otherwise use fallback
+  const projects = data && data.length > 0 ? data : fallbackProjects
+  const useNotionData = data && data.length > 0
+
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4">
@@ -51,20 +57,21 @@ export default function ProjectsSection() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Here are some of my recent projects that showcase my skills and experience 
             in full-stack development.
+            {useNotionData && <span className="block text-sm text-green-600 mt-2">✅ Live data from Notion</span>}
+            {!useNotionData && <span className="block text-sm text-blue-600 mt-2">📋 Fallback data (Notion not configured)</span>}
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <Card key={index} className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
-              <div className="aspect-video bg-gray-200 relative overflow-hidden">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-full object-cover"
-                />
+          {projects.map((project) => (
+            <Card key={project.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden flex items-center justify-center">
+                <div className="text-white text-center p-6">
+                  <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
+                  <p className="text-blue-100">Technical Project</p>
+                </div>
                 {project.featured && (
-                  <Badge className="absolute top-4 left-4 bg-blue-600">
+                  <Badge className="absolute top-4 left-4 bg-yellow-500 text-yellow-900">
                     Featured
                   </Badge>
                 )}
@@ -81,37 +88,30 @@ export default function ProjectsSection() {
                   {project.description}
                 </p>
                 
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
+                {project.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.tags.map((tag, tagIndex) => (
+                      <Badge key={tagIndex} variant="outline" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                )}
                 
                 <div className="flex gap-3">
-                  <Button asChild size="sm">
-                    <a 
-                      href={project.liveUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      Live Demo
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <a 
-                      href={project.githubUrl} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      <Github className="h-4 w-4" />
-                      Code
-                    </a>
-                  </Button>
+                  {project.github && (
+                    <Button variant="outline" size="sm" asChild>
+                      <a 
+                        href={project.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        <Github className="h-4 w-4" />
+                        Code
+                      </a>
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
@@ -121,7 +121,7 @@ export default function ProjectsSection() {
         <div className="text-center mt-12">
           <Button variant="outline" size="lg" asChild>
             <a 
-              href="https://github.com/darcyliu" 
+              href="https://github.com/codejedi-ai" 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2"
