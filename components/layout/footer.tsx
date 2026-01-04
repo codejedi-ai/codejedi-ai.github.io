@@ -1,44 +1,35 @@
-"use client"
-
 import { Github, Linkedin, Mail, Heart } from "lucide-react"
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear()
-
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-4 gap-8">
           {/* Brand */}
-          <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">D</span>
-              </div>
-              <span className="font-bold text-xl">Darcy Liu</span>
-            </div>
-            <p className="text-gray-400 mb-4">
-              Full-stack developer passionate about creating innovative web applications 
-              and solving complex problems.
+          <div className="md:col-span-2">
+            <h3 className="text-2xl font-bold mb-4">Darcy Liu</h3>
+            <p className="text-gray-400 mb-4 max-w-md">
+              Full-Stack Developer passionate about creating innovative web applications 
+              and solving complex problems with clean, efficient code.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://github.com/darcyliu" 
-                target="_blank" 
+              <a
+                href="https://github.com/darcyliu"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <Github className="h-5 w-5" />
               </a>
-              <a 
-                href="https://linkedin.com/in/darcyliu" 
-                target="_blank" 
+              <a
+                href="https://linkedin.com/in/darcyliu"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-400 hover:text-white transition-colors"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
-              <a 
+              <a
                 href="mailto:darcy.ldx@gmail.com"
                 className="text-gray-400 hover:text-white transition-colors"
               >
@@ -49,61 +40,68 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <button 
-                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                <a
+                  href="#about"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   About
-                </button>
+                </a>
               </li>
               <li>
-                <button 
-                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                <a
+                  href="#experience"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  Experience
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#projects"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Projects
-                </button>
+                </a>
               </li>
               <li>
-                <button 
-                  onClick={() => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })}
+                <a
+                  href="#skills"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Skills
-                </button>
+                </a>
               </li>
               <li>
-                <button 
-                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                <a
+                  href="#contact"
                   className="text-gray-400 hover:text-white transition-colors"
                 >
                   Contact
-                </button>
+                </a>
               </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold text-lg mb-4">Get In Touch</h3>
-            <div className="space-y-2">
-              <p className="text-gray-400">
-                <Mail className="inline h-4 w-4 mr-2" />
-                darcy.ldx@gmail.com
-              </p>
-              <p className="text-gray-400">
-                📍 Toronto, Ontario, Canada
-              </p>
-            </div>
+            <h4 className="text-lg font-semibold mb-4">Get In Touch</h4>
+            <ul className="space-y-2 text-gray-400">
+              <li>darcy.ldx@gmail.com</li>
+              <li>San Francisco, CA</li>
+              <li>Available for opportunities</li>
+            </ul>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 flex items-center justify-center">
-            © {currentYear} Darcy Liu. Made with <Heart className="h-4 w-4 mx-1 text-red-500" /> and lots of coffee.
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p className="flex items-center justify-center">
+            Made with <Heart className="h-4 w-4 mx-1 text-red-500" /> by Darcy Liu
+          </p>
+          <p className="mt-2 text-sm">
+            © {new Date().getFullYear()} Darcy Liu. All rights reserved.
           </p>
         </div>
       </div>

@@ -1,16 +1,7 @@
-"use client"
-
 import { Button } from "@/components/ui/button"
 import { ArrowDown, Download } from "lucide-react"
 
 export default function HeroSection() {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
       <div className="max-w-4xl mx-auto px-4 text-center">
@@ -27,10 +18,10 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <Button 
             size="lg" 
-            onClick={() => scrollToSection('projects')}
+            asChild
             className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
           >
-            View My Work
+            <a href="#projects">View My Work</a>
           </Button>
           <Button 
             variant="outline" 
@@ -43,12 +34,12 @@ export default function HeroSection() {
         </div>
 
         <div className="animate-bounce">
-          <button 
-            onClick={() => scrollToSection('about')}
-            className="text-gray-500 hover:text-blue-600 transition-colors"
+          <a 
+            href="#about"
+            className="text-gray-500 hover:text-blue-600 transition-colors inline-block"
           >
             <ArrowDown className="h-8 w-8 mx-auto" />
-          </button>
+          </a>
         </div>
       </div>
     </section>
