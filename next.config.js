@@ -1,12 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
+  // Remove output: 'export' to enable SSR
+  // trailingSlash: true, // Not needed for SSR
   images: {
-    unoptimized: true
+    // unoptimized: true // Not needed for SSR, Next.js can optimize images
   },
   experimental: {
-    // Enable any new experimental features if needed
+    // Enable any experimental features if needed
   }
 }
 

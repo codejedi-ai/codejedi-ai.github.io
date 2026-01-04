@@ -1,0 +1,15 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "functions": {
+    "app/page.tsx": {
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "NOTION_API_KEY": "@notion_api_key",
+    "NOTION_SKILLS_DATABASE_ID": "@notion_skills_database_id", 
+    "NOTION_EXPERIENCE_DATABASE_ID": "@notion_experience_database_id"
+  }
+}
