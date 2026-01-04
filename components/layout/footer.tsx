@@ -1,105 +1,110 @@
-import Link from "next/link"
-import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react"
+"use client"
+
+import { Github, Linkedin, Mail, Heart } from "lucide-react"
 
 export default function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <div className="h-8 w-8 bg-green-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">R</span>
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="grid md:grid-cols-3 gap-8">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">D</span>
               </div>
-              <span className="font-bold text-xl">Roguebreak</span>
+              <span className="font-bold text-xl">Darcy Liu</span>
             </div>
-            <p className="text-gray-400">
-              Fresh groceries delivered to your door in as fast as 1 hour. Quality guaranteed.
+            <p className="text-gray-400 mb-4">
+              Full-stack developer passionate about creating innovative web applications 
+              and solving complex problems.
             </p>
             <div className="flex space-x-4">
-              <Facebook className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
-              <Twitter className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
-              <Instagram className="h-5 w-5 text-gray-400 hover:text-white cursor-pointer" />
+              <a 
+                href="https://github.com/darcyliu" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a 
+                href="https://linkedin.com/in/darcyliu" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a 
+                href="mailto:darcy.ldx@gmail.com"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
+                <Mail className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Quick Links</h3>
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/shop" className="text-gray-400 hover:text-white">
-                  Shop
-                </Link>
+                <button 
+                  onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  About
+                </button>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white">
-                  About Us
-                </Link>
+                <button 
+                  onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  Projects
+                </button>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white">
+                <button 
+                  onClick={() => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
+                  Skills
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Contact
-                </Link>
-              </li>
-              <li>
-                <Link href="/help" className="text-gray-400 hover:text-white">
-                  Help Center
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Categories */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Categories</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/shop?category=fruits" className="text-gray-400 hover:text-white">
-                  Fruits & Vegetables
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=dairy" className="text-gray-400 hover:text-white">
-                  Dairy & Eggs
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=meat" className="text-gray-400 hover:text-white">
-                  Meat & Seafood
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?category=bakery" className="text-gray-400 hover:text-white">
-                  Bakery
-                </Link>
+                </button>
               </li>
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Contact Us</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-green-600" />
-                <span className="text-gray-400">1-800-ROGUE-BREAK</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-green-600" />
-                <span className="text-gray-400">support@roguebreak.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-green-600" />
-                <span className="text-gray-400">Toronto, ON, Canada</span>
-              </div>
+          <div>
+            <h3 className="font-semibold text-lg mb-4">Get In Touch</h3>
+            <div className="space-y-2">
+              <p className="text-gray-400">
+                <Mail className="inline h-4 w-4 mr-2" />
+                darcy.ldx@gmail.com
+              </p>
+              <p className="text-gray-400">
+                📍 Toronto, Ontario, Canada
+              </p>
             </div>
           </div>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400">© 2024 Roguebreak. All rights reserved.</p>
+          <p className="text-gray-400 flex items-center justify-center">
+            © {currentYear} Darcy Liu. Made with <Heart className="h-4 w-4 mx-1 text-red-500" /> and lots of coffee.
+          </p>
         </div>
       </div>
     </footer>

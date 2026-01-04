@@ -1,87 +1,157 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
-import { ShoppingCart, User, Search, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { useCart } from "@/contexts/cart-context"
-import { useUser } from "@/contexts/auth-context"
+import { Menu, X, Github, Linkedin, Mail } from "lucide-react"
 
 export default function Navbar() {
-  const { user, isLoading } = useUser()
-  const { items } = useCart()
-  const totalItems = items.reduce((sum, item) => sum + item.quantity, 0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsMenuOpen(false)
+  }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="relative flex h-16 items-center w-full px-8">
-        {/* LEFT SECTION - Logo, Location, Search */}
-        <div className="flex items-center space-x-6 flex-1">
-          {/* Logo */}
+    <nav className="bg-white shadow-sm border-b sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Left Section - Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="h-8 w-8 bg-green-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">R</span>
+            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-sm">D</span>
             </div>
-            <span className="font-bold text-xl">Roguebreak</span>
+            <span className="font-bold text-xl text-gray-900">Darcy Liu</span>
           </Link>
 
-          {/* Location */}
-          <div className="hidden md:flex items-center space-x-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4" />
-            <span>Deliver to</span>
-            <Button variant="ghost" size="sm" className="font-medium text-foreground">
-              Toronto, ON M5V 3A8
-            </Button>
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            <button 
+              onClick={() => scrollToSection('about')}
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+            >
+              About
+            </button>
+            <button 
+              onClick={() => scrollToSection('projects')}
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+            >
+              Projects
+            </button>
+            <button 
+              onClick={() => scrollToSection('skills')}
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+            >
+              Skills
+            </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+            >
+              Contact
+            </button>
           </div>
 
-          {/* Search */}
-          <div className="flex-1 max-w-md">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search for products..." className="pl-10" />
-            </div>
+          {/* Right Section - Social Links */}
+          <div className="hidden md:flex items-center space-x-4">
+            <a 
+              href="https://github.com/darcyliu" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+            <a 
+              href="https://linkedin.com/in/darcyliu" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a 
+              href="mailto:darcy.ldx@gmail.com"
+              className="text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <Mail className="h-5 w-5" />
+            </a>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+            </Button>
           </div>
         </div>
 
-        {/* RIGHT SECTION - Cart and Account - STICKS TO RIGHT EDGE */}
-        <div className="absolute right-8 flex items-center space-x-4">
-          {/* Cart */}
-          <Link href="/cart">
-            <Button variant="ghost" size="sm" className="relative">
-              <ShoppingCart className="h-5 w-5" />
-              {totalItems > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center text-xs">
-                  {totalItems}
-                </Badge>
-              )}
-            </Button>
-          </Link>
-
-          {/* User Menu - Sign in/Profile */}
-          {isLoading ? (
-            <div className="h-8 w-8 rounded-full bg-muted animate-pulse" />
-          ) : user ? (
-            <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/dashboard" className="flex items-center space-x-2">
-                  <User className="h-5 w-5" />
-                  <span className="hidden md:inline">{user.name}</span>
-                </Link>
-              </Button>
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/api/auth/logout">
-                  Sign out
-                </Link>
-              </Button>
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 border-t">
+            <div className="flex flex-col space-y-4">
+              <button 
+                onClick={() => scrollToSection('about')}
+                className="text-gray-700 hover:text-blue-600 font-medium py-2 text-left"
+              >
+                About
+              </button>
+              <button 
+                onClick={() => scrollToSection('projects')}
+                className="text-gray-700 hover:text-blue-600 font-medium py-2 text-left"
+              >
+                Projects
+              </button>
+              <button 
+                onClick={() => scrollToSection('skills')}
+                className="text-gray-700 hover:text-blue-600 font-medium py-2 text-left"
+              >
+                Skills
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="text-gray-700 hover:text-blue-600 font-medium py-2 text-left"
+              >
+                Contact
+              </button>
+              
+              {/* Mobile Social Links */}
+              <div className="flex items-center space-x-4 pt-4 border-t">
+                <a 
+                  href="https://github.com/darcyliu" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Github className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://linkedin.com/in/darcyliu" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </a>
+                <a 
+                  href="mailto:darcy.ldx@gmail.com"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  <Mail className="h-5 w-5" />
+                </a>
+              </div>
             </div>
-          ) : (
-            <Button asChild>
-              <Link href="/api/auth/login">Sign in</Link>
-            </Button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </header>
+    </nav>
   )
 }
