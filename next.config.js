@@ -4,7 +4,10 @@ const nextConfig = {
   trailingSlash: true,
   images: {
     unoptimized: true
+  },
+  experimental: {
+    // Enable any new experimental features if needed
   }
 }
 
-module.exports = nextConfig
+export default nextConfig
