@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Note: API routes require server-side execution, which GitHub Pages doesn't support
-  // For static export, use: output: 'export'
+  // Static export for GitHub Pages (no server-side API routes)
+  output: 'export',
   trailingSlash: true,
   images: {
-    unoptimized: false,
+    unoptimized: true, // Required for static export
     remotePatterns: [
       {
         protocol: "https",
@@ -55,9 +55,6 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   typescript: {
     ignoreBuildErrors: true,
