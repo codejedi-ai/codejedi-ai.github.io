@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // Note: API routes require server-side execution, which GitHub Pages doesn't support
+  // For static export, use: output: 'export'
   trailingSlash: true,
   images: {
     unoptimized: false,
