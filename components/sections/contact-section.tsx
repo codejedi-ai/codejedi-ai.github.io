@@ -13,7 +13,7 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto">
+        <div className="mx-auto">
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <div className="flex flex-col items-center justify-center gap-6">
               {/* LinkedIn */}
