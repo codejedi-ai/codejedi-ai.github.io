@@ -403,7 +403,7 @@ export default function Contact() {
         }))
       }
 
-      const response = await fetch("https://codejedi-ai.vercel.app/api/contacts/submit", {
+      const response = await fetch("/api/contacts/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

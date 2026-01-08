@@ -33,7 +33,7 @@ export default function Projects() {
   useEffect(() => {
     async function fetchProjects() {
       try {
-        const response = await fetch("https://codejedi-ai.vercel.app/api/projects/")
+        const response = await fetch("/api/projects")
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}))
