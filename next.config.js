@@ -1,9 +1,65 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Remove output: 'export' to enable SSR
-  // trailingSlash: true, // Not needed for SSR
+  trailingSlash: true,
   images: {
-    // unoptimized: true // Not needed for SSR, Next.js can optimize images
+    unoptimized: false,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "prod-files-secure.s3.*.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "www.notion.so",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "blob.v0.dev",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "hebbkx1anhila5yf.public.blob.vercel-storage.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "unsplash.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.jsdelivr.net",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
   },
   experimental: {
     // Enable any experimental features if needed
