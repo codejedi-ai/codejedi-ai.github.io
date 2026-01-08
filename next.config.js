@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Remove output: 'export' to enable SSR
+  output: 'export',
   trailingSlash: true,
   images: {
     unoptimized: false,
