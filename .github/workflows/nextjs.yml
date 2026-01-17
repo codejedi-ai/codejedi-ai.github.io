@@ -63,7 +63,7 @@ jobs:
       - name: Build static frontend with Next.js
         run: pnpm run build
         env:
-          NEXT_PUBLIC_API_URL: https://api.codejedi.ai
+          NEXT_PUBLIC_API_URL: https://codejedi-ai.vercel.app
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
