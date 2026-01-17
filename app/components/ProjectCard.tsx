@@ -26,29 +26,16 @@ interface ProjectCardProps {
   imageLoading: boolean
   onImageLoad: (projectId: string) => void
   onImageError: (projectId: string) => void
-  onLearnMore: (project: Project) => void
 }
 
 export default class ProjectCard extends Component<ProjectCardProps> {
   render() {
-    const { project, imageLoading, onImageLoad, onImageError, onLearnMore } = this.props
+    const { project, imageLoading, onImageLoad, onImageError } = this.props
 
     return (
       <div
-        className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col h-full group cursor-pointer"
-        role="link"
-        tabIndex={0}
-        onClick={() => {
-          if (project.link) {
-            window.open(project.link, "_blank", "noopener,noreferrer")
-          }
-        }}
-        onKeyDown={(e) => {
-          if ((e.key === "Enter" || e.key === " ") && project.link) {
-            e.preventDefault()
-            window.open(project.link, "_blank", "noopener,noreferrer")
-          }
-        }}
+        className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col h-full group"
+        role="article"
       >
         <div className="relative h-48 overflow-hidden">
           {imageLoading && (
@@ -110,26 +97,24 @@ export default class ProjectCard extends Component<ProjectCardProps> {
             )}
           </div>
         </div>
-        <div className="p-6 pt-0 flex justify-between">
-          <Link
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <Github className="h-4 w-4" />
-            <span>Code</span>
-          </Link>
+        <div className="p-6 pt-0 flex justify-start">
           <button
             onClick={(e) => {
               e.stopPropagation()
-              onLearnMore(project)
+              // Prefer GitHub URL, fall back to project link (which always has a Notion URL)
+              const url = (project.github && project.github.trim()) ? project.github : project.link
+              console.log(`🔗 Opening URL for "${project.title}":`, url)
+              console.log(`   GitHub: "${project.github}", Link: "${project.link}"`)
+              if (url && url !== "/" && url !== "#") {
+                window.open(url, "_blank", "noopener,noreferrer")
+              } else {
+                console.warn(`⚠️ Invalid URL for project "${project.title}":`, url)
+              }
             }}
-            className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
+            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
           >
-            <span>Learn More</span>
-            <ExternalLink className="h-4 w-4" />
+            <Github className="h-4 w-4" />
+            <span>Code</span>
           </button>
         </div>
       </div>
