@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   description: "Created with Next.js and Tailwind CSS",
   generator: 'v0.dev',
   icons: {
-    icon: '/CodeJedi.png',
-    shortcut: '/CodeJedi.png',
-    apple: '/CodeJedi.png',
+    icon: '/img/CodeJedi.png',
+    shortcut: '/img/CodeJedi.png',
+    apple: '/img/CodeJedi.png',
   },
 };
 
