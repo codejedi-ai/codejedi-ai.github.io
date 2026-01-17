@@ -34,7 +34,8 @@ export default function Certificates() {
         }
 
         const data = await response.json()
-        setCertificates(data.certificates)
+        const certificatesData = Array.isArray(data.certificates) ? data.certificates : []
+        setCertificates(certificatesData)
       } catch (err) {
         console.error("Error fetching certificates:", err)
         const errorMessage = err instanceof Error ? err.message : "Failed to load certificates. Please try again later."
@@ -78,7 +79,7 @@ export default function Certificates() {
           </div>
         )}
 
-        {!isLoading && !error && (
+        {!isLoading && !error && certificates.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl mx-auto">
             {certificates.map((cert) => (
               <div key={cert.id} className="flex flex-col items-center">
@@ -103,6 +104,10 @@ export default function Certificates() {
               </div>
             ))}
           </div>
+        )}
+
+        {!isLoading && !error && certificates.length === 0 && (
+          <div className="text-center text-gray-200">No certificates available.</div>
         )}
       </div>
     </section>
