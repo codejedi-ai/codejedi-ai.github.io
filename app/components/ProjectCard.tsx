@@ -39,6 +39,13 @@ export default class ProjectCard extends Component<ProjectCardProps> {
     })()
     const hasCode = !!codeUrl
 
+    const linkUrl = (() => {
+      const url = (project.link && project.link.trim()) ? project.link.trim() : ""
+      if (!url || url === "/" || url === "#") return ""
+      return url
+    })()
+    const hasLink = !!linkUrl
+
     return (
       <div
         className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col h-full group"
@@ -125,15 +132,25 @@ export default class ProjectCard extends Component<ProjectCardProps> {
               <span>Code</span>
             </span>
           )}
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
-          >
-            <ExternalLink className="h-4 w-4" />
-            <span>Learn more</span>
-          </Link>
+          {hasLink ? (
+            <Link
+              href={linkUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Learn more</span>
+            </Link>
+          ) : (
+            <span
+              aria-disabled="true"
+              className="flex items-center gap-1 text-gray-500 cursor-not-allowed opacity-50"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Learn more</span>
+            </span>
+          )}
         </div>
       </div>
     )
