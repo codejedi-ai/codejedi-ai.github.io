@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { API_ENDPOINTS } from "@/lib/api-config"
+import { CERTIFICATES_BG_URL } from "@/lib/constants"
 
 interface Certificate {
   id: string
@@ -19,8 +20,7 @@ export default function Certificates() {
 
   const quote =
     '"The greatest scientific discovery was the discovery of ignorance."-- Yuval Noah Harari, Homo Deus: A History of Tomorrow'
-  const backgroundImage =
-    "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80"
+  const backgroundImage = CERTIFICATES_BG_URL
 
   useEffect(() => {
     async function fetchCertificates() {
