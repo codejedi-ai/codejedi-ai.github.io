@@ -26,11 +26,12 @@ interface ProjectCardProps {
   imageLoading: boolean
   onImageLoad: (projectId: string) => void
   onImageError: (projectId: string) => void
+  onLearnMore?: (project: Project) => void
 }
 
 export default class ProjectCard extends Component<ProjectCardProps> {
   render() {
-    const { project, imageLoading, onImageLoad, onImageError } = this.props
+    const { project, imageLoading, onImageLoad, onImageError, onLearnMore } = this.props
 
     return (
       <div
@@ -97,7 +98,7 @@ export default class ProjectCard extends Component<ProjectCardProps> {
             )}
           </div>
         </div>
-        <div className="p-6 pt-0 flex justify-start">
+        <div className="p-6 pt-0 flex justify-start gap-4">
           <button
             onClick={(e) => {
               e.stopPropagation()
@@ -116,6 +117,18 @@ export default class ProjectCard extends Component<ProjectCardProps> {
             <Github className="h-4 w-4" />
             <span>Code</span>
           </button>
+          {onLearnMore && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
+                onLearnMore(project)
+              }}
+              className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
+            >
+              <ExternalLink className="h-4 w-4" />
+              <span>Learn more</span>
+            </button>
+          )}
         </div>
       </div>
     )
