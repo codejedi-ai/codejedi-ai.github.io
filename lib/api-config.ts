@@ -3,7 +3,7 @@
  * Point `NEXT_PUBLIC_API_URL` to whatever backend hosts the API.
  */
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.codejedi.ai"
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://codejedi-ai.vercel.app"
 
 export const API_ENDPOINTS = {
   workExperience: `${API_BASE_URL}/api/work-experience/`,
