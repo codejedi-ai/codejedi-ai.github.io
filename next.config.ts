@@ -10,6 +10,9 @@ const inferredMode = hasNotionSecret ? "api" : "static"
 const buildMode = explicitMode ?? inferredMode
 
 const isStatic = buildMode === "static"
+const isProd = process.env.NODE_ENV === "production"
+// Only apply basePath when exporting for production (e.g., GitHub Pages).
+const staticBasePath = isStatic && isProd ? process.env.NEXT_PUBLIC_BASE_PATH || "/codejedi.ai.github.io" : undefined
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
@@ -17,8 +20,8 @@ const nextConfig: NextConfig = {
   ...(isStatic
     ? {
         output: "export",
-        // Base path for GitHub Pages; override via NEXT_PUBLIC_BASE_PATH if needed.
-        basePath: process.env.NEXT_PUBLIC_BASE_PATH || "/codejedi.ai.github.io",
+        // Base path only in production exports; local dev stays root so routes and assets resolve.
+        ...(staticBasePath ? { basePath: staticBasePath } : {}),
         images: { unoptimized: true },
       }
     : {
@@ -40,6 +43,6 @@ const nextConfig: NextConfig = {
 }
 
 // Helpful build-time log (won't leak secrets)
-console.log(`[next.config] buildMode=${buildMode} (hasNotionSecret=${hasNotionSecret})`)
+console.log(`[next.config] buildMode=${buildMode} (hasNotionSecret=${hasNotionSecret}) basePath=${staticBasePath ?? "<none>"}`)
 
 export default nextConfig

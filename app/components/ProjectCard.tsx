@@ -34,7 +34,22 @@ export default class ProjectCard extends Component<ProjectCardProps> {
     const { project, imageLoading, onImageLoad, onImageError, onLearnMore } = this.props
 
     return (
-      <div className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col h-full group">
+      <div
+        className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col h-full group cursor-pointer"
+        role="link"
+        tabIndex={0}
+        onClick={() => {
+          if (project.link) {
+            window.open(project.link, "_blank", "noopener,noreferrer")
+          }
+        }}
+        onKeyDown={(e) => {
+          if ((e.key === "Enter" || e.key === " ") && project.link) {
+            e.preventDefault()
+            window.open(project.link, "_blank", "noopener,noreferrer")
+          }
+        }}
+      >
         <div className="relative h-48 overflow-hidden">
           {imageLoading && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-800 z-10">
@@ -101,12 +116,16 @@ export default class ProjectCard extends Component<ProjectCardProps> {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
+            onClick={(e) => e.stopPropagation()}
           >
             <Github className="h-4 w-4" />
             <span>Code</span>
           </Link>
           <button
-            onClick={() => onLearnMore(project)}
+            onClick={(e) => {
+              e.stopPropagation()
+              onLearnMore(project)
+            }}
             className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
           >
             <span>Learn More</span>
