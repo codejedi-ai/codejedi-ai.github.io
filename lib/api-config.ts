@@ -3,6 +3,9 @@
  * Point `NEXT_PUBLIC_API_URL` to whatever backend hosts the API.
  */
 
+// Ensure TypeScript recognizes process in environments without @types/node
+declare const process: any
+
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://codejedi-ai.vercel.app"
 
 export const API_ENDPOINTS = {

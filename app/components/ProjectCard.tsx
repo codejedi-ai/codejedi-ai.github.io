@@ -26,12 +26,18 @@ interface ProjectCardProps {
   imageLoading: boolean
   onImageLoad: (projectId: string) => void
   onImageError: (projectId: string) => void
-  onLearnMore?: (project: Project) => void
 }
 
 export default class ProjectCard extends Component<ProjectCardProps> {
   render() {
-    const { project, imageLoading, onImageLoad, onImageError, onLearnMore } = this.props
+    const { project, imageLoading, onImageLoad, onImageError } = this.props
+
+    const codeUrl = (() => {
+      const url = (project.github && project.github.trim()) ? project.github.trim() : ""
+      if (!url || url === "/" || url === "#") return ""
+      return url
+    })()
+    const hasCode = !!codeUrl
 
     return (
       <div
@@ -99,36 +105,35 @@ export default class ProjectCard extends Component<ProjectCardProps> {
           </div>
         </div>
         <div className="p-6 pt-0 flex justify-start gap-4">
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              // Prefer GitHub URL, fall back to project link (which always has a Notion URL)
-              const url = (project.github && project.github.trim()) ? project.github : project.link
-              console.log(`🔗 Opening URL for "${project.title}":`, url)
-              console.log(`   GitHub: "${project.github}", Link: "${project.link}"`)
-              if (url && url !== "/" && url !== "#") {
-                window.open(url, "_blank", "noopener,noreferrer")
-              } else {
-                console.warn(`⚠️ Invalid URL for project "${project.title}":`, url)
-              }
-            }}
-            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
-          >
-            <Github className="h-4 w-4" />
-            <span>Code</span>
-          </button>
-          {onLearnMore && (
+          {hasCode ? (
             <button
               onClick={(e) => {
                 e.stopPropagation()
-                onLearnMore(project)
+                window.open(codeUrl, "_blank", "noopener,noreferrer")
               }}
               className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
             >
-              <ExternalLink className="h-4 w-4" />
-              <span>Learn more</span>
+              <Github className="h-4 w-4" />
+              <span>Code</span>
             </button>
+          ) : (
+            <span
+              aria-disabled="true"
+              className="flex items-center gap-1 text-gray-500 cursor-not-allowed opacity-50"
+            >
+              <Github className="h-4 w-4" />
+              <span>Code</span>
+            </span>
           )}
+          <Link
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
+          >
+            <ExternalLink className="h-4 w-4" />
+            <span>Learn more</span>
+          </Link>
         </div>
       </div>
     )
