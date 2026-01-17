@@ -1,9 +1,1 @@
-
-{"buildCommand": "pnpm run build",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://codejedi-ai.vercel.app"
-  },
-  "regions": ["iad1"],
-  "public": false
-}
+{}

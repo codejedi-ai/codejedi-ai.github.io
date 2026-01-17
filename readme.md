@@ -1,6 +1,6 @@
 # CodeJedi Portfolio
 
-A modern, responsive portfolio website showcasing my work, skills, and experience. Built with Next.js and hosted on Vercel.
+A modern, responsive portfolio website showcasing my work, skills, and experience. Built with Next.js and hosted on GitHub Pages.
 
 🌐 **Live Site**: [https://codejedi-ai.github.io/](https://codejedi-ai.github.io/)
 
@@ -27,7 +27,7 @@ A modern, responsive portfolio website showcasing my work, skills, and experienc
 - **Animations**: Framer Motion
 - **Icons**: Lucide React
 - **Content Management**: Notion API
-- **Deployment**: Vercel
+- **Deployment**: GitHub Pages
 - **QR Code Generation**: qrcode.react
 
 ## 📁 Project Structure
@@ -160,21 +160,9 @@ To add allowed origins, update the `allowedOrigins` array in both files.
 
 ## 🚢 Deployment
 
-### Deploy to Vercel
+The site is built and deployed to GitHub Pages via the workflow in `.github/workflows/nextjs.yml` on pushes to `main`.
 
-1. Push your code to GitHub
-2. Import your repository in [Vercel](https://vercel.com)
-3. Add environment variables in Vercel dashboard
-4. Deploy!
-
-The site will be automatically deployed on every push to the main branch.
-
-### Environment Variables on Vercel
-
-Make sure to add all required environment variables in the Vercel dashboard:
-- `NOTION_INTEGRATION_SECRET`
-- `ALLOWED_ORIGINS` (optional)
-- `ALLOW_ALL_ORIGINS` (optional)
+Runtime data is fetched from an external backend. Set `NEXT_PUBLIC_API_URL` in the build environment to point to that host.
 
 ## 📄 License
 
@@ -191,7 +179,7 @@ This project is private and proprietary.
 ## 🙏 Acknowledgments
 
 - Built with [Next.js](https://nextjs.org/)
-- Deployed on [Vercel](https://vercel.com)
+- Hosted on [GitHub Pages](https://pages.github.com)
 - Content managed with [Notion](https://notion.so)
 - Icons by [Lucide](https://lucide.dev)
 

@@ -1,6 +1,6 @@
 # GitHub Pages Frontend Deployment Workflow
 # Builds static Next.js site and deploys to GitHub Pages
-# Frontend calls Vercel backend for API routes
+# Frontend calls an external API host defined by NEXT_PUBLIC_API_URL
 #
 name: Deploy Next.js site to Pages
 
@@ -63,7 +63,7 @@ jobs:
       - name: Build static frontend with Next.js
         run: pnpm run build
         env:
-          NEXT_PUBLIC_API_URL: https://codejedi-ai.vercel.app
+          NEXT_PUBLIC_API_URL: https://api.codejedi.ai
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
