@@ -7,7 +7,7 @@ The static site build is the only supported mode for this repository.
 - `pnpm run dev` → local dev server (still uses `NEXT_PUBLIC_API_URL` for data)
 
 ## Environment
-- `NEXT_PUBLIC_API_URL` must point to your backend API host (e.g., `https://api.codejedi.ai`).
+- `NEXT_PUBLIC_API_URL` must point to your backend API host (e.g., `https://codejedi-ai.vercel.app`).
 
 ## Deployment
 - GitHub Actions runs `pnpm run build` and deploys `./out` to GitHub Pages.

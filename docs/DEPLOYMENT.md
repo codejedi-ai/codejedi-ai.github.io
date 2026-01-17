@@ -17,7 +17,7 @@ The repository produces a static frontend that is deployed to GitHub Pages. All 
 
 ### Frontend Environment
 ```
-NEXT_PUBLIC_API_URL=https://api.codejedi.ai
+NEXT_PUBLIC_API_URL=https://codejedi-ai.vercel.app
 ```
 
 ### Directory Hints

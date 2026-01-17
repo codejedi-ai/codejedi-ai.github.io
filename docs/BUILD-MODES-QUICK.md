@@ -7,7 +7,7 @@ pnpm run build    # static export → ./out
 ```
 
 ## Environment
-- Set `NEXT_PUBLIC_API_URL` to your backend API host (example: `https://api.codejedi.ai`).
+- Set `NEXT_PUBLIC_API_URL` to your backend API host (example: `https://codejedi-ai.vercel.app`).
 
 ## Deploy
 - GitHub Actions builds and deploys `./out` to GitHub Pages on pushes to `main`.
