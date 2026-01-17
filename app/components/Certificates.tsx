@@ -20,7 +20,7 @@ export default function Certificates() {
   const quote =
     '"The greatest scientific discovery was the discovery of ignorance."-- Yuval Noah Harari, Homo Deus: A History of Tomorrow'
   const backgroundImage =
-    "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/spacexRocket-lXq09XQLJNEDmBHyBJiKM864evBAA4.webp"
+    "https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=80"
 
   useEffect(() => {
     async function fetchCertificates() {

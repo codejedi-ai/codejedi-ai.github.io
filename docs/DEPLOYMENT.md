@@ -1,94 +1,51 @@
-# Deployment Architecture
+# Deployment
 
-This project uses a **split deployment** approach:
+The repository produces a static frontend that is deployed to GitHub Pages. All dynamic data must be fetched from an external API host that you configure via `NEXT_PUBLIC_API_URL`.
 
-## Frontend - GitHub Pages
-- **Deployment**: GitHub Pages (static site)
-- **Build**: Next.js static export (`output: export`)
-- **Content**: 
-  - Homepage, portfolio pages
-  - Components (no API routes)
-  - Static assets
-- **GitHub Actions**: Runs on every push to `main` branch
+## Frontend (GitHub Pages)
+- **Build**: Next.js static export
+- **Deploy**: GitHub Actions workflow in `.github/workflows/nextjs.yml`
+- **Output**: `./out`
 - **URL**: https://codejedi-ai.github.io/
 
-## Backend - Vercel
-- **Deployment**: Vercel (serverless)
-- **Content**:
-  - All API routes (`/api/...`)
-  - Notion integration
-  - Backend logic
-- **URL**: https://codejedi-ai.vercel.app/
-
-## How It Works
-
-1. **Frontend (GitHub Pages)** is a static site that the user downloads and views
-2. **Frontend makes API calls** to the Vercel backend at `https://codejedi-ai.vercel.app/api/...`
-3. **Vercel backend** handles database queries, Notion integration, and business logic
-4. **Frontend displays** the data returned from the backend
+## Backend (External)
+- Hosted separately from this repo (any platform is fine)
+- Expose routes under `/api/...`
+- Enable CORS for the GitHub Pages origin
 
 ## Configuration
 
-### Frontend Environment Variables
-```env
-NEXT_PUBLIC_API_URL=https://codejedi-ai.vercel.app
+### Frontend Environment
+```
+NEXT_PUBLIC_API_URL=https://api.codejedi.ai
 ```
 
-### Backend Environment Variables (Vercel only)
-- `NOTION_INTEGRATION_SECRET` - Notion API credentials
-- Database IDs for Notion databases
-
-## Directory Structure
-
+### Directory Hints
 ```
-/app                    # Frontend components (static pages)
-/public                 # Static assets
-/lib                    # Utilities, API config, CORS helpers
-/.github/workflows/     # GitHub Actions (static build)
-
-# Note: /app/api no longer exists (used only in Vercel deployment)
+/app            # Frontend components only
+/public         # Static assets
+/lib            # Utilities, API config, CORS helpers
+/.github        # Pages deployment workflow
 ```
 
 ## Local Development
-
-### Development Mode
 ```bash
 pnpm install
 pnpm dev
 ```
-- Runs on `http://localhost:3000`
-- Calls Vercel backend APIs: `https://codejedi-ai.vercel.app/api/...`
+- Runs on http://localhost:3000
+- Uses `NEXT_PUBLIC_API_URL` for API calls
 
-### Production Build (Static Export)
+## Production Build
 ```bash
 pnpm build
-pnpm export  # or: next export
-ls out/      # Static HTML files for GitHub Pages
+ls out/   # static export ready for Pages
 ```
 
-## Deployment
+## Deployment Flow
+- Push to `main` → GitHub Actions builds and deploys `./out` to Pages.
+- Ensure the external API host is reachable and configured for CORS.
 
-### GitHub Pages
-- Automatically deployed via GitHub Actions
-- Triggers on push to `main` branch
-- Builds static site and uploads to GitHub Pages
-
-### Vercel (Backend)
-- Connect via Vercel dashboard
-- Needs `.env` with `NOTION_INTEGRATION_SECRET` and database IDs
-- Handles all API routes
-
-## Benefits
-
-✅ **Cost**: GitHub Pages is free for static hosting  
-✅ **Performance**: Static frontend = fast loads  
-✅ **Scalability**: Vercel serverless scales automatically  
-✅ **Separation**: Frontend and backend independently deployable  
-✅ **Security**: API secrets only on Vercel backend  
-
-## Important Notes
-
-- ❌ No API routes in frontend (GitHub Pages can't run Node.js)
-- ✅ All API calls go to Vercel backend
-- ✅ Frontend calls are client-side (CORS enabled on backend)
-- ✅ Static files cached forever, backend updates immediately
+## Notes
+- This repo contains no server-side API routes.
+- Secrets remain on your backend; only `NEXT_PUBLIC_*` vars are exposed.
