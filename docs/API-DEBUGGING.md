@@ -3,6 +3,7 @@
 ## Endpoints
 All React components read endpoints from [lib/api-config.ts](lib/api-config.ts). Set `NEXT_PUBLIC_API_URL` to your backend host (example: `https://codejedi-ai.vercel.app`).
 
+
 ## Quick Checks
 - Console: look for CORS or network errors.
 - Network tab: requests should hit `<API_BASE_URL>/api/...` and return 200.
