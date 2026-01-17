@@ -48,10 +48,8 @@ export default function Projects() {
         }
 
         const getData = await getResponse.json()
-        console.log("GET request successful:", getData.projects?.length || 0, "projects")
-
-        // Use GET data
-        const projectsData = getData.projects || []
+        const projectsData = Array.isArray(getData.projects) ? getData.projects : []
+        console.log("GET request successful:", projectsData.length, "projects")
         setProjects(projectsData)
         setFilteredProjects(projectsData)
 
@@ -78,8 +76,9 @@ export default function Projects() {
     const allTagsList: string[] = []
     for (let i = 0; i < projectsList.length; i++) {
       const project = projectsList[i]
-      for (let j = 0; j < project.tags.length; j++) {
-        allTagsList.push(project.tags[j])
+      const tags = Array.isArray(project.tags) ? project.tags : []
+      for (let j = 0; j < tags.length; j++) {
+        allTagsList.push(tags[j])
       }
     }
     return Array.from(new Set(allTagsList))
