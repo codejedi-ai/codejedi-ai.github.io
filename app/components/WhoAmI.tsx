@@ -108,7 +108,8 @@ export default function AboutMe() {
         }
 
         const data = await response.json()
-        setSlidesData(data.aboutImages)
+        const images = Array.isArray(data.aboutImages) ? data.aboutImages : []
+        setSlidesData(images)
       } catch (err) {
         console.error("Error fetching about images:", err)
         const errorMessage = err instanceof Error ? err.message : "Failed to load images. Please try again later."

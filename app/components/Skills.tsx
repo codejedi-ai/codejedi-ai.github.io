@@ -29,7 +29,8 @@ export default function Skills() {
         }
 
         const data = await response.json()
-        setSkills(data.skills)
+        const skillsData = Array.isArray(data.skills) ? data.skills : []
+        setSkills(skillsData)
       } catch (err) {
         console.error("Error fetching skills:", err)
         const errorMessage = err instanceof Error ? err.message : "Failed to load skills. Please try again later."
@@ -69,7 +70,7 @@ export default function Skills() {
           </div>
         )}
 
-        {!isLoading && !error && (
+        {!isLoading && !error && skills.length > 0 && (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {skills.map((skill) => (
               <div
@@ -91,6 +92,10 @@ export default function Skills() {
               </div>
             ))}
           </div>
+        )}
+
+        {!isLoading && !error && skills.length === 0 && (
+          <div className="text-center text-gray-400">No skills available.</div>
         )}
       </div>
     </section>
