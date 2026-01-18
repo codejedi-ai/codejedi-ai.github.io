@@ -92,6 +92,19 @@ export default function Certificates() {
                       fill 
                       className="object-contain" 
                       sizes="160px"
+                      onError={async () => {
+                        try {
+                          const resp = await fetch(API_ENDPOINTS.certificates)
+                          if (!resp.ok) return
+                          const data = await resp.json().catch(() => ({}))
+                          const list: Certificate[] = Array.isArray(data.certificates) ? data.certificates : []
+                          const fresh = list.find((c) => c.id === cert.id)
+                          if (!fresh) return
+                          setCertificates((prev) => prev.map((c) => (c.id === cert.id ? { ...c, image: fresh.image } : c)))
+                        } catch (e) {
+                          console.warn("Certificate image refresh failed", e)
+                        }
+                      }}
                     />
                   </div>
                 </div>

@@ -139,6 +139,24 @@ export default function Projects() {
 
   const handleImageError = (projectId: string) => {
     setImageLoadingStates(prev => ({ ...prev, [projectId]: false }))
+    // Attempt to refresh the project's image by refetching from the API
+    ;(async () => {
+      try {
+        const resp = await fetch(API_ENDPOINTS.projects, { method: "GET" })
+        if (!resp.ok) return
+        const data = await resp.json().catch(() => ({}))
+        const list: Project[] = Array.isArray(data.projects) ? data.projects : []
+        const fresh = list.find((p) => p.id === projectId)
+        if (!fresh) return
+        // Update the specific project's image (and icon if present)
+        setProjects((prev) => prev.map((p) => (p.id === projectId ? { ...p, image: fresh.image, icon: fresh.icon, iconType: fresh.iconType } : p)))
+        setFilteredProjects((prev) => prev.map((p) => (p.id === projectId ? { ...p, image: fresh.image, icon: fresh.icon, iconType: fresh.iconType } : p)))
+        // Trigger re-load spinner for the updated project image
+        setImageLoadingStates(prev => ({ ...prev, [projectId]: true }))
+      } catch (e) {
+        console.warn("Project image refresh failed", e)
+      }
+    })()
   }
 
   // Open project details modal
