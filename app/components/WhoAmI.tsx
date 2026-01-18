@@ -243,6 +243,26 @@ export default function AboutMe() {
                         className="object-cover rounded-lg"
                         priority={index === 0}
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        onError={async () => {
+                          try {
+                            const resp = await fetch(API_ENDPOINTS.aboutImages)
+                            if (!resp.ok) return
+                            const data = await resp.json().catch(() => ({}))
+                            const images: SlideData[] = Array.isArray(data.aboutImages) ? data.aboutImages : []
+                            // Replace the failing slide by id if found in fresh data
+                            setSlidesData((prev) => {
+                              const idx = prev.findIndex((s) => s.id === slide.id)
+                              if (idx === -1) return prev
+                              const fresh = images.find((s) => s.id === slide.id)
+                              if (!fresh) return prev
+                              const next = [...prev]
+                              next[idx] = fresh
+                              return next
+                            })
+                          } catch (e) {
+                            console.warn("About image refresh failed", e)
+                          }
+                        }}
                       />
                     </div>
                   ))}
