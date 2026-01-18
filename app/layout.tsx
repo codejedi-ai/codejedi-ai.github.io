@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   description: "Fast, lightweight static portfolio site deployed on GitHub Pages",
   generator: 'v0.dev',
   icons: {
-    icon: '/img/CodeJedi.png',
-    shortcut: '/img/CodeJedi.png',
-    apple: '/img/CodeJedi.png',
+    icon: '/CodeJedi.png',
+    shortcut: '/CodeJedi.png',
+    apple: '/CodeJedi.png',
   },
 };
 
@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-     
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
