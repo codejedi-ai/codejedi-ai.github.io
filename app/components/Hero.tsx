@@ -1,6 +1,5 @@
 "use client"
 
-import { Heart } from "lucide-react"
 import Link from "next/link"
 //w-full h-full from the background gradient effects
 export function Hero() {
