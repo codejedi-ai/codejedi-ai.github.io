@@ -57,8 +57,8 @@ export default function Footer() {
                 Certificates
               </Link>
             </div>
-            <p className="text-gray-500 text-sm flex items-center">
-              &copy; {currentYear} CodeJedi. Made with <Heart className="h-4 w-4 text-primary-pink mx-1" /> and Next.js
+            <p className="text-gray-500 text-sm">
+              &copy; {currentYear} CodeJedi. Made with Next.js
             </p>
           </div>
         </div>
