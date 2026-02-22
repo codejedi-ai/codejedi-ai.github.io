@@ -19,7 +19,7 @@ export function Hero() {
             Hello, my name is
             <br />
             <span className="flex items-center justify-center gap-2 mt-2">
-              Darcy <Heart className="text-primary-pink animate-pulse" size={32} /> Liu
+              Darcy <Heart className="text-primary-pink" size={32} /> Liu
             </span>
 
           </h2>
