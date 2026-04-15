@@ -2,6 +2,14 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
   trailingSlash: true,
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "https://codejedi-ai.vercel.app/:path*",
+      },
+    ]
+  },
   images: {
     unoptimized: false,
     remotePatterns: [

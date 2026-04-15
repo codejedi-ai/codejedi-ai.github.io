@@ -1,11 +1,8 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { Github, ExternalLink, Code, Award } from "lucide-react"
+import { Code } from "lucide-react"
 import ProjectCard from "./ProjectCard"
-import { API_ENDPOINTS } from "@/lib/api-config"
 
 interface Project {
   id: string
@@ -35,21 +32,29 @@ export default function Projects() {
     async function fetchProjects() {
       try {
         // Make GET request to fetch projects
-        console.log("Fetching projects from:", API_ENDPOINTS.projects)
-        const getResponse = await fetch(API_ENDPOINTS.projects, {
+        const getResponse = await fetch("/api/projects", {
           method: "GET",
         })
 
         if (!getResponse.ok) {
           const errorData = await getResponse.json().catch(() => ({}))
-          throw new Error(errorData.error || `Failed to fetch projects: ${getResponse.status}`)
+          throw new Error(errorData.error || `Failed to fetch projects (GET): ${getResponse.status}`)
         }
 
         const getData = await getResponse.json()
-        const projectsData = Array.isArray(getData.projects) ? getData.projects : []
-        console.log("GET request successful:", projectsData.length, "projects")
-        setProjects(projectsData)
-        setFilteredProjects(projectsData)
+        console.log("GET request successful:", getData.projects?.length || 0, "projects")
+
+        // Use GET data only (public API is GET-only)
+        const projectsData = getData.projects || []
+        
+        // Sort projects initially: featured ones first
+        const sortedProjects = [...projectsData].sort((a: Project, b: Project) => {
+          if (a.featured === b.featured) return 0;
+          return a.featured ? -1 : 1;
+        });
+        
+        setProjects(sortedProjects)
+        setFilteredProjects(sortedProjects)
 
         // Initialize loading states for all projects
         const initialLoadingStates = projectsData.reduce((acc: Record<string, boolean>, project: Project) => {
@@ -74,9 +79,8 @@ export default function Projects() {
     const allTagsList: string[] = []
     for (let i = 0; i < projectsList.length; i++) {
       const project = projectsList[i]
-      const tags = Array.isArray(project.tags) ? project.tags : []
-      for (let j = 0; j < tags.length; j++) {
-        allTagsList.push(tags[j])
+      for (let j = 0; j < project.tags.length; j++) {
+        allTagsList.push(project.tags[j])
       }
     }
     return Array.from(new Set(allTagsList))
@@ -139,28 +143,9 @@ export default function Projects() {
 
   const handleImageError = (projectId: string) => {
     setImageLoadingStates(prev => ({ ...prev, [projectId]: false }))
-    // Attempt to refresh the project's image by refetching from the API
-    ;(async () => {
-      try {
-        const resp = await fetch(API_ENDPOINTS.projects, { method: "GET" })
-        if (!resp.ok) return
-        const data = await resp.json().catch(() => ({}))
-        const list: Project[] = Array.isArray(data.projects) ? data.projects : []
-        const fresh = list.find((p) => p.id === projectId)
-        if (!fresh) return
-        // Update the specific project's image (and icon if present)
-        setProjects((prev) => prev.map((p) => (p.id === projectId ? { ...p, image: fresh.image, icon: fresh.icon, iconType: fresh.iconType } : p)))
-        setFilteredProjects((prev) => prev.map((p) => (p.id === projectId ? { ...p, image: fresh.image, icon: fresh.icon, iconType: fresh.iconType } : p)))
-        // Trigger re-load spinner for the updated project image
-        setImageLoadingStates(prev => ({ ...prev, [projectId]: true }))
-      } catch (e) {
-        console.warn("Project image refresh failed", e)
-      }
-    })()
   }
 
-  // Open project details modal
-  // Modal removed: Learn More now navigates directly; no selectedProject state
+  // Modal removed: Learn More now navigates directly via ProjectCard link
 
   return (
     <section id="projects" className="py-20 text-white">
@@ -196,7 +181,6 @@ export default function Projects() {
                 imageLoading={imageLoadingStates[project.id] || false}
                 onImageLoad={handleImageLoad}
                 onImageError={handleImageError}
-                
               />
             ))}
           </div>
