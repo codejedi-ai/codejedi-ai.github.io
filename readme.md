@@ -1,33 +1,42 @@
-# Darcy's Portfolio — GitHub Pages (Static Frontend)
+# Darcy's Portfolio — Vercel (Backend API + Fallback Frontend)
 
-A fast, lightweight static portfolio site deployed on GitHub Pages that fetches data from the Vercel backend API. Built with Next.js, React, TypeScript, and Tailwind CSS.
+The backend API and fallback frontend for the portfolio. Provides REST endpoints for portfolio content and serves as a dynamic fallback if the static GitHub Pages site has issues.
 
-🌐 **Live Site**: [https://codejedi-ai.github.io](https://codejedi-ai.github.io)  
-🔗 **Backend API**: [https://codejedi-ai.vercel.app](https://codejedi-ai.vercel.app)
+🌐 **Live Backend**: [https://codejedi-ai.vercel.app](https://codejedi-ai.vercel.app)  
+🔗 **Static Frontend**: [https://codejedi-ai.github.io](https://codejedi-ai.github.io)
 
 ## 🎯 Overview
 
-This is a **static export** of a Next.js application that runs on GitHub Pages. It serves as the primary frontend for the portfolio, calling the backend API hosted on Vercel for all dynamic content (projects, skills, work experience, certificates, images).
+This repository contains two parts:
+
+1. **Backend API** (`/app/api/*`) — REST endpoints providing portfolio data (projects, skills, work experience, certificates, images)
+2. **Fallback Frontend** (`/app/components/*`) — Full-featured Next.js site for backup access if GitHub Pages is unavailable
 
 ### Architecture
 
 ```
-codejedi-ai.github.io (Static Site)
+GitHub Pages (Static Frontend)
     ↓ (API calls)
-codejedi-ai.vercel.app (Backend + Fallback Frontend)
+Vercel (Backend API + Fallback)
+    ↓
+Static Data / Notion (future)
 ```
 
 ## 🚀 Features
 
-- **Static Export**: Pre-built HTML/CSS/JS, no server required — deployed directly to GitHub Pages
-- **Fast Load Times**: CDN-backed GitHub Pages deployment with instant global distribution
-- **API-Driven**: Fetches all dynamic content from Vercel backend
-- **Error Resilience**: Built-in guards for empty payloads; error boundary with Vercel redirect fallback
-- **Synced UI**: Identical visual design to Vercel via shared constants
-- **Responsive Design**: Mobile-first, works on all devices
-- **Dark Theme**: Gradient-based UI with cyan/blue/purple accents
-- **Smooth Animations**: CSS transitions, fade effects, and interactive elements
-- **Accessible**: ARIA labels, semantic HTML, keyboard navigation
+**Backend API:**
+- RESTful endpoints with CORS support
+- OPTIONS preflight handling for all routes
+- Aligned response shapes (`{ projects: [...] }`, `{ skills: [...] }`, etc.)
+- Health check endpoint (`/api/health`)
+- Static data fallback (no external dependencies)
+
+**Fallback Frontend:**
+- Identical UI to GitHub Pages
+- Fully responsive and interactive
+- All components fetch via API endpoints
+- Error guards for empty/missing payloads
+- Modal project details, carousel images, timeline timeline
 
 ## 🛠️ Tech Stack
 
@@ -35,19 +44,27 @@ codejedi-ai.vercel.app (Backend + Fallback Frontend)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
-- **Deployment**: GitHub Pages + GitHub Actions
-- **Backend**: Vercel (API + fallback frontend)
+- **Deployment**: Vercel
+- **Data**: Static data in `lib/staticData.ts`
 
 ## 📁 Project Structure
 
 ```
-codejedi-ai.github.io/
+codejedi-ai.vercel.app/
 ├── app/
-│   ├── components/           # React components
+│   ├── api/                      # REST API endpoints
+│   │   ├── health/               # Health check
+│   │   ├── projects/
+│   │   ├── skills/
+│   │   ├── work-experience/
+│   │   ├── certificates/
+│   │   ├── about-images/
+│   │   └── contacts/
+│   ├── components/               # React components
 │   │   ├── Header.tsx
 │   │   ├── Hero.tsx
 │   │   ├── NavBar.tsx
-│   │   ├── WhoAmI.tsx        # About section with carousel
+│   │   ├── WhoAmI.tsx            # About section with carousel
 │   │   ├── Skills.tsx
 │   │   ├── WorkExperience.tsx
 │   │   ├── Certificates.tsx
@@ -55,40 +72,142 @@ codejedi-ai.github.io/
 │   │   ├── ProjectCard.tsx
 │   │   ├── Contact.tsx
 │   │   └── Footer.tsx
+│   ├── contexts/                 # React contexts (if any)
 │   ├── types/
-│   │   └── types.ts          # TypeScript interfaces
-│   ├── error.tsx             # Global error boundary
-│   ├── layout.tsx            # Root layout
-│   ├── page.tsx              # Home page
-│   └── globals.css           # Global styles
+│   │   └── types.ts              # TypeScript interfaces
+│   ├── error.tsx                 # Error boundary (fallback frontend)
+│   ├── layout.tsx                # Root layout
+│   ├── page.tsx                  # Home page
+│   └── globals.css               # Global styles
 ├── lib/
-│   ├── api-config.ts         # API endpoint configuration
-│   ├── constants.ts          # Shared constants (CERTIFICATES_BG_URL)
-│   ├── cors.ts               # CORS utilities
-│   └── utils.ts              # Helper functions
-├── public/                   # Static assets (images, favicon)
-├── .github/
-│   └── workflows/
-│       └── nextjs.yml        # GitHub Actions deployment
-├── docs/                     # Documentation
-├── tailwind.config.ts        # Tailwind CSS configuration
-├── next.config.ts            # Next.js configuration
-├── tsconfig.json             # TypeScript configuration
-└── README.md                 # This file
+│   ├── api-config.ts             # API endpoint configuration
+│   ├── constants.ts              # Shared constants
+│   ├── cors.ts                   # CORS utilities
+│   ├── notion-api.ts             # Notion API client (future)
+│   ├── notion-config.ts          # Notion configuration
+│   ├── notion-databases.ts       # Notion database IDs
+│   ├── staticData.ts             # Hardcoded portfolio data
+│   └── utils.ts                  # Helper functions
+├── public/                       # Static assets (images, favicon)
+├── vercel.json                   # Vercel configuration
+├── tailwind.config.ts            # Tailwind CSS configuration
+├── next.config.ts                # Next.js configuration
+├── tsconfig.json                 # TypeScript configuration
+└── README.md                     # This file
 ```
 
-## 📡 API Contract
+## 📡 API Endpoints
 
-All endpoints expect responses in this format:
+All endpoints accept `GET` requests with CORS support and respond with structured JSON:
 
-| Endpoint | Response |
-|----------|----------|
-| `/api/work-experience` | `{ workExperience: [...] }` |
-| `/api/skills` | `{ skills: [...] }` |
-| `/api/projects` | `{ projects: [...] }` |
-| `/api/certificates` | `{ certificates: [...] }` |
-| `/api/about-images` | `{ aboutImages: [...] }` |
-| `/api/health` | `{ status: "ok" }` |
+### GET /api/health
+Health check for uptime monitoring.
+
+**Response:**
+```json
+{
+  "status": "ok"
+}
+```
+
+### GET /api/projects
+Portfolio projects with filtering.
+
+**Response:**
+```json
+{
+  "projects": [
+    {
+      "id": "string",
+      "title": "string",
+      "description": "string",
+      "longDescription": "string",
+      "image": "url",
+      "tags": ["string"],
+      "tech": ["string"],
+      "link": "url",
+      "github": "url",
+      "featured": true,
+      "technical": false,
+      "icon": "emoji or url",
+      "iconType": "emoji"
+    }
+  ]
+}
+```
+
+### GET /api/skills
+Technical skills and competencies.
+
+**Response:**
+```json
+{
+  "skills": [
+    {
+      "id": "string",
+      "title": "string",
+      "icon": "lucide-icon-name",
+      "skills": ["skill1", "skill2"]
+    }
+  ]
+}
+```
+
+### GET /api/work-experience
+Work experience timeline.
+
+**Response:**
+```json
+{
+  "workExperience": [
+    {
+      "id": "string",
+      "title": "string",
+      "company": "string",
+      "location": "string",
+      "startDate": "ISO-date",
+      "endDate": "ISO-date",
+      "year": "2024",
+      "emoji": "💼",
+      "link": "url"
+    }
+  ]
+}
+```
+
+### GET /api/certificates
+Certifications and achievements.
+
+**Response:**
+```json
+{
+  "certificates": [
+    {
+      "id": "string",
+      "name": "string",
+      "image": "url",
+      "alt": "string",
+      "date": "string"
+    }
+  ]
+}
+```
+
+### GET /api/about-images
+Images for the About section carousel.
+
+**Response:**
+```json
+{
+  "aboutImages": [
+    {
+      "id": "string",
+      "src": "url",
+      "alt": "string"
+    }
+  ]
+}
+```
 
 ## 🚀 Getting Started
 
@@ -100,8 +219,8 @@ All endpoints expect responses in this format:
 ### Installation
 
 ```bash
-git clone https://github.com/codejedi-ai/codejedi-ai.github.io.git
-cd codejedi-ai.github.io
+git clone https://github.com/codejedi-ai/codejedi-ai.vercel.app.git
+cd codejedi-ai.vercel.app
 pnpm install
 ```
 
@@ -113,118 +232,114 @@ pnpm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-### Build Static Export
+Backend API available at `http://localhost:3000/api/*`.
+
+### Build
 
 ```bash
 pnpm run build
+pnpm run start  # local production test
 ```
-
-Output is in `out/` directory, ready for deployment.
 
 ## 📝 Environment Variables
 
 Create `.env.local`:
 
 ```bash
-# Optional: override API host (defaults to https://codejedi-ai.vercel.app)
-NEXT_PUBLIC_API_URL=https://codejedi-ai.vercel.app
+# Optional: Notion integration (for future dynamic content)
+NOTION_INTEGRATION_SECRET=your_token
+
+# Optional: CORS allowlist (defaults to specific origins)
+ALLOWED_ORIGINS=https://codejedi-ai.github.io,https://example.com
+ALLOW_ALL_ORIGINS=false
 ```
 
 ## 🔧 Available Scripts
 
 ```bash
 pnpm run dev      # Start dev server
-pnpm run build    # Build static export
-pnpm run start    # Start production server (local testing)
+pnpm run build    # Build for production
+pnpm run start    # Start production server locally
 pnpm run lint     # Run ESLint
 ```
 
 ## 🚢 Deployment
 
-Automatic via GitHub Actions on push to `main`:
+### Deploy to Vercel (Automatic)
+
+Push to GitHub; Vercel auto-deploys:
 
 ```bash
 git add .
-git commit -m "Update portfolio"
+git commit -m "Update portfolio backend"
 git push origin main
 ```
 
-Deployment typically completes in 2–5 minutes.
+### Manual Deployment
 
-## 🔐 API & CORS
-
-The backend (Vercel) includes CORS headers for `https://codejedi-ai.github.io`. Responses include:
-
-```
-Access-Control-Allow-Origin: https://codejedi-ai.github.io
-Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+```bash
+npm i -g vercel
+vercel login
+vercel deploy
 ```
 
-If deploying elsewhere, update the backend's CORS allowlist.
+## 🔐 CORS Configuration
+
+By default, CORS is configured for:
+- `https://codejedi-ai.github.io` (GitHub Pages frontend)
+- `localhost:3000` (development)
+
+Update in `lib/cors.ts` to add more origins:
+
+```typescript
+const allowedOrigins = [
+  "https://codejedi-ai.github.io",
+  "https://example.com",
+  // Add more origins here
+];
+```
+
+Or set `ALLOW_ALL_ORIGINS=true` in `.env.local` (development only).
+
+## 📊 Data Management
+
+### Static Data
+
+All portfolio data is stored in `lib/staticData.ts`:
+
+```typescript
+export const staticProjects = { ... }
+export const staticSkills = { ... }
+export const staticWorkExperience = { ... }
+export const staticCertificates = { ... }
+export const staticAboutImages = { ... }
+```
+
+To update content, edit these exports directly.
+
+### Future: Notion Integration
+
+Notion API utilities are in place (`lib/notion-*.ts`) for future migration to dynamic content management.
+
+## 🤝 Sync with GitHub Pages
+
+Keep `codejedi-ai.vercel.app` and `codejedi-ai.github.io` in sync:
+
+1. **API Response Shapes**: Maintain consistent response formats (both repos expect same JSON structure)
+2. **Shared Constants**: Update `lib/constants.ts` in **both** repos (e.g., `CERTIFICATES_BG_URL`)
+3. **UI Components**: Keep component logic aligned between repos
 
 ## ⚠️ Error Handling
 
-- **Empty Payloads**: Components check `Array.isArray()` before rendering; show "No data available"
-- **API Failures**: Error boundary (`app/error.tsx`) offers retry or redirect to Vercel site
-- **Network Issues**: Graceful fallback UI with user-friendly messages
+Frontend components guard against:
+- Empty or missing API payloads
+- Network failures
+- Invalid response structures
 
-## 🎨 Customization
-
-### Update API Host
-
-Edit `lib/api-config.ts`:
-
-```typescript
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://your-api.com"
-```
-
-### Shared Constants
-
-Keep both sites in sync via `lib/constants.ts`:
-
-```typescript
-export const CERTIFICATES_BG_URL = "https://..."
-```
-
-### Styling
-
-- `tailwind.config.ts` — Colors, animations, gradients
-- `app/globals.css` — Global styles and custom CSS
-
-## 📊 Troubleshooting
-
-### API calls fail (CORS)
-
-```bash
-# Check backend is running and accessible
-curl -i https://codejedi-ai.vercel.app/api/health
-```
-
-Expected: `200 OK` with CORS headers
-
-### Data doesn't render
-
-1. Open DevTools → Network tab
-2. Check API response structure matches expected format
-3. Verify response includes required keys (e.g., `{ skills: [...] }`)
-
-### Build errors
-
-```bash
-pnpm run build
-```
-
-Common fixes:
-- `pnpm add -D @types/node` — Missing Node types
-- Remove unused imports or prefix with `_`
-
-## 🤝 Sync with Vercel
-
-Keep `codejedi-ai.github.io` and `codejedi-ai.vercel.app` in sync:
-
-1. **UI Changes**: Edit components in **both** repos
-2. **Constants**: Update `lib/constants.ts` in **both** repos
-3. **API Contracts**: Keep response shapes aligned
+Backend API returns appropriate HTTP status codes:
+- `200` — Success
+- `400` — Bad request
+- `500` — Server error
 
 ## 📄 License
 
@@ -234,10 +349,29 @@ Proprietary — Darcy Liu
 
 **Darcy Liu (CodeJedi)**
 
-- Live Portfolio: https://codejedi-ai.github.io
-- Vercel Backend: https://codejedi-ai.vercel.app
+- Live Backend: https://codejedi-ai.vercel.app
+- Static Frontend: https://codejedi-ai.github.io
 - GitHub: https://github.com/codejedi-ai
 
 ---
 
-Built with ❤️ using Next.js & GitHub Pages
+Built with ❤️ using Next.js & Vercel
+
+## 👤 Author
+
+**Darcy Liu (CodeJedi)**
+
+- Portfolio: [https://codejedi-ai.github.io/](https://codejedi-ai.github.io/)
+- LinkedIn: [codejediatuw](https://www.linkedin.com/in/codejediatuw/)
+- Email: d273liu@uwaterloo.ca
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- Deployed on [Vercel](https://vercel.com)
+- Content managed with [Notion](https://notion.so)
+- Icons by [Lucide](https://lucide.dev)
+
+---
+
+Made with ❤️ and Next.js

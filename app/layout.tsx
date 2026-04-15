@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
@@ -14,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Darcy's Portfolio - Static Frontend (GitHub Pages)",
-  description: "Fast, lightweight static portfolio site deployed on GitHub Pages",
+  title: "Darcy's Portfolio - Backend API & Fallback Frontend (Vercel)",
+  description: "Backend API and fallback frontend for portfolio content",
   generator: 'v0.dev',
   icons: {
     icon: '/CodeJedi.png',
@@ -36,6 +38,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

@@ -12,13 +12,8 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log for debugging; details in browser console
-    console.error("Application error on codejedi-ai.github.io:", error)
+    console.error("Application error on codejedi-ai.vercel.app:", error)
   }, [error])
-
-  const redirectToVercel = () => {
-    // Fallback to dynamic site if static render fails
-    window.location.href = "https://codejedi-ai.vercel.app"
-  }
 
   return (
     <section className="min-h-[60vh] flex items-center justify-center bg-dark text-white px-4">
@@ -28,7 +23,7 @@ export default function Error({
         </div>
         <h1 className="text-3xl font-bold mb-2">Application error</h1>
         <p className="text-gray-300 mb-6">
-          A client-side exception occurred while loading codejedi-ai.github.io.
+          A client-side exception occurred while loading codejedi-ai.vercel.app.
           Check the browser console for more information.
         </p>
         {error?.digest && (
@@ -43,18 +38,10 @@ export default function Error({
             <RefreshCw className="h-5 w-5" />
             Try again
           </button>
-
-          <button
-            onClick={redirectToVercel}
-            className="bg-gray-700 hover:bg-gray-600 text-white px-5 py-3 rounded-md flex items-center gap-2 transition-colors"
-          >
-            <ExternalLink className="h-5 w-5" />
-            Go to Vercel site
-          </button>
         </div>
 
         <div className="mt-8 text-sm text-gray-400">
-          <p>If the issue persists, the Vercel site provides a dynamic fallback.</p>
+          <p>If the issue persists, please refresh the page or contact support.</p>
         </div>
       </div>
     </section>

@@ -6,7 +6,10 @@
 // Ensure TypeScript recognizes process in environments without @types/node
 declare const process: any
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "https://codejedi-ai.vercel.app"
+// Default to same-origin API routes so a single deployment can serve both UI and API.
+// For external backend usage (e.g. GitHub Pages), set NEXT_PUBLIC_API_URL.
+const configuredApiUrl = process.env.NEXT_PUBLIC_API_URL
+export const API_BASE_URL = configuredApiUrl ? String(configuredApiUrl).trim().replace(/\/$/, "") : ""
 
 export const API_ENDPOINTS = {
   workExperience: `${API_BASE_URL}/api/work-experience/`,
