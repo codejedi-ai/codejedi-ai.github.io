@@ -122,7 +122,7 @@ export const CONTACTS_DATA = [
 // Unified fetcher function
 export async function queryNotionDatabase(databaseId: string, queryBody: any = {}) {
   const baseUrl = API_BASE_URL || ""
-  const response = await fetch(`${baseUrl}/api/notion/2022-06-28/databases/${databaseId}/query/`, {
+  const response = await fetch(`${baseUrl}/api/notion/2022-06-28/databases/${databaseId}/query`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export async function queryNotionDatabase(databaseId: string, queryBody: any = {
 // Unified submission function
 export async function createNotionPage(data: any) {
   const baseUrl = API_BASE_URL || ""
-  const response = await fetch(`${baseUrl}/api/notion/2022-06-28/pages/`, {
+  const response = await fetch(`${baseUrl}/api/notion/2022-06-28/pages`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
