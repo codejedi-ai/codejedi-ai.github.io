@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { queryNotionDatabase, CERTIFICATES_DATABASE_ID, transformCertificate, HUGGING_FACE_CERTIFICATES } from "@/lib/notion-morphic"
+import { queryNotionDatabase, CERTIFICATES_DATABASE_ID, transformCertificate } from "@/lib/notion-morphic"
 import { CERTIFICATES_BG_URL } from "@/lib/constants"
 import { Certificate } from "@/app/types/types"
 import ProgressiveImage from "./ProgressiveImage"
@@ -20,7 +20,7 @@ export default function Certificates() {
       try {
         const data = await queryNotionDatabase(CERTIFICATES_DATABASE_ID)
         const notionCertificates = data.results.map(transformCertificate)
-        setCertificates([...notionCertificates, ...HUGGING_FACE_CERTIFICATES])
+        setCertificates(notionCertificates)
       } catch (err) {
         console.error("Error fetching certificates:", err)
         const errorMessage = err instanceof Error ? err.message : "Failed to load certificates. Please try again later."
