@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
+const isGithubPagesBuild = process.env.GITHUB_PAGES === "true";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,8 +40,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <Analytics />
-        <SpeedInsights />
+        {!isGithubPagesBuild && <Analytics />}
+        {!isGithubPagesBuild && <SpeedInsights />}
       </body>
     </html>
   );
