@@ -2,7 +2,7 @@
 
 import { Component } from "react"
 import Link from "next/link"
-import { Github, ExternalLink } from "lucide-react"
+import { Github, ExternalLink, Video, Twitter } from "lucide-react"
 import ProgressiveImage from "./ProgressiveImage"
 
 interface Project {
@@ -15,6 +15,9 @@ interface Project {
   tech: string[]
   link: string
   github: string
+  demoVideo?: string
+  twitter?: string
+  tryMe?: string
   featured: boolean
   technical: boolean
   icon?: string | null
@@ -29,19 +32,23 @@ export default class ProjectCard extends Component<ProjectCardProps> {
   render() {
     const { project } = this.props
 
-    const codeUrl = (() => {
-      const url = (project.github && project.github.trim()) ? project.github.trim() : ""
+    const normalizedUrl = (value?: string) => {
+      const url = value && value.trim() ? value.trim() : ""
       if (!url || url === "/" || url === "#") return ""
       return url
-    })()
+    }
+
+    const codeUrl = normalizedUrl(project.github)
     const hasCode = !!codeUrl
 
-    const linkUrl = (() => {
-      const url = (project.link && project.link.trim()) ? project.link.trim() : ""
-      if (!url || url === "/" || url === "#") return ""
-      return url
-    })()
-    const hasLink = !!linkUrl
+    const demoVideoUrl = normalizedUrl(project.demoVideo)
+    const hasDemoVideo = !!demoVideoUrl
+
+    const twitterUrl = normalizedUrl(project.twitter)
+    const hasTwitter = !!twitterUrl
+
+    const tryMeUrl = normalizedUrl(project.tryMe || project.link)
+    const hasTryMe = !!tryMeUrl
 
     return (
       <div
@@ -98,46 +105,89 @@ export default class ProjectCard extends Component<ProjectCardProps> {
             )}
           </div>
         </div>
-        <div className="p-6 pt-0 flex justify-start gap-4">
+        <div className="p-6 pt-0">
+          <div className="grid grid-cols-4">
           {hasCode ? (
-            <button
-              onClick={(e) => {
-                e.stopPropagation()
-                window.open(codeUrl, "_blank", "noopener,noreferrer")
-              }}
-              className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
-            >
-              <Github className="h-4 w-4" />
-              <span>Code</span>
-            </button>
-          ) : (
-            <span
-              aria-disabled="true"
-              className="flex items-center gap-1 text-gray-500 cursor-not-allowed opacity-50"
-            >
-              <Github className="h-4 w-4" />
-              <span>Code</span>
-            </span>
-          )}
-          {hasLink ? (
-            <Link
-              href={linkUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 text-gray-300 hover:text-white transition-colors"
-            >
-              <ExternalLink className="h-4 w-4" />
-              <span>Learn more</span>
-            </Link>
-          ) : (
-            <span
-              aria-disabled="true"
-              className="flex items-center gap-1 text-gray-500 cursor-not-allowed opacity-50"
-            >
-              <ExternalLink className="h-4 w-4" />
-              <span>Learn more</span>
-            </span>
-          )}
+              <Link
+                href={codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Github"
+                title="Github"
+                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
+              >
+                <Github className="h-4 w-4" />
+              </Link>
+            ) : (
+              <span
+                aria-disabled="true"
+                title="Github unavailable"
+                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
+              >
+                <Github className="h-4 w-4" />
+              </span>
+            )}
+            {hasDemoVideo ? (
+              <Link
+                href={demoVideoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Demo Video"
+                title="Demo Video"
+                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
+              >
+                <Video className="h-4 w-4" />
+              </Link>
+            ) : (
+              <span
+                aria-disabled="true"
+                title="Demo Video unavailable"
+                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
+              >
+                <Video className="h-4 w-4" />
+              </span>
+            )}
+            {hasTwitter ? (
+              <Link
+                href={twitterUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Twitter"
+                title="Twitter"
+                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
+              >
+                <Twitter className="h-4 w-4" />
+              </Link>
+            ) : (
+              <span
+                aria-disabled="true"
+                title="Twitter unavailable"
+                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
+              >
+                <Twitter className="h-4 w-4" />
+              </span>
+            )}
+            {hasTryMe ? (
+              <Link
+                href={tryMeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Try me"
+                title="Try me"
+                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
+              >
+                <ExternalLink className="h-4 w-4" />
+              </Link>
+            ) : (
+              <span
+                aria-disabled="true"
+                title="Try me unavailable"
+                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
+              >
+                <ExternalLink className="h-4 w-4" />
+              </span>
+            )}
+          </div>
         </div>
       </div>
     )

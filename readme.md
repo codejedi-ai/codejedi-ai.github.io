@@ -248,10 +248,6 @@ Create `.env.local`:
 ```bash
 # Optional: Notion integration (for future dynamic content)
 NOTION_INTEGRATION_SECRET=your_token
-
-# Optional: CORS allowlist (defaults to specific origins)
-ALLOWED_ORIGINS=https://codejedi-ai.github.io,https://example.com
-ALLOW_ALL_ORIGINS=false
 ```
 
 ## 🔧 Available Scripts
@@ -289,17 +285,17 @@ By default, CORS is configured for:
 - `https://codejedi-ai.github.io` (GitHub Pages frontend)
 - `localhost:3000` (development)
 
-Update in `lib/cors.ts` to add more origins:
+Update `lib/constants.ts` to add more origins:
 
 ```typescript
-const allowedOrigins = [
+export const ALLOWED_ORIGINS = [
   "https://codejedi-ai.github.io",
-  "https://example.com",
+  "https://codejedi.ai",
+  "https://www.codejedi.ai",
+  "http://localhost:3000",
   // Add more origins here
 ];
 ```
-
-Or set `ALLOW_ALL_ORIGINS=true` in `.env.local` (development only).
 
 ## 📊 Data Management
 
