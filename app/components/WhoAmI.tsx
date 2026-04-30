@@ -2,8 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from "react"
 import { ChevronLeft, ChevronRight, Pause } from "lucide-react"
-import { queryNotionDatabase, ABOUT_IMAGES_DATABASE_ID, transformAboutImage } from "@/lib/notion-morphic"
-import { AboutImage } from "@/app/types/types"
+import {
+  queryNotionDatabase,
+  ABOUT_IMAGES_DATABASE_ID,
+  EDUCATION_DATABASE_ID,
+  transformAboutImage,
+  transformEducation,
+} from "@/lib/notion-morphic"
+import { AboutImage, EducationItem } from "@/app/types/types"
 import ProgressiveImage from "./ProgressiveImage"
 
 // Countdown Pie Clock Component
@@ -82,8 +88,11 @@ function CountdownPieClock({ duration = 5000, onComplete }: { duration?: number;
 
 export default function AboutMe() {
   const [slidesData, setSlidesData] = useState<AboutImage[]>([])
+  const [educationData, setEducationData] = useState<EducationItem[]>([])
   const [isLoadingSlides, setIsLoadingSlides] = useState(true)
+  const [isLoadingEducation, setIsLoadingEducation] = useState(true)
   const [slidesError, setSlidesError] = useState<string | null>(null)
+  const [educationError, setEducationError] = useState<string | null>(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const pauseTimerRef = useRef<NodeJS.Timeout | null>(null)
@@ -107,6 +116,25 @@ export default function AboutMe() {
     }
 
     fetchAboutImages()
+  }, [])
+
+  useEffect(() => {
+    async function fetchEducation() {
+      try {
+        const data = await queryNotionDatabase(EDUCATION_DATABASE_ID, {
+          sorts: [{ property: "Date", direction: "descending" }],
+        })
+        setEducationData((data.results || []).map(transformEducation))
+      } catch (err) {
+        console.error("Error fetching education:", err)
+        const errorMessage = err instanceof Error ? err.message : "Failed to load education. Please try again later."
+        setEducationError(errorMessage)
+      } finally {
+        setIsLoadingEducation(false)
+      }
+    }
+
+    fetchEducation()
   }, [])
 
   // Function to advance to the next slide
@@ -326,16 +354,29 @@ export default function AboutMe() {
 
             <div className="border-t border-gray-600 pt-6 mt-6">
               <h4 className="text-lg font-semibold text-blue-400 mb-3">Education</h4>
-              <p className="text-gray-300 mb-2">
-                <span className="font-semibold">MEng Systems Design Engineering - Health Technologies</span>
-                <br />
-                University of Waterloo, Canada (Current)
-              </p>
-              <p className="text-gray-300">
-                <span className="font-semibold">Bachelor of Computer Science - AI Specialization (Honours)</span>
-                <br />
-                University of Waterloo, Canada (2020–2025)
-              </p>
+              {isLoadingEducation ? (
+                <p className="text-gray-400">Loading education...</p>
+              ) : educationError ? (
+                <p className="text-primary-pink">{educationError}</p>
+              ) : educationData.length === 0 ? (
+                <p className="text-gray-400">No education entries found.</p>
+              ) : (
+                educationData.map((item) => {
+                  const startYear = item.startDate ? new Date(item.startDate).getFullYear() : ""
+                  const hasEndDate = Boolean(item.endDate)
+                  const endYear = hasEndDate && item.endDate ? new Date(item.endDate).getFullYear() : "Current"
+                  const yearLabel = startYear ? `${startYear}–${endYear}` : "Current"
+
+                  return (
+                    <p key={item.id} className="text-gray-300 mb-2">
+                      <span className="font-semibold">{item.name || "Untitled"}</span>
+                      <br />
+                      {item.institution || item.name}
+                      {item.location ? `, ${item.location}` : ""} ({yearLabel})
+                    </p>
+                  )
+                })
+              )}
             </div>
           </div>
         </div>

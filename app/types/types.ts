@@ -154,6 +154,19 @@ export interface WorkExperienceItem {
   iconType?: string | null
 }
 
+export interface EducationItem {
+  id: string
+  name: string
+  degree: string
+  institution: string
+  location: string
+  text: string
+  highlights: string
+  startDate: string
+  endDate: string
+  reviewed: boolean
+}
+
 export interface AboutImage {
   id: string
   src: string
@@ -185,6 +198,9 @@ export interface Project {
   tech: string[]
   link: string
   github: string
+  demoVideo?: string
+  twitter?: string
+  tryMe?: string
   featured: boolean
   technical: boolean
   icon?: string | null

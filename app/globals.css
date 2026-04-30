@@ -80,3 +80,33 @@ body {
   background: linear-gradient(to right, #1a1a2e 4%, #2a2a4e 25%, #1a1a2e 36%);
   background-size: 1000px 100%;
 }
+
+@keyframes govTicker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.gov-board {
+  box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.18), 0 0 14px rgba(0, 210, 255, 0.2);
+}
+
+.gov-ticker-track {
+  display: flex;
+  width: max-content;
+  min-width: 200%;
+  animation: govTicker 28s linear infinite;
+  white-space: nowrap;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gov-ticker-track > span {
+  flex: 0 0 50%;
+  padding: 0.7rem 1rem;
+}

@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+
 //w-full h-full from the background gradient effects
 export function Hero() {
   return (

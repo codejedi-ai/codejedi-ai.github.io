@@ -4,7 +4,8 @@ import {
   WorkExperienceItem, 
   Certificate, 
   AboutImage, 
-  BlogPost 
+  BlogPost,
+  EducationItem,
 } from "@/app/types/types"
 import { API_BASE_URL } from "./api-config"
 
@@ -17,6 +18,15 @@ export const ABOUT_IMAGES_DATABASE_ID = "c8c11443-ac59-4f07-899a-1c0604751414"
 export const IMAGES_DATABASE_ID = "911ef9d8-89c2-41ad-bf82-a2a9cc41e231"
 export const BLOGS_DATABASE_ID = "311b3a0811614102b265b91425edf4df"
 export const CONTACTS_DATABASE_ID = "46fdbe9f-11ca-4f7e-9123-8f2e9025c66d"
+export const DOGE_TASKS_DATABASE_ID = "2fbc4b32-e707-4b33-a232-c1f7a64f3ef1"
+export const EDUCATION_DATABASE_ID = "809f5c6b-4a29-4d9b-bcfb-3dba61988de1"
+
+export interface DogeTaskItem {
+  id: string
+  title: string
+  accomplishment: string
+  date: string
+}
 
 export const CONTACTS_DATA = [
   {
@@ -113,6 +123,47 @@ export async function createNotionPage(data: any) {
   return response.json()
 }
 
+const formatShortDate = (value?: string | null): string => {
+  if (!value) return ""
+  const parsed = new Date(value)
+  if (Number.isNaN(parsed.getTime())) return ""
+  return parsed.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+}
+
+export function transformDogeTask(page: any): DogeTaskItem {
+  const properties = page?.properties || {}
+  const title =
+    properties?.Title?.title?.[0]?.plain_text?.trim() ||
+    properties?.Name?.title?.[0]?.plain_text?.trim() ||
+    "Untitled task"
+
+  const accomplishment =
+    properties?.Description?.rich_text?.[0]?.plain_text?.trim() ||
+    properties?.Description?.plain_text?.trim() ||
+    properties?.Accomplismment?.rich_text?.[0]?.plain_text?.trim() ||
+    properties?.Accomplismment?.plain_text?.trim() ||
+    properties?.Accomplishment?.rich_text?.[0]?.plain_text?.trim() ||
+    properties?.Accomplishment?.plain_text?.trim() ||
+    "No accomplishment summary"
+
+  const dateLabel = formatShortDate(properties?.Date?.date?.start || page?.created_time)
+
+  return {
+    id: page?.id || `${title}-${dateLabel}`,
+    title,
+    accomplishment,
+    date: dateLabel,
+  }
+}
+
+export async function fetchDogeTasks(limit = 5): Promise<DogeTaskItem[]> {
+  const data = await queryNotionDatabase(DOGE_TASKS_DATABASE_ID, {
+    page_size: limit,
+    sorts: [{ timestamp: "last_edited_time", direction: "descending" }],
+  })
+  return (data?.results || []).slice(0, limit).map(transformDogeTask)
+}
+
 // Helper to normalize URLs
 const normalizeUrl = (url: string | undefined | null): string => {
   if (!url) return "#"
@@ -173,8 +224,11 @@ export function transformProject(page: any): Project {
     properties.Skills?.multi_select?.map((t: any) => t.name) ||
     []
 
-  const link = normalizeUrl(getUrlProperty(properties, ["Link", "URL", "Live URL", "Demo URL"]))
-  const github = normalizeUrl(getUrlProperty(properties, ["GitHub", "github", "Source Code", "Repository"]))
+  const github = normalizeUrl(getUrlProperty(properties, ["Github", "GitHub", "github", "Source Code", "Repository"]))
+  const demoVideo = normalizeUrl(getUrlProperty(properties, ["Demo Video", "Demo", "Video", "Demo URL"]))
+  const twitter = normalizeUrl(getUrlProperty(properties, ["Twitter", "X", "X (Twitter)"]))
+  const tryMe = normalizeUrl(getUrlProperty(properties, ["Try me", "Try Me", "Link", "URL", "Live URL"]))
+  const link = tryMe
 
   const featured = properties.Featured?.checkbox || properties.Highlight?.checkbox || properties.Important?.checkbox || false
   const technical = properties.Technical?.checkbox || false
@@ -205,6 +259,9 @@ export function transformProject(page: any): Project {
     tech,
     link,
     github,
+    demoVideo,
+    twitter,
+    tryMe,
     featured,
     technical,
     icon: pageIcon,
@@ -342,6 +399,24 @@ export function transformWorkExperience(page: any): WorkExperienceItem {
   }
 }
 
+export function transformEducation(page: any): EducationItem {
+  const properties = page.properties as Record<string, any>
+  const dateRange = properties.Date?.date || properties.date?.date || null
+
+  return {
+    id: page.id,
+    name: properties.Name?.title?.[0]?.plain_text || "Untitled",
+    degree: properties.Degree?.select?.name || "",
+    institution: properties.Institution?.rich_text?.[0]?.plain_text || "",
+    location: properties.Location?.rich_text?.[0]?.plain_text || "",
+    text: properties.Text?.rich_text?.[0]?.plain_text || "",
+    highlights: properties.Highlights?.rich_text?.[0]?.plain_text || "",
+    startDate: dateRange?.start || "",
+    endDate: dateRange?.end || "",
+    reviewed: properties.Reviewed?.checkbox || false,
+  }
+}
+
 export function transformCertificate(page: any): Certificate {
   const properties = page.properties as Record<string, any>
 
@@ -414,16 +489,22 @@ export function transformAboutImage(page: any): AboutImage {
     properties["Alt Text"]?.rich_text?.[0]?.plain_text ||
     ""
 
-  let src = 
+  const rawSrc = 
     properties.src?.rich_text?.[0]?.plain_text ||
     properties.Src?.rich_text?.[0]?.plain_text ||
     properties.URL?.rich_text?.[0]?.plain_text ||
     properties.url?.rich_text?.[0]?.plain_text ||
     null
 
-  if (!src && page.cover) {
-    src = page.cover.external?.url || page.cover.file?.url || null
-  }
+  const coverSrc = page.cover?.external?.url || page.cover?.file?.url || null
+
+  // Keep data sourced from the same Notion DB, but prefer Notion-hosted cover files
+  // when src points to Vercel blob storage (now intentionally removed from allowed hosts).
+  const isVercelBlobSrc =
+    typeof rawSrc === "string" &&
+    (rawSrc.includes("vercel-storage.com") || rawSrc.includes("blob.v0.dev"))
+
+  const src = isVercelBlobSrc ? (coverSrc || rawSrc) : (rawSrc || coverSrc)
 
   return {
     id,
