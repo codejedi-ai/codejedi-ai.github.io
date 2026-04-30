@@ -159,7 +159,7 @@ export function transformDogeTask(page: any): DogeTaskItem {
 export async function fetchDogeTasks(limit = 5): Promise<DogeTaskItem[]> {
   const data = await queryNotionDatabase(DOGE_TASKS_DATABASE_ID, {
     page_size: limit,
-    sorts: [{ timestamp: "last_edited_time", direction: "descending" }],
+    sorts: [{ timestamp: "created_time", direction: "descending" }],
   })
   return (data?.results || []).slice(0, limit).map(transformDogeTask)
 }

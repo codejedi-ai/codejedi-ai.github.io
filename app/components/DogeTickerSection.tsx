@@ -48,9 +48,9 @@ export default function DogeTickerSection() {
           <ul className="list-disc space-y-2 pl-6 text-sm text-white">
             {points.slice(0, 5).map((task, index) => (
               <li key={task.id || `${task.title}-${index}`}>
+                {task.date ? <span className="text-primary-cyan">{`[${task.date}] `}</span> : null}
                 <span className="font-semibold">{task.title}</span>
                 {task.accomplishment ? ` - ${task.accomplishment}` : ""}
-                {task.date ? <span className="text-gray-400">{` (${task.date})`}</span> : null}
               </li>
             ))}
           </ul>
