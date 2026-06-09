@@ -50,6 +50,13 @@ export default class ProjectCard extends Component<ProjectCardProps> {
     const tryMeUrl = normalizedUrl(project.tryMe || project.link)
     const hasTryMe = !!tryMeUrl
 
+    const footerLinks = [
+      hasCode && { href: codeUrl, icon: Github, label: "Github" },
+      hasDemoVideo && { href: demoVideoUrl, icon: Video, label: "Demo Video" },
+      hasTwitter && { href: twitterUrl, icon: Twitter, label: "Twitter" },
+      hasTryMe && { href: tryMeUrl, icon: ExternalLink, label: "Try me" },
+    ].filter(Boolean) as { href: string; icon: typeof Github; label: string }[]
+
     return (
       <div
         className="bg-gray-800/50 rounded-lg overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300 flex flex-col h-full group"
@@ -105,90 +112,25 @@ export default class ProjectCard extends Component<ProjectCardProps> {
             )}
           </div>
         </div>
-        <div className="p-6 pt-0">
-          <div className="grid grid-cols-4">
-          {hasCode ? (
-              <Link
-                href={codeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Github"
-                title="Github"
-                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
-              >
-                <Github className="h-4 w-4" />
-              </Link>
-            ) : (
-              <span
-                aria-disabled="true"
-                title="Github unavailable"
-                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
-              >
-                <Github className="h-4 w-4" />
-              </span>
-            )}
-            {hasDemoVideo ? (
-              <Link
-                href={demoVideoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Demo Video"
-                title="Demo Video"
-                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
-              >
-                <Video className="h-4 w-4" />
-              </Link>
-            ) : (
-              <span
-                aria-disabled="true"
-                title="Demo Video unavailable"
-                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
-              >
-                <Video className="h-4 w-4" />
-              </span>
-            )}
-            {hasTwitter ? (
-              <Link
-                href={twitterUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-                title="Twitter"
-                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
-              >
-                <Twitter className="h-4 w-4" />
-              </Link>
-            ) : (
-              <span
-                aria-disabled="true"
-                title="Twitter unavailable"
-                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
-              >
-                <Twitter className="h-4 w-4" />
-              </span>
-            )}
-            {hasTryMe ? (
-              <Link
-                href={tryMeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Try me"
-                title="Try me"
-                className="flex min-h-10 items-center justify-center text-gray-300 transition-colors hover:text-white"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </Link>
-            ) : (
-              <span
-                aria-disabled="true"
-                title="Try me unavailable"
-                className="flex min-h-10 items-center justify-center text-gray-500 opacity-50"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </span>
-            )}
+        {footerLinks.length > 0 && (
+          <div className="p-6 pt-0">
+            <div className="flex">
+              {footerLinks.map(({ href, icon: Icon, label }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  title={label}
+                  className="flex min-h-10 flex-1 items-center justify-center text-gray-300 transition-colors hover:text-white"
+                >
+                  <Icon className="h-4 w-4" />
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     )
   }
